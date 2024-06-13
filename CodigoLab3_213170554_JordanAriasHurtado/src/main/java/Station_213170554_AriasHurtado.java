@@ -61,8 +61,8 @@ public class Station_213170554_AriasHurtado {
                 }
             }
 
-    // Método para mostrar la información de la persona
-    public void mostrarInfo() {
+    // Método para mostrar la información de la estacion
+    public void mostrarInfoStation() {
         System.out.println("ID: " + idStation + ", Nombre: " + nameStation + ", Tipo: " + stationType + ", Tiempo parada: " + stopTime);
     }
 
@@ -70,7 +70,7 @@ public class Station_213170554_AriasHurtado {
     public static void main (String[]args){
                 try {
                     Station_213170554_AriasHurtado station = new Station_213170554_AriasHurtado(1, "USACH", 'r', 0);
-                    station.mostrarInfo();
+                    station.mostrarInfoStation();
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
