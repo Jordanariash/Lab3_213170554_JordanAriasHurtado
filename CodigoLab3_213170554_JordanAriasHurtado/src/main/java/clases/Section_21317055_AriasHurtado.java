@@ -1,16 +1,22 @@
+package clases;
+
 public class Section_21317055_AriasHurtado{
 
     //constructor
     Station_213170554_AriasHurtado station1;
     Station_213170554_AriasHurtado station2;
 
-    int distance;
-    int cost;
+    private int distance;
+    private int cost;
 
     public Section_21317055_AriasHurtado(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2,
                                          int distance, int cost){
 
         this.station1 = station1;
+
+        if (station1.getIdStation() == station2.getIdStation()){
+            throw new IllegalArgumentException("las estaciones no pueden ser la misma");
+        }
         this.station2 = station2;
 
         if (distance <= 0) {
@@ -24,6 +30,8 @@ public class Section_21317055_AriasHurtado{
 
         }
         this.cost = cost;
+
+
 
     }
     //getter y setters
@@ -62,20 +70,8 @@ public class Section_21317055_AriasHurtado{
 
     // Método para mostrar la información de la seccion
     public void mostrarInfoSection() {
-
-        System.out.println("distancia: " + distance + ",costo: " + cost);
+        System.out.println(" " +
+                "distancia: " + distance + ",costo: " + cost);
     }
 
-    public static void main (String[]args){
-        try {
-            Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "USACH", 'r', 0);
-            Station_213170554_AriasHurtado station2 = new Station_213170554_AriasHurtado(2, "Estacion central", 'r', 1);
-            Section_21317055_AriasHurtado section = new Section_21317055_AriasHurtado(station1, station2, 3, 4);
-            station1.mostrarInfoStation();
-            station2.mostrarInfoStation();
-            section.mostrarInfoSection();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
