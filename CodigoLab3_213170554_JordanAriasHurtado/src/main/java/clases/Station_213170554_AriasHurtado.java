@@ -21,7 +21,7 @@ public class Station_213170554_AriasHurtado{
         }
         this.nameStation = nameStation;
 
-        setStationType(stationType);
+        validStationType(stationType);
 
         if (stopTime < 0) {
             throw new IllegalArgumentException("El tiempo de parada debe ser un número positivo.");
@@ -56,7 +56,15 @@ public class Station_213170554_AriasHurtado{
         this.stopTime = stopTime;
     }
 
-    private void setStationType(char stationType){
+    public char getStationType() {
+        return stationType;
+    }
+
+    public void setStationType(char stationType) {
+        this.stationType = stationType;
+    }
+
+    private void validStationType(char stationType){
         if (stationType == 'r' || stationType == 'm' || stationType == 'c' || stationType == 't') {
             this.stationType = stationType;
         } else {

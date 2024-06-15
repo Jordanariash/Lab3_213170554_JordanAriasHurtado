@@ -1,6 +1,7 @@
 package clases;
 
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 
@@ -29,6 +30,37 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    public int getIdLine() {
+        return idLine;
+    }
+
+    public void setIdLine(int idLine) {
+        this.idLine = idLine;
+    }
+
+    public String getNameLine() {
+        return nameLine;
+    }
+
+    public void setNameLine(String nameLine) {
+        this.nameLine = nameLine;
+    }
+
+    public String getRailType() {
+        return railType;
+    }
+
+    public void setRailType(String railType) {
+        this.railType = railType;
+    }
+
+    public ArrayList<Section_21317055_AriasHurtado> getSections() {
+        return sections;
+    }
+
+    public void setSections(ArrayList<Section_21317055_AriasHurtado> sections) {
+        this.sections = sections;
+    }
 
     public boolean isConnected(){
         if(sections == null){
@@ -45,5 +77,30 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    public boolean circular(){
+
+        if(sections == null){
+            return true;
+        } else if (sections.size() == 1){
+            return true;
+        }else{
+            return sections.get(0).getStation1().equals(sections.get(sections.size()-1).getStation2());
+        }
+    }
+
+    public boolean lineal(){
+        if(sections == null){
+            return true;
+        } else if (sections.size() == 1){
+            return true;
+        }else{
+            return (sections.get(0).getStation1().getStationType() == 't') && (sections.get(sections.size() - 1).getStation2().getStationType() == 't');
+            }
+
+    }
+
+    public boolean validLine(Line_21317055_AriasHurtado line){
+        return line.circular() || line.lineal();
+    }
 
 }
