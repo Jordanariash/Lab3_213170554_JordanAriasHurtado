@@ -62,6 +62,48 @@ public class Line_21317055_AriasHurtado {
         this.sections = sections;
     }
 
+
+    int totalLenghtLine = 0;
+    public int lineLenght(){
+        if(sections == null){
+            return 0;
+    }else{
+        for(int i = 0; i < sections.size(); i++){
+            totalLenghtLine  = sections.get(i).getDistance() + totalLenghtLine;
+            }
+        return totalLenghtLine;
+        }
+    }
+
+    /*
+    *int lenghtLine = 0;
+    *public int lineSectionLenght(Station_213170554_AriasHurtado Station){
+    *}
+    */
+
+    int totalCost = 0;
+    public int lineCost(){
+        if(sections == null){
+            return 0;
+        }else{
+            for(int i = 0; i < sections.size(); i++){
+                totalCost  = sections.get(i).getCost() + totalCost;
+            }
+            return totalCost;
+        }
+    }
+
+    /*
+    *int Cost = 0;
+    *public int lineSectionCost(Station_213170554_AriasHurtado Station){
+    *}
+    */
+
+    // pero añadir al inicio o final?
+    // o que se añada automaticamente a cualquier lado en que sea posible?
+    // public void addSection(Section_21317055_AriasHurtado section){}
+
+
     public boolean isConnected(){
         if(sections == null){
             return true;
@@ -95,12 +137,12 @@ public class Line_21317055_AriasHurtado {
             return true;
         }else{
             return (sections.get(0).getStation1().getStationType() == 't') && (sections.get(sections.size() - 1).getStation2().getStationType() == 't');
-            }
+        }
 
     }
 
-    public boolean validLine(Line_21317055_AriasHurtado line){
-        return line.circular() || line.lineal();
+    //esta es "line?" pero no se puede ocupar "?" por error de tipeo
+    public boolean validLine(){
+        return this.isConnected() && (this.circular() || this.lineal());
     }
-
 }

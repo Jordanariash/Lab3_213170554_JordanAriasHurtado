@@ -63,6 +63,7 @@ public class Section_21317055_AriasHurtado{
     public int getCost() {
         return cost;
     }
+
     public void setCost(int cost) {
         this.cost = cost;
     }
