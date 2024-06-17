@@ -5,7 +5,6 @@ public class Section_21317055_AriasHurtado{
     //constructor
     Station_213170554_AriasHurtado station1;
     Station_213170554_AriasHurtado station2;
-
     private int distance;
     private int cost;
 
