@@ -129,8 +129,9 @@ public class Line_21317055_AriasHurtado {
 
     // pero añadir al inicio o final?
     // o que se añada automaticamente a cualquier lado en que sea posible?
-    // public void addSection(Section_21317055_AriasHurtado section){}
-
+    public void addSection(Section_21317055_AriasHurtado section){
+        sections.add(section);
+    }
 
     public boolean isConnected(){
         if(sections == null){
@@ -189,13 +190,12 @@ public class Line_21317055_AriasHurtado {
         Section_21317055_AriasHurtado section5 = new Section_21317055_AriasHurtado(station5, station6, 7, 12);
 
         ArrayList<Section_21317055_AriasHurtado> secciones = new ArrayList<>();
-        secciones.add(section1);
-        secciones.add(section2);
-        secciones.add(section3);
-        secciones.add(section4);
-        secciones.add(section5);
-
         Line_21317055_AriasHurtado line1 = new Line_21317055_AriasHurtado(1, "L1", "UIC-60", secciones);
+        line1.addSection(section1);
+        line1.addSection(section2);
+        line1.addSection(section3);
+        line1.addSection(section4);
+        line1.addSection(section5);
         System.out.println("largo total: " + line1.lineLenght());
         System.out.println("costo total: " + line1.lineCost());
         System.out.println("esta conectada: " + line1.isConnected());

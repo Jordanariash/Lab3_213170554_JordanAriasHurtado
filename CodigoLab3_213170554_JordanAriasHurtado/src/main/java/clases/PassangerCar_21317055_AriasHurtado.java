@@ -65,7 +65,7 @@ public class PassangerCar_21317055_AriasHurtado {
     }
 
     private void validCarType(char carType){
-        if (carType == 'r' || carType == 'm') {
+        if (carType == 't' || carType == 'c') {
             this.carType = carType;
         } else {
             throw new IllegalArgumentException("El tipo de vagon debe ser t o c");
