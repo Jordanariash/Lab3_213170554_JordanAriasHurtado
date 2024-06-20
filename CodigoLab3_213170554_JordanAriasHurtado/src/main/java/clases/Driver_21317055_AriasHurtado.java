@@ -35,7 +35,7 @@ public class Driver_21317055_AriasHurtado {
         this.trainMaker = trainMaker;
     }
 
-    public static void main(String[] args) {
-        Driver_21317055_AriasHurtado driver1 = new Driver_21317055_AriasHurtado(1, "evil amaru", "atom");
+    public void showInfoDriver(){
+        System.out.println("ID driver: " + idDriver + "Name driver: " + nameDriver + "Train Maker: " + trainMaker);
     }
 }

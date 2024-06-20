@@ -71,4 +71,8 @@ public class PassangerCar_21317055_AriasHurtado {
             throw new IllegalArgumentException("El tipo de vagon debe ser t o c");
         }
     }
+
+    public void showInfoPcar(){
+        System.out.println("Id pcar: " + idPassangerCar + " ,capacidad: " + passangerCapacity + " ,modelo: "+ model + " ,manufacturador: "+ trainMaker + " ,tipo del carro: "+ carType);
+    }
 }

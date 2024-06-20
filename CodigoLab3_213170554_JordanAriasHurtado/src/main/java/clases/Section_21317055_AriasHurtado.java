@@ -68,9 +68,10 @@ public class Section_21317055_AriasHurtado{
     }
 
     // Método para mostrar la información de la seccion
-    public void mostrarInfoSection() {
-        System.out.println(" " +
-                "distancia: " + distance + ",costo: " + cost);
+    public void showInfoSection() {
+        station1.showInfoStation();
+        station2.showInfoStation();
+        System.out.println("distancia: " + distance + ",costo: " + cost);
     }
 
 }

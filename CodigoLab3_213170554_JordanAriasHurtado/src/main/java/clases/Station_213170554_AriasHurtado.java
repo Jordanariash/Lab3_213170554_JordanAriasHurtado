@@ -73,7 +73,7 @@ public class Station_213170554_AriasHurtado{
     }
 
     // Método para mostrar la información de la estacion
-    public void mostrarInfoStation() {
+    public void showInfoStation() {
         System.out.println("ID: " + idStation + ", Nombre: " + nameStation + ", Tipo: " + stationType + ", Tiempo parada: " + stopTime);
     }
 

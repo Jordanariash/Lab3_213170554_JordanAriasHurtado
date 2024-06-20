@@ -175,34 +175,10 @@ public class Line_21317055_AriasHurtado {
         return this.isConnected() && (this.circular() || this.lineal());
     }
 
-
-    public static void main(String[] args) {
-        Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
-        Station_213170554_AriasHurtado station2 = new Station_213170554_AriasHurtado(2, "Estacion Central", 'r', 10);
-        Station_213170554_AriasHurtado station3 = new Station_213170554_AriasHurtado(3, "ULA", 'r', 15);
-        Station_213170554_AriasHurtado station4 = new Station_213170554_AriasHurtado(4, "republica", 'c', 5);
-        Station_213170554_AriasHurtado station5 = new Station_213170554_AriasHurtado(5, "los heroes", 'r', 10);
-        Station_213170554_AriasHurtado station6 = new Station_213170554_AriasHurtado(6, "la moneda", 't', 15);
-        Section_21317055_AriasHurtado section1 = new Section_21317055_AriasHurtado(station1, station2, 3, 8);
-        Section_21317055_AriasHurtado section2 = new Section_21317055_AriasHurtado(station2, station3, 4, 9);
-        Section_21317055_AriasHurtado section3 = new Section_21317055_AriasHurtado(station3, station4, 5, 10);
-        Section_21317055_AriasHurtado section4 = new Section_21317055_AriasHurtado(station4, station5, 6, 11);
-        Section_21317055_AriasHurtado section5 = new Section_21317055_AriasHurtado(station5, station6, 7, 12);
-
-        ArrayList<Section_21317055_AriasHurtado> secciones = new ArrayList<>();
-        Line_21317055_AriasHurtado line1 = new Line_21317055_AriasHurtado(1, "L1", "UIC-60", secciones);
-        line1.addSection(section1);
-        line1.addSection(section2);
-        line1.addSection(section3);
-        line1.addSection(section4);
-        line1.addSection(section5);
-        System.out.println("largo total: " + line1.lineLenght());
-        System.out.println("costo total: " + line1.lineCost());
-        System.out.println("esta conectada: " + line1.isConnected());
-        System.out.println("es circular: " + line1.circular());
-        System.out.println("es lineal: " + line1.lineal());
-        System.out.println("es lineal o circular: " + line1.validLine());
-        System.out.println("distancia entre estacion y los heroes: " + line1.lineSectionLenght(station2, station5));
-        System.out.println("costo entre estacion y los heroes: " + line1.lineSectionCost(station2, station5));
+    public void showInfoLine(){
+        System.out.println("ID linea: "+ idLine + " ,Nombre Linea: " + nameLine + " ,tipo rieles: " + railType);
+        for (int i = 0; i < sections.size(); i++) {
+            sections.get(i).showInfoSection();
+        }
     }
 }
