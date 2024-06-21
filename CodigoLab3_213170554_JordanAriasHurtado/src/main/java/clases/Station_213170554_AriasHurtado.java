@@ -77,7 +77,7 @@ public class Station_213170554_AriasHurtado{
         System.out.println("ID: " + idStation + ", Nombre: " + nameStation + ", Tipo: " + stationType + ", Tiempo parada: " + stopTime);
     }
 
-    public boolean equals(Station_213170554_AriasHurtado station){
+    public boolean compareStation(Station_213170554_AriasHurtado station){
         return station.getIdStation() == this.idStation;
     }
 }

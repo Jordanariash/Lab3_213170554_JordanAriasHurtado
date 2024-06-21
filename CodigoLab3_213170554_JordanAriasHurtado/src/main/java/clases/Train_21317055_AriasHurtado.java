@@ -7,7 +7,7 @@ public class Train_21317055_AriasHurtado {
     private String trainMaker;
     private int speed;
     private int stationStaytime;
-    public ArrayList<PassangerCar_21317055_AriasHurtado> carList;
+    private ArrayList<PassangerCar_21317055_AriasHurtado> carList;
 
     public Train_21317055_AriasHurtado(int idTrain, String trainMaker, int speed, int stationStaytime, ArrayList<PassangerCar_21317055_AriasHurtado> carList) {
         this.idTrain = idTrain;

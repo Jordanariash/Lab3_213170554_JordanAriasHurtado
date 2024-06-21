@@ -75,4 +75,8 @@ public class PassangerCar_21317055_AriasHurtado {
     public void showInfoPcar(){
         System.out.println("Id pcar: " + idPassangerCar + " ,capacidad: " + passangerCapacity + " ,modelo: "+ model + " ,manufacturador: "+ trainMaker + " ,tipo del carro: "+ carType);
     }
+
+    public boolean comparePcar(PassangerCar_21317055_AriasHurtado pcar){
+        return getIdPassangerCar() == this.idPassangerCar;
+    }
 }

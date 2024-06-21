@@ -79,12 +79,12 @@ public class Line_21317055_AriasHurtado {
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
         int i = 0;
         while(i < sections.size()) {
-            if (!station1.equals(sections.get(i).getStation1()) && !station2.equals(sections.get(i).getStation1())) {
+            if (!station1.compareStation(sections.get(i).getStation1()) && !station2.compareStation(sections.get(i).getStation1())) {
                 i++;
             }
         while(i < sections.size()){
             sectionLenght = sections.get(i).getDistance() + sectionLenght;
-            if(station1.equals(sections.get(i).getStation2()) || station2.equals(sections.get(i).getStation2())){
+            if(station1.compareStation(sections.get(i).getStation2()) || station2.compareStation(sections.get(i).getStation2())){
                 return sectionLenght;
                 }
             i++;
@@ -111,12 +111,12 @@ public class Line_21317055_AriasHurtado {
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
         int i = 0;
         while(i < sections.size()) {
-            if (!station1.equals(sections.get(i).getStation1()) && !station2.equals(sections.get(i).getStation1())) {
+            if (!station1.compareStation(sections.get(i).getStation1()) && !station2.compareStation(sections.get(i).getStation1())) {
                 i++;
             }
             while(i < sections.size()){
                 sectionCost = sections.get(i).getCost() + sectionCost;
-                if(station1.equals(sections.get(i).getStation2()) || station2.equals(sections.get(i).getStation2())){
+                if(station1.compareStation(sections.get(i).getStation2()) || station2.compareStation(sections.get(i).getStation2())){
                     return sectionCost;
                 }
                 i++;
@@ -140,7 +140,7 @@ public class Line_21317055_AriasHurtado {
             return true;
         }else{
             for(int i = 0; i < sections.size()-1; i++){
-                if(!sections.get(i).getStation2().equals(sections.get(i+1).getStation1())){
+                if(!sections.get(i).getStation2().compareStation(sections.get(i+1).getStation1())){
                     return false;
                 }
             }
@@ -155,7 +155,7 @@ public class Line_21317055_AriasHurtado {
         } else if (sections.size() == 1){
             return true;
         }else{
-            return sections.get(0).getStation1().equals(sections.get(sections.size()-1).getStation2());
+            return sections.get(0).getStation1().compareStation(sections.get(sections.size()-1).getStation2());
         }
     }
 

@@ -5,6 +5,7 @@ public class Driver_21317055_AriasHurtado {
     private String nameDriver;
     private String trainMaker;
 
+
     public Driver_21317055_AriasHurtado(int idDriver, String nameDriver, String trainMaker){
         this.idDriver = idDriver;
         this.nameDriver = nameDriver;

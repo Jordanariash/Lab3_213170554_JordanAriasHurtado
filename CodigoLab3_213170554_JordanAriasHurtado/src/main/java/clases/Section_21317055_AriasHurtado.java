@@ -67,7 +67,6 @@ public class Section_21317055_AriasHurtado{
         this.cost = cost;
     }
 
-    // Método para mostrar la información de la seccion
     public void showInfoSection() {
         station1.showInfoStation();
         station2.showInfoStation();
