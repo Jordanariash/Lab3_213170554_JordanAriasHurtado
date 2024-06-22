@@ -1,7 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 
 public class Subway_21317055_AriasHurtado {
     private int idSubway;
@@ -10,9 +10,9 @@ public class Subway_21317055_AriasHurtado {
     private ArrayList<Train_21317055_AriasHurtado> trains;
     private ArrayList<Driver_21317055_AriasHurtado> drivers;
     private ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains;
-    private ArrayList<pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado>> assignedDrivers;
+    private  ArrayList<pairTrainDriver> assignedDrivers;
 
-    public Subway_21317055_AriasHurtado(int idSubway, String nameSubway, ArrayList<Line_21317055_AriasHurtado> lines, ArrayList<Train_21317055_AriasHurtado> trains, ArrayList<Driver_21317055_AriasHurtado> drivers, ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains, ArrayList<pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado>> assignedDrivers){
+    public Subway_21317055_AriasHurtado(int idSubway, String nameSubway, ArrayList<Line_21317055_AriasHurtado> lines, ArrayList<Train_21317055_AriasHurtado> trains, ArrayList<Driver_21317055_AriasHurtado> drivers, ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains, ArrayList<pairTrainDriver> assignedDrivers){
         this.idSubway = idSubway;
         this.nameSubway = nameSubway;
         if(lines == null || lines.isEmpty()){
@@ -91,28 +91,49 @@ public class Subway_21317055_AriasHurtado {
         this.assignedTrains = assignedTrains;
     }
 
-    public ArrayList<pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado>> getAssignedDrivers() {
+    public ArrayList<pairTrainDriver> getAssignedDrivers() {
         return assignedDrivers;
     }
 
-    public void setAssignedDrivers(ArrayList<pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado>> assignedDrivers) {
+    public void setAssignedDrivers(ArrayList<pairTrainDriver> assignedDrivers) {
         this.assignedDrivers = assignedDrivers;
     }
 
-
-
-
-
-
     public void addLine(ArrayList<Line_21317055_AriasHurtado> lines){
-        this.lines.addAll(lines);
+        ArrayList<Line_21317055_AriasHurtado> linesUnrepeated= new ArrayList<Line_21317055_AriasHurtado>();
+        for(int i = 0; i < lines.size(); i++){
+            if(!lines.get(i).validLine()){
+                System.out.println("La linea "+ lines.get(i).getNameLine() +" es invalida");
+                break;
+            }
+            if(!linesUnrepeated.contains(lines.get(i))){
+                linesUnrepeated.add(lines.get(i));
+            }
+        }
+        this.lines.addAll(linesUnrepeated);
     }
 
     public void addTrains(ArrayList<Train_21317055_AriasHurtado> trains){
-        this.trains.addAll(trains);
+        ArrayList<Train_21317055_AriasHurtado> trainsUnrepeated= new ArrayList<Train_21317055_AriasHurtado>();
+        for(int i = 0; i < trains.size(); i++){
+            if(!trains.get(i).sameModel() || !trains.get(i).validBody()){
+                System.out.println("El tren N° "+ trains.get(i).getIdTrain() + " es invalido");
+                break;
+            }
+            if(!trainsUnrepeated.contains(trains.get(i))){
+                trainsUnrepeated.add(trains.get(i));
+            }
+        }
+        this.trains.addAll(trainsUnrepeated);
     }
 
     public void addDrivers(ArrayList<Driver_21317055_AriasHurtado> drivers){
+        ArrayList<Driver_21317055_AriasHurtado> driversUnrepeated = new ArrayList<Driver_21317055_AriasHurtado>();
+        for(int i = 0; i < drivers.size()-1; i++){
+            if(!driversUnrepeated.contains(drivers.get(i))){
+                driversUnrepeated.add(drivers.get(i));
+            }
+        }
         this.drivers.addAll(drivers);
     }
 
@@ -135,17 +156,19 @@ public class Subway_21317055_AriasHurtado {
         if (trains != null && !trains.isEmpty()) {
             for (int i = 0; i < trains.size(); i++) {
                 trains.get(i).showInfoTrain();
+
                 System.out.println("el tren tiene asignados a los conductores: ");
                 for(int j = 0; j < assignedDrivers.size(); j++){
                     if(assignedDrivers.get(j).getDriver().getIdDriver() == trains.get(i).getIdTrain()){
                         System.out.println(assignedDrivers.get(j).getDriver().getIdDriver());
                     }
+
                 }
             }
         } else {
             System.out.println("no hay trenes");
         }
-        if (drivers != null && !drivers.isEmpty()) {
+        if(drivers != null && !drivers.isEmpty()) {
             for (int i = 0; i < drivers.size(); i++) {
                drivers.get(i).showInfoDriver();
             }
@@ -159,10 +182,12 @@ public class Subway_21317055_AriasHurtado {
         assignedTrains.add(pair);
     }
 
-    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver){
-        pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado> pair = new pairTrainDriver<>(train, driver);
-        assignedDrivers.add(pair);
+    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime, Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
     }
+
+    //public void whereIsTrain(Train_21317055_AriasHurtado train, int hora ){}
+
+
 
     public static void main(String[] args) {
         Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
@@ -171,6 +196,7 @@ public class Subway_21317055_AriasHurtado {
         Station_213170554_AriasHurtado station4 = new Station_213170554_AriasHurtado(4, "republica", 'c', 5);
         Station_213170554_AriasHurtado station5 = new Station_213170554_AriasHurtado(5, "los heroes", 'r', 10);
         Station_213170554_AriasHurtado station6 = new Station_213170554_AriasHurtado(6, "la moneda", 't', 15);
+
         Section_21317055_AriasHurtado section1 = new Section_21317055_AriasHurtado(station1, station2, 3, 8);
         Section_21317055_AriasHurtado section2 = new Section_21317055_AriasHurtado(station2, station3, 4, 9);
         Section_21317055_AriasHurtado section3 = new Section_21317055_AriasHurtado(station3, station4, 5, 10);
@@ -208,10 +234,9 @@ public class Subway_21317055_AriasHurtado {
         ArrayList<Train_21317055_AriasHurtado> trains = new ArrayList<>();
         ArrayList<Driver_21317055_AriasHurtado> drivers = new ArrayList<>();
         ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains = new ArrayList<>();
-        ArrayList<pairTrainDriver<Train_21317055_AriasHurtado, Driver_21317055_AriasHurtado>> assignedDrivers = new ArrayList<>();
+        ArrayList<pairTrainDriver> assignedDrivers = new ArrayList<>();
 
         Subway_21317055_AriasHurtado subway1= new Subway_21317055_AriasHurtado(1, "metro", lines, trains, drivers, assignedTrains, assignedDrivers);
-
         lines.add(line1);
         trains.add(train1);
         drivers.add(driver1);
@@ -221,7 +246,7 @@ public class Subway_21317055_AriasHurtado {
         subway1.addTrains(trains);
         subway1.addDrivers(drivers);
         subway1.assignTrainToLine(train1, line1);
-        subway1.assignDriverToTrain(train1, driver1);
+        //subway1.assignDriverToTrain(train1, driver1);
 
         subway1.myToString();
     }

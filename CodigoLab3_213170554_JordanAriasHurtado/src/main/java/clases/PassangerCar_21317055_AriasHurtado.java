@@ -1,7 +1,5 @@
 package clases;
 
-import java.util.ArrayList;
-
 
 public class PassangerCar_21317055_AriasHurtado {
 
@@ -76,7 +74,11 @@ public class PassangerCar_21317055_AriasHurtado {
         System.out.println("Id pcar: " + idPassangerCar + " ,capacidad: " + passangerCapacity + " ,modelo: "+ model + " ,manufacturador: "+ trainMaker + " ,tipo del carro: "+ carType);
     }
 
-    public boolean comparePcar(PassangerCar_21317055_AriasHurtado pcar){
-        return getIdPassangerCar() == this.idPassangerCar;
+    public boolean samePcar(PassangerCar_21317055_AriasHurtado pcar){
+        if(getIdPassangerCar() == pcar.getIdPassangerCar()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

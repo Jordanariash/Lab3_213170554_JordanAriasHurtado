@@ -39,4 +39,12 @@ public class Driver_21317055_AriasHurtado {
     public void showInfoDriver(){
         System.out.println("ID driver: " + idDriver + "Name driver: " + nameDriver + "Train Maker: " + trainMaker);
     }
+
+    public boolean sameDriver(Driver_21317055_AriasHurtado driver){
+        if(getIdDriver() == driver.getIdDriver()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

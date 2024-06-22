@@ -79,12 +79,12 @@ public class Line_21317055_AriasHurtado {
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
         int i = 0;
         while(i < sections.size()) {
-            if (!station1.compareStation(sections.get(i).getStation1()) && !station2.compareStation(sections.get(i).getStation1())) {
+            if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
                 i++;
             }
         while(i < sections.size()){
             sectionLenght = sections.get(i).getDistance() + sectionLenght;
-            if(station1.compareStation(sections.get(i).getStation2()) || station2.compareStation(sections.get(i).getStation2())){
+            if(station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())){
                 return sectionLenght;
                 }
             i++;
@@ -111,12 +111,12 @@ public class Line_21317055_AriasHurtado {
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
         int i = 0;
         while(i < sections.size()) {
-            if (!station1.compareStation(sections.get(i).getStation1()) && !station2.compareStation(sections.get(i).getStation1())) {
+            if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
                 i++;
             }
             while(i < sections.size()){
                 sectionCost = sections.get(i).getCost() + sectionCost;
-                if(station1.compareStation(sections.get(i).getStation2()) || station2.compareStation(sections.get(i).getStation2())){
+                if(station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())){
                     return sectionCost;
                 }
                 i++;
@@ -140,7 +140,7 @@ public class Line_21317055_AriasHurtado {
             return true;
         }else{
             for(int i = 0; i < sections.size()-1; i++){
-                if(!sections.get(i).getStation2().compareStation(sections.get(i+1).getStation1())){
+                if(!sections.get(i).getStation2().sameStation(sections.get(i+1).getStation1())){
                     return false;
                 }
             }
@@ -155,7 +155,7 @@ public class Line_21317055_AriasHurtado {
         } else if (sections.size() == 1){
             return true;
         }else{
-            return sections.get(0).getStation1().compareStation(sections.get(sections.size()-1).getStation2());
+            return sections.get(0).getStation1().sameStation(sections.get(sections.size()-1).getStation2());
         }
     }
 
@@ -170,15 +170,45 @@ public class Line_21317055_AriasHurtado {
 
     }
 
+    public boolean unrepeteadSecctions(){
+        ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<>();
+        for (int i = 0; i < sections.size()-1; i++) {
+            //si hay una seccion que sea la misma, osea st1-st2 != st2-st1
+            if(sections.get(i).sameSection(sections.get(i+1))){
+                return false;
+            }
+        }
+        //verificar si alguna secccion esta repetida
+        for (int j = 0; j < sections.size(); j++) {
+            if(!auxSections.contains(sections.get(j))){
+                auxSections.add(sections.get(j));
+            }
+        }
+        if (auxSections.size() == sections.size()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     //esta es "line?" pero no se puede ocupar "?" por error de tipeo
     public boolean validLine(){
-        return this.isConnected() && (this.circular() || this.lineal());
+        return isConnected() && (circular() || lineal()) && unrepeteadSecctions();
     }
 
     public void showInfoLine(){
         System.out.println("ID linea: "+ idLine + " ,Nombre Linea: " + nameLine + " ,tipo rieles: " + railType);
         for (int i = 0; i < sections.size(); i++) {
             sections.get(i).showInfoSection();
+        }
+    }
+
+    public boolean sameLine(Line_21317055_AriasHurtado line){
+        if(getIdLine() == line.getIdLine() && getNameLine().equals(line.getNameLine())){
+            return true;
+        }else{
+            return false;
         }
     }
 }

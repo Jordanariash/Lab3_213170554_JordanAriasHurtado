@@ -122,4 +122,12 @@ public class Train_21317055_AriasHurtado {
             carList.get(i).showInfoPcar();
         }
     }
+
+    public boolean sameTrain(Train_21317055_AriasHurtado train){
+        if(getIdTrain() == train.getIdTrain()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
