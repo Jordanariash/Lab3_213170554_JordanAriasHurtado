@@ -1,13 +1,12 @@
 package clases;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class pairTrainDriver{
     private Train_21317055_AriasHurtado train;
     private Driver_21317055_AriasHurtado driver;
-    private Date departureTime;
+    //private Date departureTime;
+    private Date departureTime = new Date();
     private Station_213170554_AriasHurtado departureStation;
     private Station_213170554_AriasHurtado arriveStation;
 
@@ -15,7 +14,7 @@ public class pairTrainDriver{
     public pairTrainDriver(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation) {
         this.train = train;
         this.driver = driver;
-        this.departureTime = departureTime;
+        //this.departureTime = departureTime;
         this.departureStation = departureStation;
         this.arriveStation = arriveStation;
     }
@@ -35,7 +34,6 @@ public class pairTrainDriver{
     public void setDriver(Driver_21317055_AriasHurtado driver) {
         this.driver = driver;
     }
-
     public Date getDepartureTime() {
         return departureTime;
     }
@@ -43,7 +41,6 @@ public class pairTrainDriver{
     public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
-
     public Station_213170554_AriasHurtado getDepartureStation() {
         return departureStation;
     }

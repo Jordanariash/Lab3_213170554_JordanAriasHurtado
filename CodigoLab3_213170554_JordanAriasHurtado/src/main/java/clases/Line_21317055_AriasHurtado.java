@@ -193,12 +193,12 @@ public class Line_21317055_AriasHurtado {
     }
 
     //esta es "line?" pero no se puede ocupar "?" por error de tipeo
-    public boolean validLine(){
+    public boolean isLine(){
         return isConnected() && (circular() || lineal()) && unrepeteadSecctions();
     }
 
     public void showInfoLine(){
-        System.out.println("ID linea: "+ idLine + " ,Nombre Linea: " + nameLine + " ,tipo rieles: " + railType);
+        System.out.println("ID linea: "+ idLine + " , Nombre Linea: " + nameLine + " , tipo rieles: " + railType);
         for (int i = 0; i < sections.size(); i++) {
             sections.get(i).showInfoSection();
         }

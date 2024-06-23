@@ -3,6 +3,7 @@ package clases;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Subway_21317055_AriasHurtado {
     private int idSubway;
     private String nameSubway;
@@ -10,7 +11,7 @@ public class Subway_21317055_AriasHurtado {
     private ArrayList<Train_21317055_AriasHurtado> trains;
     private ArrayList<Driver_21317055_AriasHurtado> drivers;
     private ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains;
-    private  ArrayList<pairTrainDriver> assignedDrivers;
+    private ArrayList<pairTrainDriver> assignedDrivers;
 
     public Subway_21317055_AriasHurtado(int idSubway, String nameSubway, ArrayList<Line_21317055_AriasHurtado> lines, ArrayList<Train_21317055_AriasHurtado> trains, ArrayList<Driver_21317055_AriasHurtado> drivers, ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains, ArrayList<pairTrainDriver> assignedDrivers){
         this.idSubway = idSubway;
@@ -42,6 +43,11 @@ public class Subway_21317055_AriasHurtado {
         }
 
     }
+
+
+
+
+
 
     public int getIdSubway() {
         return idSubway;
@@ -99,10 +105,15 @@ public class Subway_21317055_AriasHurtado {
         this.assignedDrivers = assignedDrivers;
     }
 
+
+
+
+
+
     public void addLine(ArrayList<Line_21317055_AriasHurtado> lines){
         ArrayList<Line_21317055_AriasHurtado> linesUnrepeated= new ArrayList<Line_21317055_AriasHurtado>();
         for(int i = 0; i < lines.size(); i++){
-            if(!lines.get(i).validLine()){
+            if(!lines.get(i).isLine()){
                 System.out.println("La linea "+ lines.get(i).getNameLine() +" es invalida");
                 break;
             }
@@ -138,11 +149,16 @@ public class Subway_21317055_AriasHurtado {
     }
 
     public void myToString() {
+        System.out.println("*********************************************");
         System.out.println("id subway: " + getIdSubway());
         System.out.println("nombre subway: " + getNameSubway());
+        System.out.println("---------------------------------------------");
+        System.out.println("-----------------lineas----------------------");
+        System.out.println("---------------------------------------------");
         if (lines != null && !lines.isEmpty()) {
             for (int i = 0; i < lines.size(); i++) {
                 lines.get(i).showInfoLine();
+                System.out.println("---------------------------------------------");
                 System.out.println("la linea tiene asignado el/los trenes: ");
                 for(int j = 0; j < assignedTrains.size(); j++){
                     if(assignedTrains.get(j).getLine().getIdLine() == lines.get(i).getIdLine()){
@@ -153,10 +169,13 @@ public class Subway_21317055_AriasHurtado {
         } else {
             System.out.println("no hay lineas");
         }
+        System.out.println("---------------------------------------------");
+        System.out.println("-----------------trenes----------------------");
+        System.out.println("---------------------------------------------");
         if (trains != null && !trains.isEmpty()) {
             for (int i = 0; i < trains.size(); i++) {
                 trains.get(i).showInfoTrain();
-
+                System.out.println("---------------------------------------------");
                 System.out.println("el tren tiene asignados a los conductores: ");
                 for(int j = 0; j < assignedDrivers.size(); j++){
                     if(assignedDrivers.get(j).getDriver().getIdDriver() == trains.get(i).getIdTrain()){
@@ -168,6 +187,9 @@ public class Subway_21317055_AriasHurtado {
         } else {
             System.out.println("no hay trenes");
         }
+        System.out.println("---------------------------------------------");
+        System.out.println("-----------------conductores-----------------");
+        System.out.println("---------------------------------------------");
         if(drivers != null && !drivers.isEmpty()) {
             for (int i = 0; i < drivers.size(); i++) {
                drivers.get(i).showInfoDriver();
@@ -175,6 +197,7 @@ public class Subway_21317055_AriasHurtado {
         } else {
             System.out.println("no hay conductores");
         }
+        System.out.println("*********************************************");
     }
 
     public void assignTrainToLine(Train_21317055_AriasHurtado train, Line_21317055_AriasHurtado line) {
@@ -183,6 +206,21 @@ public class Subway_21317055_AriasHurtado {
     }
 
     public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime, Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
+        for (int i = 0; i < lines.size(); i++) {
+            ArrayList<Section_21317055_AriasHurtado> aux= lines.get(i).getSections();
+            for(int j = 0; j < aux.size(); j++){
+                if(aux.get(i).getStation1().equals(departureStation) || aux.get(i).getStation2().equals(departureStation)){
+                    for(int k = 0; k < aux.size(); k++){
+                        if(aux.get(k).getStation1().equals(arriveStation) || aux.get(k).getStation2().equals(arriveStation)){
+                            pairTrainDriver pair= new pairTrainDriver(train, driver, departureTime, departureStation, arriveStation);
+                            assignedDrivers.add(pair);
+                        }else{
+                            throw new IllegalArgumentException("Las estaciones deben ser de la misma linea");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //public void whereIsTrain(Train_21317055_AriasHurtado train, int hora ){}
@@ -246,7 +284,9 @@ public class Subway_21317055_AriasHurtado {
         subway1.addTrains(trains);
         subway1.addDrivers(drivers);
         subway1.assignTrainToLine(train1, line1);
-        //subway1.assignDriverToTrain(train1, driver1);
+        //subway1.assignDriverToTrain(train1, driver1,departureTime station1, station6);
+
+
 
         subway1.myToString();
     }

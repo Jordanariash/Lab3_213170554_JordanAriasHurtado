@@ -72,8 +72,9 @@ public class Section_21317055_AriasHurtado{
 
     public void showInfoSection() {
         station1.showInfoStation();
+        System.out.println("distancia: " + distance + " ,costo: " + cost);
         station2.showInfoStation();
-        System.out.println("distancia: " + distance + ",costo: " + cost);
+
     }
 
 
