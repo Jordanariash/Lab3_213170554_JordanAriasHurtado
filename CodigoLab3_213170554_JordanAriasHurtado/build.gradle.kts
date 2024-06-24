@@ -1,12 +1,17 @@
 plugins {
     id("java")
+    id("application")
 }
 
-group = "org.example"
+group = "clases"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass.set("clases.Main_21317055_AriasHurtado")
 }
 
 dependencies {

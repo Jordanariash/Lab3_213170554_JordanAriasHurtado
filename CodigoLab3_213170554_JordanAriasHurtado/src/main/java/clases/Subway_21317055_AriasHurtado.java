@@ -205,29 +205,17 @@ public class Subway_21317055_AriasHurtado {
         assignedTrains.add(pair);
     }
 
-    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime, Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
-        for (int i = 0; i < lines.size(); i++) {
-            ArrayList<Section_21317055_AriasHurtado> aux= lines.get(i).getSections();
-            for(int j = 0; j < aux.size(); j++){
-                if(aux.get(i).getStation1().equals(departureStation) || aux.get(i).getStation2().equals(departureStation)){
-                    for(int k = 0; k < aux.size(); k++){
-                        if(aux.get(k).getStation1().equals(arriveStation) || aux.get(k).getStation2().equals(arriveStation)){
-                            pairTrainDriver pair= new pairTrainDriver(train, driver, departureTime, departureStation, arriveStation);
-                            assignedDrivers.add(pair);
-                        }else{
-                            throw new IllegalArgumentException("Las estaciones deben ser de la misma linea");
-                        }
-                    }
-                }
-            }
-        }
+    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
+        pairTrainDriver pair = new pairTrainDriver(train, driver, departureTime ,departureStation, arriveStation);
+        assignedDrivers.add(pair);
     }
 
     //public void whereIsTrain(Train_21317055_AriasHurtado train, int hora ){}
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+     {
         Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
         Station_213170554_AriasHurtado station2 = new Station_213170554_AriasHurtado(2, "Estacion Central", 'r', 10);
         Station_213170554_AriasHurtado station3 = new Station_213170554_AriasHurtado(3, "ULA", 'r', 15);
@@ -284,10 +272,8 @@ public class Subway_21317055_AriasHurtado {
         subway1.addTrains(trains);
         subway1.addDrivers(drivers);
         subway1.assignTrainToLine(train1, line1);
-        //subway1.assignDriverToTrain(train1, driver1,departureTime station1, station6);
-
-
-
+        Date departureTime = new Date();
+        subway1.assignDriverToTrain(train1, driver1, departureTime, station1 ,station6);
         subway1.myToString();
     }
 }

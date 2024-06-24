@@ -1,10 +1,9 @@
 package clases;
 
-
+/**
+ *
+ */
 public class Station_213170554_AriasHurtado{
-
-
-    //constructor
 
     private int idStation;
     private String nameStation;
@@ -77,7 +76,13 @@ public class Station_213170554_AriasHurtado{
         System.out.println("ID: " + idStation + ", Nombre: " + nameStation + ", Tipo: " + stationType + ", Tiempo parada: " + stopTime);
     }
 
-    //si es la misma stacion retorna true
+
+    /**
+     * comparador de 2 estaciones
+     *
+     * @param station
+     * @return boolean
+     */
     public boolean sameStation(Station_213170554_AriasHurtado station){
         if ((getIdStation() == station.getIdStation()) ||(getNameStation().equals(station.getNameStation()))){
                 return true;
