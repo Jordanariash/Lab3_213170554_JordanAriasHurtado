@@ -1,5 +1,6 @@
 package clases;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,12 +26,36 @@ public class Menu_21317055_AriasHurtado {
             scanner.nextLine();
             switch(option){
                 case 1:
+                    try {
+                        ArrayList<Line_21317055_AriasHurtado> lines = LineReader.readLines("ExampleLines.txt");
+                        subway = new Subway_21317055_AriasHurtado(1, "Subway", lines, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+                        System.out.println("Líneas cargadas correctamente.");
+                        subway.myToString();
+                    } catch (IOException e) {
+                        System.out.println("Error al leer el archivo: " + e.getMessage());
+                    }
                     break;
                 case 2:
                     break;
                 case 3:
+                    try {
+                        ArrayList<Train_21317055_AriasHurtado> trains = TrainReader.readTrains("ExampleTrains.txt");
+                        subway.setTrains(trains);
+                        System.out.println("Trenes cargados correctamente.");
+                        subway.myToString();
+                    } catch (IOException e) {
+                        System.out.println("Error al leer el archivo: " + e.getMessage());
+                    }
                     break;
                 case 4:
+                    try {
+                        ArrayList<Driver_21317055_AriasHurtado> drivers = DriverReader.readDrivers("ExampleDrivers.txt");
+                        subway.setDrivers(drivers);
+                        System.out.println("Conductores cargados correctamente.");
+                        subway.myToString();
+                    } catch (IOException e) {
+                        System.out.println("Error al leer el archivo: " + e.getMessage());
+                    }
                     break;
                 case 5:
                     break;

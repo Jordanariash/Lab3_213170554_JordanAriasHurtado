@@ -152,26 +152,23 @@ public class Subway_21317055_AriasHurtado {
         System.out.println("*********************************************");
         System.out.println("id subway: " + getIdSubway());
         System.out.println("nombre subway: " + getNameSubway());
-        System.out.println("---------------------------------------------");
         System.out.println("-----------------lineas----------------------");
-        System.out.println("---------------------------------------------");
         if (lines != null && !lines.isEmpty()) {
             for (int i = 0; i < lines.size(); i++) {
                 lines.get(i).showInfoLine();
-                System.out.println("---------------------------------------------");
                 System.out.println("la linea tiene asignado el/los trenes: ");
                 for(int j = 0; j < assignedTrains.size(); j++){
                     if(assignedTrains.get(j).getLine().getIdLine() == lines.get(i).getIdLine()){
                         System.out.println(assignedTrains.get(j).getTrain().getIdTrain());
                     }
                 }
+                System.out.println("---------------------------------------------");
             }
         } else {
             System.out.println("no hay lineas");
+            System.out.println("---------------------------------------------");
         }
-        System.out.println("---------------------------------------------");
         System.out.println("-----------------trenes----------------------");
-        System.out.println("---------------------------------------------");
         if (trains != null && !trains.isEmpty()) {
             for (int i = 0; i < trains.size(); i++) {
                 trains.get(i).showInfoTrain();
@@ -183,19 +180,21 @@ public class Subway_21317055_AriasHurtado {
                     }
 
                 }
+                System.out.println("---------------------------------------------");
             }
         } else {
             System.out.println("no hay trenes");
+            System.out.println("---------------------------------------------");
         }
-        System.out.println("---------------------------------------------");
         System.out.println("-----------------conductores-----------------");
-        System.out.println("---------------------------------------------");
         if(drivers != null && !drivers.isEmpty()) {
             for (int i = 0; i < drivers.size(); i++) {
                drivers.get(i).showInfoDriver();
             }
+            System.out.println("---------------------------------------------");
         } else {
             System.out.println("no hay conductores");
+            System.out.println("---------------------------------------------");
         }
         System.out.println("*********************************************");
     }
