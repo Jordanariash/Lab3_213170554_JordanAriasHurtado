@@ -1,3 +1,1 @@
-Line,1,L1,UIC60 
-Line,2,L2,80ASCE 
-Line,3,L3,100RE
+Line,1,L1,UIC60,1:A:t:10:2:B:r:20:100:200;2:B:r:20:3:C:t:30:300:400

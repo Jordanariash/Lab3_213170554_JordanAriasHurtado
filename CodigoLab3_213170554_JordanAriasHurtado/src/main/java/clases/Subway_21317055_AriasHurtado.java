@@ -13,40 +13,18 @@ public class Subway_21317055_AriasHurtado {
     private ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains;
     private ArrayList<pairTrainDriver> assignedDrivers;
 
-    public Subway_21317055_AriasHurtado(int idSubway, String nameSubway, ArrayList<Line_21317055_AriasHurtado> lines, ArrayList<Train_21317055_AriasHurtado> trains, ArrayList<Driver_21317055_AriasHurtado> drivers, ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains, ArrayList<pairTrainDriver> assignedDrivers){
+    public Subway_21317055_AriasHurtado(int idSubway, String nameSubway){
         this.idSubway = idSubway;
         this.nameSubway = nameSubway;
-        if(lines == null || lines.isEmpty()){
-            this.lines = new ArrayList<>();
-        }else{
-            this.lines = lines;
-        }
-        if(trains == null || trains.isEmpty()){
-            this.trains = new ArrayList<>();
-        }else{
-            this.trains = trains;
-        }
-        if(drivers == null || drivers.isEmpty()){
-            this.drivers = new ArrayList<>();
-        }else{
-            this.drivers = drivers;
-        }
-        if(assignedTrains == null || assignedTrains.isEmpty()){
-            this.assignedTrains = new ArrayList<>();
-        }else{
-            this.assignedTrains = assignedTrains;
-        }
-        if(assignedDrivers == null || assignedDrivers.isEmpty()){
-            this.assignedDrivers = new ArrayList<>();
-        }else{
-            this.assignedDrivers = assignedDrivers;
-        }
+
+        this.lines = new ArrayList<>();
+
+        this.trains = new ArrayList<>();
+        this.drivers = new ArrayList<>();
+        this.assignedTrains = new ArrayList<>();
+        this.assignedDrivers = new ArrayList<>();
 
     }
-
-
-
-
 
 
     public int getIdSubway() {
@@ -124,7 +102,7 @@ public class Subway_21317055_AriasHurtado {
         this.lines.addAll(linesUnrepeated);
     }
 
-    public void addTrains(ArrayList<Train_21317055_AriasHurtado> trains){
+    public void addTrain(ArrayList<Train_21317055_AriasHurtado> trains){
         ArrayList<Train_21317055_AriasHurtado> trainsUnrepeated= new ArrayList<Train_21317055_AriasHurtado>();
         for(int i = 0; i < trains.size(); i++){
             if(!trains.get(i).sameModel() || !trains.get(i).validBody()){
@@ -138,7 +116,7 @@ public class Subway_21317055_AriasHurtado {
         this.trains.addAll(trainsUnrepeated);
     }
 
-    public void addDrivers(ArrayList<Driver_21317055_AriasHurtado> drivers){
+    public void addDriver(ArrayList<Driver_21317055_AriasHurtado> drivers){
         ArrayList<Driver_21317055_AriasHurtado> driversUnrepeated = new ArrayList<Driver_21317055_AriasHurtado>();
         for(int i = 0; i < drivers.size()-1; i++){
             if(!driversUnrepeated.contains(drivers.get(i))){
@@ -209,12 +187,7 @@ public class Subway_21317055_AriasHurtado {
         assignedDrivers.add(pair);
     }
 
-    //public void whereIsTrain(Train_21317055_AriasHurtado train, int hora ){}
-
-
-
-    public static void main(String[] args)
-     {
+    public static void main(String[] args){
         Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
         Station_213170554_AriasHurtado station2 = new Station_213170554_AriasHurtado(2, "Estacion Central", 'r', 10);
         Station_213170554_AriasHurtado station3 = new Station_213170554_AriasHurtado(3, "ULA", 'r', 15);
@@ -261,15 +234,15 @@ public class Subway_21317055_AriasHurtado {
         ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains = new ArrayList<>();
         ArrayList<pairTrainDriver> assignedDrivers = new ArrayList<>();
 
-        Subway_21317055_AriasHurtado subway1= new Subway_21317055_AriasHurtado(1, "metro", lines, trains, drivers, assignedTrains, assignedDrivers);
+        Subway_21317055_AriasHurtado subway1= new Subway_21317055_AriasHurtado(1, "metro");
         lines.add(line1);
         trains.add(train1);
         drivers.add(driver1);
         drivers.add(driver2);
         drivers.add(driver3);
         subway1.addLine(lines);
-        subway1.addTrains(trains);
-        subway1.addDrivers(drivers);
+        subway1.addTrain(trains);
+        subway1.addDriver(drivers);
         subway1.assignTrainToLine(train1, line1);
         Date departureTime = new Date();
         subway1.assignDriverToTrain(train1, driver1, departureTime, station1 ,station6);

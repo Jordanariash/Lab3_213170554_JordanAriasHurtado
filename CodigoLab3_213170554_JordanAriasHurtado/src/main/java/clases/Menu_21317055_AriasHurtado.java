@@ -12,15 +12,17 @@ public class Menu_21317055_AriasHurtado {
     public Menu_21317055_AriasHurtado() {
         scanner = new Scanner(System.in);
     }
+
     public void menuLoad() {
+        subway = new Subway_21317055_AriasHurtado(1, "Metro de santiago");
         int option;
         do{
             System.out.println("------------------- Sistema Metro - Cargar información del sistema de metro -------------------");
             System.out.println("Opciones: ");
             System.out.println("1. Creación de una línea de metro básica (cargar archivo lineas.txt)");
-            System.out.println("2. Combinaciones entre estaciones entre Líneas  (cargar archivo combinaciones.txt)");
-            System.out.println("3. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
-            System.out.println("4. Conductores asignados a una Línea (cargar archivo conductores.txt)");
+            System.out.println("2. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
+            System.out.println("3. Conductores asignados a una Línea (cargar archivo conductores.txt)");
+            System.out.println("4. Modificar Subway");
             System.out.println("5. Retorno al menú de Inicio");
             option = scanner.nextInt();
             scanner.nextLine();
@@ -28,7 +30,7 @@ public class Menu_21317055_AriasHurtado {
                 case 1:
                     try {
                         ArrayList<Line_21317055_AriasHurtado> lines = LineReader.readLines("ExampleLines.txt");
-                        subway = new Subway_21317055_AriasHurtado(1, "Subway", lines, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+                        subway.setLines(lines);
                         System.out.println("Líneas cargadas correctamente.");
                         subway.myToString();
                     } catch (IOException e) {
@@ -36,8 +38,6 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 2:
-                    break;
-                case 3:
                     try {
                         ArrayList<Train_21317055_AriasHurtado> trains = TrainReader.readTrains("ExampleTrains.txt");
                         subway.setTrains(trains);
@@ -47,7 +47,7 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
                     }
                     break;
-                case 4:
+                case 3:
                     try {
                         ArrayList<Driver_21317055_AriasHurtado> drivers = DriverReader.readDrivers("ExampleDrivers.txt");
                         subway.setDrivers(drivers);
@@ -57,7 +57,8 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
                     }
                     break;
-                case 5:
+                case 4:
+                    menuView();
                     break;
                 default:
                     break;
@@ -84,7 +85,7 @@ public class Menu_21317055_AriasHurtado {
     }
 
 
-    public void menuInteract(){
+    public void menuInteract() {
         int option;
 
         do {
@@ -131,9 +132,13 @@ public class Menu_21317055_AriasHurtado {
                 default:
                     break;
             }
-        }while (option != 12) ;
+        } while (option != 12);
     }
 
+
+    public static void main(String[] args) {
+        Main_21317055_AriasHurtado.main(new String[0]);
+    }
 }
 
 

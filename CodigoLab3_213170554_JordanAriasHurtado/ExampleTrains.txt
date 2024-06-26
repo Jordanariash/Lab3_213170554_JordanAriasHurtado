@@ -1,3 +1,1 @@
-Train,1,‎NS2007,200,10
-Train,2,‎NS2016,175,9
-Train,3,NS74,150,8
+Train,1,‎A,100,100,    1:1:MA:A:t:    2:2:MA:A:c:    3:3:MA:A:t

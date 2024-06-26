@@ -1,8 +1,6 @@
 package clases;
 
-/**
- *
- */
+
 public class Station_213170554_AriasHurtado{
 
     private int idStation;
