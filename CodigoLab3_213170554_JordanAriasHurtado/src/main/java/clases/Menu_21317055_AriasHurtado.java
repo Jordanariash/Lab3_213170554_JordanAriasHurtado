@@ -3,7 +3,6 @@ package clases;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Menu_21317055_AriasHurtado {
     private Subway_21317055_AriasHurtado subway;
@@ -17,11 +16,11 @@ public class Menu_21317055_AriasHurtado {
         subway = new Subway_21317055_AriasHurtado(1, "Metro de santiago");
         int option;
         do{
-            System.out.println("------------------- Sistema Metro - Cargar información del sistema de metro -------------------");
+            System.out.println("------------------- Sistema Metro - Cargar informacion del sistema de metro -------------------");
             System.out.println("Opciones: ");
-            System.out.println("1. Creación de una línea de metro básica (cargar archivo lineas.txt)");
-            System.out.println("2. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
-            System.out.println("3. Conductores asignados a una Línea (cargar archivo conductores.txt)");
+            System.out.println("1. Creacion de una linea de metro basica (cargar archivo lineas.txt)");
+            System.out.println("2. Definicion de trenes con distintos numero de carros (cargar archivo trenes.txt)");
+            System.out.println("3. Conductores asignados a una Linea (cargar archivo conductores.txt)");
             System.out.println("4. Modificar Subway");
             System.out.println("5. Retorno al menú de Inicio");
             option = scanner.nextInt();
@@ -30,8 +29,8 @@ public class Menu_21317055_AriasHurtado {
                 case 1:
                     try {
                         ArrayList<Line_21317055_AriasHurtado> lines = LineReader.readLines("ExampleLines.txt");
-                        subway.setLines(lines);
-                        System.out.println("Líneas cargadas correctamente.");
+                        subway.addLine(lines);
+                        System.out.println("Lineas cargadas correctamente.");
                         subway.myToString();
                     } catch (IOException e) {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -40,7 +39,7 @@ public class Menu_21317055_AriasHurtado {
                 case 2:
                     try {
                         ArrayList<Train_21317055_AriasHurtado> trains = TrainReader.readTrains("ExampleTrains.txt");
-                        subway.setTrains(trains);
+                        subway.addTrain(trains);
                         System.out.println("Trenes cargados correctamente.");
                         subway.myToString();
                     } catch (IOException e) {
@@ -50,7 +49,7 @@ public class Menu_21317055_AriasHurtado {
                 case 3:
                     try {
                         ArrayList<Driver_21317055_AriasHurtado> drivers = DriverReader.readDrivers("ExampleDrivers.txt");
-                        subway.setDrivers(drivers);
+                        subway.addDriver(drivers);
                         System.out.println("Conductores cargados correctamente.");
                         subway.myToString();
                     } catch (IOException e) {
@@ -65,6 +64,10 @@ public class Menu_21317055_AriasHurtado {
             }
         }while(option != 5);
     }
+
+
+
+
     public void menuView(){
         int option;
         do {
@@ -75,6 +78,7 @@ public class Menu_21317055_AriasHurtado {
             scanner.nextLine();
             switch (option) {
                 case 1:
+                    menuInteract();
                     break;
                 case 2:
                     break;
@@ -85,9 +89,14 @@ public class Menu_21317055_AriasHurtado {
     }
 
 
+
+
+
     public void menuInteract() {
         int option;
-
+        int select;
+        int subselect1;
+        int subselect2;
         do {
             System.out.println("------------------- Sistema Metro - Interactuar con el sistema de metros -------------------");
             System.out.println("1. lineLength: obtener el largo total de una línea.");
@@ -106,16 +115,124 @@ public class Menu_21317055_AriasHurtado {
             scanner.nextLine();
             switch (option) {
                 case 1:
+                    System.out.println("Indique el id de la linea que quiere obtener el largo");
+                    System.out.println("Lineas disponibles");
+                    for (int i=0; i<subway.getLines().size(); i++){
+                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("La linea "+ select + " tiene un largo de: " + subway.getLineById(select).lineLenght());
                     break;
                 case 2:
+                    System.out.println("Indique el id de la linea de la que quiere obtener el largo entre 2 estaciones");
+                    System.out.println("Lineas disponibles");
+                    for (int i=0; i<subway.getLines().size(); i++){
+                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Indique el id de la primera estacion");
+                    System.out.println("Estaciones disponibles:");
+                    subway.getLineById(select).showStations();
+                    subselect1 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Indique el id de la segunda estacion");
+                    System.out.println("Estaciones disponibles:");
+                    subway.getLineById(select).showStations();
+                    subselect2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Entre " + subway.getLineById(select).getStationById(subselect1).getNameStation() + " y " + subway.getLineById(select).getStationById(subselect2).getNameStation()+ " hay un largo de: " + subway.getLineById(select).lineSectionCost(subway.getLineById(select).getStationById(subselect1), subway.getLineById(select).getStationById(subselect2)));
                     break;
                 case 3:
+                    System.out.println("Indique el id de la linea que quiere obtener el costo");
+                    System.out.println("Lineas disponibles");
+                    for (int i=0; i<subway.getLines().size(); i++){
+                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("La linea "+ select + " tiene un largo de: " + subway.getLineById(select).lineCost());
                     break;
                 case 4:
+                    System.out.println("Indique el id de la linea de la que quiere obtener el costo entre 2 estaciones");
+                    System.out.println("Lineas disponibles");
+                    for (int i=0; i<subway.getLines().size(); i++){
+                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Indique el id de la primera estacion");
+                    System.out.println("Estaciones disponibles:");
+                    subway.getLineById(select).showStations();
+                    subselect1 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Indique el id de la segunda estacion");
+                    System.out.println("Estaciones disponibles:");
+                    subway.getLineById(select).showStations();
+                    subselect2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Entre " + subway.getLineById(select).getStationById(subselect1).getNameStation() + " y " + subway.getLineById(select).getStationById(subselect2).getNameStation()+ " hay un costo de: " + subway.getLineById(select).lineSectionCost(subway.getLineById(select).getStationById(subselect1), subway.getLineById(select).getStationById(subselect2)));
                     break;
                 case 5:
+                    System.out.println("Indique el id de la linea que quiere validar");
+                    System.out.println("Lineas disponibles");
+                    for (int i=0; i<subway.getLines().size(); i++){
+                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    if(subway.getLineById(select).isLine()){
+                        System.out.println("la linea " + subway.getLineById(select) + "es valida");
+                    }else{
+                        System.out.println("la linea " + subway.getLineById(select) + "no es valida");
+                    }
                     break;
                 case 6:
+                    System.out.println("Indique el id del tren al que quiere añadir un vagon");
+                    System.out.println("Trenes disponibles");
+                    for (int i=0; i<subway.getTrains().size(); i++){
+                        System.out.println("Tren " + subway.getTrains().get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Procedera a ingresar los datos del vagon que quiere añadir");
+
+                    int idPassangerCar;
+                    System.out.println("Ingrese el id del vagon");
+                    idPassangerCar = scanner.nextInt();
+                    scanner.nextLine();
+
+                    int passangerCapacity;
+                    System.out.println("Ingrese la capacidad del vagon");
+                    passangerCapacity = scanner.nextInt();
+                    scanner.nextLine();
+
+                    String model;
+                    System.out.println("Ingrese el modelo del vagon");
+                    model = scanner.nextLine();
+                    scanner.nextLine();
+
+                    String trainMaker;
+                    System.out.println("Ingrese la manufacturadora del vagon");
+                    trainMaker = scanner.nextLine();
+                    scanner.nextLine();
+
+                    char carType;
+                    System.out.println("Ingrese si el vagon es de tipo terminal (t), o central(c)");
+                    carType = scanner.nextLine().charAt(0);
+                    scanner.nextLine();
+                    PassangerCar_21317055_AriasHurtado userPcar = new PassangerCar_21317055_AriasHurtado(idPassangerCar, passangerCapacity, model, trainMaker, carType);
+                    System.out.println("Ahora ingrese la posicion en la que quiere ingresar el vagon");
+                    System.out.println("Posiciones disponibles");
+                    for (int i=0; i<subway.getTrains().get(select).getCarList().size(); i++){
+                        System.out.println("Posicion" + subway.getTrains().get(select).getCarList().get(i).getIdPassangerCar());
+                    }
+                    subselect1 = scanner.nextInt();
+                    scanner.nextLine();
+                    subway.getTrains().get(select).addCar(subselect1, userPcar);
+
+
                     break;
                 case 7:
                     break;
@@ -134,7 +251,6 @@ public class Menu_21317055_AriasHurtado {
             }
         } while (option != 12);
     }
-
 
     public static void main(String[] args) {
         Main_21317055_AriasHurtado.main(new String[0]);

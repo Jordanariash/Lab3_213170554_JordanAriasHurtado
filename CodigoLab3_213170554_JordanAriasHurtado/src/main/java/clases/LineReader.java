@@ -46,9 +46,9 @@ public class LineReader {
                     Section_21317055_AriasHurtado section = new Section_21317055_AriasHurtado(station1, station2, distance, cost);
                     sections.add(section);
 
-                    lines.add(new Line_21317055_AriasHurtado(idLine, nameLine, railType, sections));
-
                     }
+                Line_21317055_AriasHurtado line1 = new Line_21317055_AriasHurtado(idLine, nameLine, railType, sections);
+                lines.add(line1);
                 }
             }
             reader.close();

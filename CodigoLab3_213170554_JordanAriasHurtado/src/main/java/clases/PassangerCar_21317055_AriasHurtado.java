@@ -1,6 +1,5 @@
 package clases;
 
-
 public class PassangerCar_21317055_AriasHurtado {
 
     private int idPassangerCar;

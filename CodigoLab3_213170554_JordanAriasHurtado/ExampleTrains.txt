@@ -1,1 +1,2 @@
-Train,1,‎A,100,100,    1:1:MA:A:t:    2:2:MA:A:c:    3:3:MA:A:t
+Train,1,‎A,100,100,    1,1,MA,A,t,    2,2,MA,A,c,    3,3,MA,A,t
+Train,2,‎B,100,100,    4,4,MA,A,t,    5,5,MA,A,c,    6,6,MA,A,c

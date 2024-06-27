@@ -66,8 +66,8 @@ public class Train_21317055_AriasHurtado {
     }
 
 
-    public void addCar(PassangerCar_21317055_AriasHurtado passangerCar) {
-        this.carList.add(passangerCar);
+    public void addCar(int position, PassangerCar_21317055_AriasHurtado passangerCar) {
+        this.carList.add(position, passangerCar);
     }
 
     public void removeCar(int position){

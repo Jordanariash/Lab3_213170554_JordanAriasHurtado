@@ -85,6 +85,15 @@ public class Subway_21317055_AriasHurtado {
 
 
 
+    public Line_21317055_AriasHurtado getLineById(int idLine){
+        for (Line_21317055_AriasHurtado line : lines) {
+            if (line.getIdLine() == idLine) {
+                return line;
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -218,11 +227,11 @@ public class Subway_21317055_AriasHurtado {
         ArrayList<PassangerCar_21317055_AriasHurtado> carList = new ArrayList<>();
         Train_21317055_AriasHurtado train1 = new Train_21317055_AriasHurtado(1, "atom",  10, 5, carList);
 
-        train1.addCar(pcar1);
-        train1.addCar(pcar2);
-        train1.addCar(pcar3);
-        train1.addCar(pcar4);
-        train1.addCar(pcar5);
+        train1.addCar(0,pcar1);
+        train1.addCar(1,pcar2);
+        train1.addCar(2,pcar3);
+        train1.addCar(3,pcar4);
+        train1.addCar(4,pcar5);
 
         Driver_21317055_AriasHurtado driver1 = new Driver_21317055_AriasHurtado(1, "charmander", "atom");
         Driver_21317055_AriasHurtado driver2= new Driver_21317055_AriasHurtado(2, "squirtle", "atom");

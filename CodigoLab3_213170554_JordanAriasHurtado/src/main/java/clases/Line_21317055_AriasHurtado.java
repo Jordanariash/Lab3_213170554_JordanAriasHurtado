@@ -61,6 +61,16 @@ public class Line_21317055_AriasHurtado {
         this.sections = sections;
     }
 
+    public Station_213170554_AriasHurtado getStationById(int idStation){
+        for (int i = 0; i<sections.size(); i++) {
+            if(sections.get(i).getStation1().getIdStation() == idStation){
+                return sections.get(i).getStation1();
+            }
+        }
+        return null;
+    }
+
+
 
     int totalLenght = 0;
     public int lineLenght(){
@@ -200,9 +210,12 @@ public class Line_21317055_AriasHurtado {
     public void showInfoLine(){
         System.out.println("ID linea: "+ idLine + " , Nombre Linea: " + nameLine + " , tipo rieles: " + railType);
         for (int i = 0; i < sections.size(); i++) {
-            sections.get(i).showInfoSection();
+            sections.get(i).getStation1().showInfoStation();
+            System.out.println("distancia: " + sections.get(i).getDistance() + " costo: " + sections.get(i).getCost());
         }
+        sections.get(sections.size()-1).getStation1().showInfoStation();
     }
+
 
     public boolean sameLine(Line_21317055_AriasHurtado line){
         if(getIdLine() == line.getIdLine() && getNameLine().equals(line.getNameLine())){
@@ -210,5 +223,12 @@ public class Line_21317055_AriasHurtado {
         }else{
             return false;
         }
+    }
+
+    public void showStations(){
+       for (int i = 0; i < sections.size(); i++) {
+           System.out.println(sections.get(i).getStation1().getIdStation() + ". "+ sections.get(i).getStation1().getNameStation());
+            }
+       System.out.println(sections.get(sections.size()-1).getStation2().getIdStation() + ". "+ sections.get(sections.size()-1).getStation2().getNameStation());
     }
 }
