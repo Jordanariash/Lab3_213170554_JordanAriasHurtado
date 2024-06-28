@@ -1,2 +1,2 @@
-Line,1,L1,UIC60,  1:A:t:10:  2:B:r:20:  100:200;   2:B:r:20:  3:C:t:30:   300:400
-Line,2,L2,UIC70,  4:D:t:10:  5:E:r:20:  100:200;   5:E:r:20:  6:F:t:30:   300:400
+Line,1,L1,UIC60,1:San pablo:t:10:2:USACH:r:20:100:200;2:USACH:r:20:3:Santa Lucia:r:30:300:400;3:Santa Lucia:r:30:4:Tobalaba:t:40:500:600
+Line,2,L2,UIC70,5:Vespucio:t:50:6:Cerro Blanco:r:60:600:700;6:Cerro Blanco:r:60:7:Toesca:r:70:700:800;7:Toesca:r:70:8:San Miguel:t:80:900:1000

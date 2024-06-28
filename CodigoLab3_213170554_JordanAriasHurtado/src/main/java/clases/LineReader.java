@@ -22,7 +22,6 @@ public class LineReader {
                 String[] sectionDetails = parts[4].trim().split(";");
                 for (String sectionDetail : sectionDetails) {
                     String[] sectionParts = sectionDetail.trim().split(":");
-
                     // Obtener detalles de las estaciones
                     int idStation1 = Integer.parseInt(sectionParts[0].trim());
                     String nameStation1 = sectionParts[1].trim();

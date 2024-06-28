@@ -1,2 +1,2 @@
-Train,1,‎A,100,100,    1,1,MA,A,t,    2,2,MA,A,c,    3,3,MA,A,t
-Train,2,‎B,100,100,    4,4,MA,A,t,    5,5,MA,A,c,    6,6,MA,A,c
+Train,1,Alstom,100,100,    1,50,NS-74,Alstom,t,    2,50,NS-74,Alstom,c,    3,50,NS-74,Alstom,c,      4,50,NS-74,Alstom,c,          5,50,NS-74,Alstom,t
+Train,2,CAF,200,200,       6,60,AS-2002,CAF,t,    7,60,AS-2002,CAF,c,    8,60,AS-2002,CAF,c,      9,60,AS-2002,CAF,c,          10,60,AS-2002,CAF,t

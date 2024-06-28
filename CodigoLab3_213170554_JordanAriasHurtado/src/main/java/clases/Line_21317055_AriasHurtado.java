@@ -66,14 +66,17 @@ public class Line_21317055_AriasHurtado {
             if(sections.get(i).getStation1().getIdStation() == idStation){
                 return sections.get(i).getStation1();
             }
+            if(sections.get(i).getStation2().getIdStation() == idStation){
+                return sections.get(i).getStation2();
+            }
         }
         return null;
     }
 
 
 
-    int totalLenght = 0;
     public int lineLenght(){
+        int totalLenght = 0;
         if(sections == null){
             return 0;
         }else{
@@ -85,8 +88,9 @@ public class Line_21317055_AriasHurtado {
     }
 
 
-    int sectionLenght = 0;
+
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
+        int sectionLenght = 0;
         int i = 0;
         while(i < sections.size()) {
             if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
@@ -104,8 +108,9 @@ public class Line_21317055_AriasHurtado {
         return sectionLenght;
     }
 
-    int totalCost = 0;
+
     public int lineCost(){
+        int totalCost = 0;
         if(sections == null){
             return 0;
         }else{
@@ -117,8 +122,9 @@ public class Line_21317055_AriasHurtado {
     }
 
 
-    int sectionCost = 0;
+
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
+        int sectionCost = 0;
         int i = 0;
         while(i < sections.size()) {
             if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
@@ -209,11 +215,15 @@ public class Line_21317055_AriasHurtado {
 
     public void showInfoLine(){
         System.out.println("ID linea: "+ idLine + " , Nombre Linea: " + nameLine + " , tipo rieles: " + railType);
-        for (int i = 0; i < sections.size(); i++) {
-            sections.get(i).getStation1().showInfoStation();
-            System.out.println("distancia: " + sections.get(i).getDistance() + " costo: " + sections.get(i).getCost());
+        if(sections.isEmpty()){
+            System.out.println("No hay estaciones en la linea");
+        }else {
+            for (int i = 0; i < sections.size(); i++) {
+                sections.get(i).getStation1().showInfoStation();
+                System.out.println("distancia: " + sections.get(i).getDistance() + " costo: " + sections.get(i).getCost());
+            }
+            sections.get(sections.size()-1).getStation2().showInfoStation();
         }
-        sections.get(sections.size()-1).getStation1().showInfoStation();
     }
 
 

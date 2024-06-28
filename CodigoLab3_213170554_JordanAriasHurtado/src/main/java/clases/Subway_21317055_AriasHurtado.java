@@ -94,9 +94,18 @@ public class Subway_21317055_AriasHurtado {
         return null;
     }
 
+    public Train_21317055_AriasHurtado getTrainById(int idTrain){
+        for (Train_21317055_AriasHurtado train : trains) {
+            if (train.getIdTrain() == idTrain) {
+                return train;
+            }
+        }
+        return null;
+    }
 
 
 
+    //añadir la verificacion de elementos unicos
     public void addLine(ArrayList<Line_21317055_AriasHurtado> lines){
         ArrayList<Line_21317055_AriasHurtado> linesUnrepeated= new ArrayList<Line_21317055_AriasHurtado>();
         for(int i = 0; i < lines.size(); i++){
