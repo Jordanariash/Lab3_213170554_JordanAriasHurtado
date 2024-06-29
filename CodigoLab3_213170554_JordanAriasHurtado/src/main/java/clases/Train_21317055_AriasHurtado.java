@@ -8,6 +8,7 @@ public class Train_21317055_AriasHurtado {
     private int speed;
     private int stationStaytime;
     private ArrayList<PassangerCar_21317055_AriasHurtado> carList;
+    private int assignedDriver;
 
     public Train_21317055_AriasHurtado(int idTrain, String trainMaker, int speed, int stationStaytime, ArrayList<PassangerCar_21317055_AriasHurtado> carList) {
         this.idTrain = idTrain;
@@ -23,6 +24,7 @@ public class Train_21317055_AriasHurtado {
         }else{
             this.carList = carList;
         }
+        this.assignedDriver =  assignedDriver;
     }
 
     public int getIdTrain() {
@@ -65,6 +67,13 @@ public class Train_21317055_AriasHurtado {
         this.carList = carList;
     }
 
+    public int getAssignedDriver() {
+        return assignedDriver;
+    }
+
+    public void setAssignedDriver(int assignedDriver) {
+        this.assignedDriver = assignedDriver;
+    }
 
 
 

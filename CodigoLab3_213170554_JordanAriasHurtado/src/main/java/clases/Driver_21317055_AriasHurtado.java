@@ -4,12 +4,13 @@ public class Driver_21317055_AriasHurtado {
     private int idDriver;
     private String nameDriver;
     private String trainMaker;
-
+    private int assignedTrain;
 
     public Driver_21317055_AriasHurtado(int idDriver, String nameDriver, String trainMaker){
         this.idDriver = idDriver;
         this.nameDriver = nameDriver;
         this.trainMaker = trainMaker;
+        this.assignedTrain = assignedTrain;
     }
 
     public int getIdDriver() {
@@ -35,6 +36,17 @@ public class Driver_21317055_AriasHurtado {
     public void setTrainMaker(String trainMaker) {
         this.trainMaker = trainMaker;
     }
+
+    public int getAssignedTrain() {
+        return assignedTrain;
+    }
+
+    public void setAssignedTrain(int assignedTrain) {
+        this.assignedTrain = assignedTrain;
+    }
+
+
+
 
     public void showInfoDriver(){
         System.out.println("ID driver: " + idDriver + " , Nombre conductor: " + nameDriver + " ,Manufacturador: " + trainMaker);

@@ -9,6 +9,7 @@ public class Line_21317055_AriasHurtado {
     private String nameLine;
     private String railType;
     private ArrayList<Section_21317055_AriasHurtado> sections;
+    private ArrayList<Integer> assignedTrains;
 
     public Line_21317055_AriasHurtado(int idLine, String nameLine, String railType, ArrayList<Section_21317055_AriasHurtado> sections) {
         this.idLine = idLine;
@@ -27,6 +28,8 @@ public class Line_21317055_AriasHurtado {
         }else{
             this.sections = sections;
         }
+
+        this.assignedTrains = new ArrayList<>();
     }
 
     public int getIdLine() {
@@ -61,6 +64,14 @@ public class Line_21317055_AriasHurtado {
         this.sections = sections;
     }
 
+    public ArrayList<Integer> getAssignedTrains() {
+        return assignedTrains;
+    }
+
+    public void setAssignedTrains(ArrayList<Integer> assignedTrains) {
+        this.assignedTrains = assignedTrains;
+    }
+
     public Station_213170554_AriasHurtado getStationById(int idStation){
         for (int i = 0; i<sections.size(); i++) {
             if(sections.get(i).getStation1().getIdStation() == idStation){
@@ -86,7 +97,6 @@ public class Line_21317055_AriasHurtado {
             return totalLenght;
         }
     }
-
 
 
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
@@ -176,7 +186,7 @@ public class Line_21317055_AriasHurtado {
     }
 
     public boolean lineal(){
-        if(sections == null){
+        if(sections.isEmpty()){
             return true;
         } else if (sections.size() == 1){
             return true;
@@ -208,9 +218,33 @@ public class Line_21317055_AriasHurtado {
 
     }
 
+    public boolean onlyTwoTerminal(){
+        if(sections == null){
+            return true;
+        }
+        if(sections.size() == 1){
+            if((sections.get(0).getStation1().getStationType() == 't') && (sections.get(0).getStation2().getStationType() == 't')){
+                return true;
+            }
+        }else{
+            if(sections.get(0).getStation2().getStationType() == 't'){
+                return false;
+            }
+            for(int i = 1; i < sections.size()-2; i++){
+                if((sections.get(i).getStation1().getStationType() == 't') || (sections.get(i).getStation2().getStationType() == 't')){
+                    return false;
+                }
+            }
+            if(sections.get(sections.size() - 1).getStation2().getStationType() == 't'){
+                return false;
+            }
+        }
+        return true;
+    }
+
     //esta es "line?" pero no se puede ocupar "?" por error de tipeo
     public boolean isLine(){
-        return isConnected() && (circular() || lineal()) && unrepeteadSecctions();
+        return isConnected() && (circular() || lineal()) && unrepeteadSecctions() && onlyTwoTerminal();
     }
 
     public void showInfoLine(){

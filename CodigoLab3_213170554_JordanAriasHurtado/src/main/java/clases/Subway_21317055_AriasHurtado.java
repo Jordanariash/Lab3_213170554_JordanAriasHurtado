@@ -10,8 +10,6 @@ public class Subway_21317055_AriasHurtado {
     private ArrayList<Line_21317055_AriasHurtado> lines;
     private ArrayList<Train_21317055_AriasHurtado> trains;
     private ArrayList<Driver_21317055_AriasHurtado> drivers;
-    private ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains;
-    private ArrayList<pairTrainDriver> assignedDrivers;
 
     public Subway_21317055_AriasHurtado(int idSubway, String nameSubway){
         this.idSubway = idSubway;
@@ -21,9 +19,6 @@ public class Subway_21317055_AriasHurtado {
 
         this.trains = new ArrayList<>();
         this.drivers = new ArrayList<>();
-        this.assignedTrains = new ArrayList<>();
-        this.assignedDrivers = new ArrayList<>();
-
     }
 
 
@@ -66,23 +61,6 @@ public class Subway_21317055_AriasHurtado {
     public void setDrivers(ArrayList<Driver_21317055_AriasHurtado> drivers) {
         this.drivers = drivers;
     }
-
-    public ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> getAssignedTrains() {
-        return assignedTrains;
-    }
-
-    public void setAssignedTrains(ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains) {
-        this.assignedTrains = assignedTrains;
-    }
-
-    public ArrayList<pairTrainDriver> getAssignedDrivers() {
-        return assignedDrivers;
-    }
-
-    public void setAssignedDrivers(ArrayList<pairTrainDriver> assignedDrivers) {
-        this.assignedDrivers = assignedDrivers;
-    }
-
 
 
     public Line_21317055_AriasHurtado getLineById(int idLine){
@@ -153,11 +131,7 @@ public class Subway_21317055_AriasHurtado {
             for (int i = 0; i < lines.size(); i++) {
                 lines.get(i).showInfoLine();
                 System.out.println("la linea tiene asignado el/los trenes: ");
-                for(int j = 0; j < assignedTrains.size(); j++){
-                    if(assignedTrains.get(j).getLine().getIdLine() == lines.get(i).getIdLine()){
-                        System.out.println(assignedTrains.get(j).getTrain().getIdTrain());
-                    }
-                }
+                //falta añadir esto
                 System.out.println("---------------------------------------------");
             }
         } else {
@@ -170,12 +144,7 @@ public class Subway_21317055_AriasHurtado {
                 trains.get(i).showInfoTrain();
                 System.out.println("---------------------------------------------");
                 System.out.println("el tren tiene asignados a los conductores: ");
-                for(int j = 0; j < assignedDrivers.size(); j++){
-                    if(assignedDrivers.get(j).getDriver().getIdDriver() == trains.get(i).getIdTrain()){
-                        System.out.println(assignedDrivers.get(j).getDriver().getIdDriver());
-                    }
-
-                }
+                //falta añadir esto
                 System.out.println("---------------------------------------------");
             }
         } else {
@@ -195,15 +164,9 @@ public class Subway_21317055_AriasHurtado {
         System.out.println("*********************************************");
     }
 
-    public void assignTrainToLine(Train_21317055_AriasHurtado train, Line_21317055_AriasHurtado line) {
-        pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado> pair = new pairTrainLine<>(train, line);
-        assignedTrains.add(pair);
-    }
+    public void assignTrainToLine(Train_21317055_AriasHurtado train, Line_21317055_AriasHurtado line) {}
 
-    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
-        pairTrainDriver pair = new pairTrainDriver(train, driver, departureTime ,departureStation, arriveStation);
-        assignedDrivers.add(pair);
-    }
+    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){}
 
     public static void main(String[] args){
         Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
