@@ -132,7 +132,6 @@ public class Line_21317055_AriasHurtado {
     }
 
 
-
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
         int sectionCost = 0;
         int i = 0;
@@ -160,7 +159,7 @@ public class Line_21317055_AriasHurtado {
     }
 
     public boolean isConnected(){
-        if(sections == null){
+        if(sections.isEmpty()){
             return true;
         } else if (sections.size() == 1){
             return true;
@@ -176,7 +175,7 @@ public class Line_21317055_AriasHurtado {
 
     public boolean circular(){
 
-        if(sections == null){
+        if(sections.isEmpty()){
             return true;
         } else if (sections.size() == 1){
             return true;
@@ -196,7 +195,7 @@ public class Line_21317055_AriasHurtado {
 
     }
 
-    public boolean unrepeteadSecctions(){
+    public boolean unrepeteadSections(){
         ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<>();
         for (int i = 0; i < sections.size()-1; i++) {
             //si hay una seccion que sea la misma, osea st1-st2 != st2-st1
@@ -219,32 +218,26 @@ public class Line_21317055_AriasHurtado {
     }
 
     public boolean onlyTwoTerminal(){
-        if(sections == null){
+        if(sections.isEmpty()) {
             return true;
         }
-        if(sections.size() == 1){
-            if((sections.get(0).getStation1().getStationType() == 't') && (sections.get(0).getStation2().getStationType() == 't')){
-                return true;
-            }
-        }else{
-            if(sections.get(0).getStation2().getStationType() == 't'){
-                return false;
-            }
-            for(int i = 1; i < sections.size()-2; i++){
-                if((sections.get(i).getStation1().getStationType() == 't') || (sections.get(i).getStation2().getStationType() == 't')){
-                    return false;
-                }
-            }
-            if(sections.get(sections.size() - 1).getStation2().getStationType() == 't'){
-                return false;
+        int count = 0;
+        for (int i = 0; i < sections.size(); i++) {
+            if((sections.get(i).getStation1().getStationType() == 't')||(sections.get(i).getStation2().getStationType() == 't')){
+                count++;
             }
         }
-        return true;
+        if(count == 2){
+            return true;
+        }else{
+            return false;
+        }
     }
+
 
     //esta es "line?" pero no se puede ocupar "?" por error de tipeo
     public boolean isLine(){
-        return isConnected() && (circular() || lineal()) && unrepeteadSecctions() && onlyTwoTerminal();
+        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal();
     }
 
     public void showInfoLine(){

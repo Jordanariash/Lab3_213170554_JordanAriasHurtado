@@ -36,7 +36,6 @@ public class Menu_21317055_AriasHurtado {
                         allLines = lines;
                         subway.addLine(lines);
                         System.out.println("Lineas cargadas correctamente.");
-                        subway.myToString();
                     } catch (IOException e) {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
                     }
@@ -47,7 +46,6 @@ public class Menu_21317055_AriasHurtado {
                         allTrains = trains;
                         subway.addTrain(trains);
                         System.out.println("Trenes cargados correctamente.");
-                        subway.myToString();
                     } catch (IOException e) {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
                     }
@@ -58,7 +56,6 @@ public class Menu_21317055_AriasHurtado {
                         allDrivers = drivers;
                         subway.addDriver(drivers);
                         System.out.println("Conductores cargados correctamente.");
-                        subway.myToString();
                     } catch (IOException e) {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
                     }
@@ -194,12 +191,10 @@ public class Menu_21317055_AriasHurtado {
                 case 8:
                     subway.myToString();
                     break;
-                case 9:
-                    break;
                 default:
                     break;
             }
-        } while (option != 8);
+        } while (option != 9);
     }
 
 
@@ -208,9 +203,14 @@ public class Menu_21317055_AriasHurtado {
         int select;
         int suboption;
         do{
+            //funciona
             System.out.println("1. Crear linea nueva");
+
             System.out.println("2. Añadir estacion a una linea");
+
+            //funciona
             System.out.println("3. Consultar si una linea es valida para ingresar a la red de metro");
+
             System.out.println("4. Añadir lineas a la red de metro");
             System.out.println("5. Crear tren nuevo");
             System.out.println("6. Añadir vagones a un tren");
@@ -244,10 +244,10 @@ public class Menu_21317055_AriasHurtado {
                     allLines.add(userLine);
                     break;
                 case 2:
-                    System.out.println("Indique el id de la linea a la que quiere añadir estaciones");
+                    System.out.println("Indique la linea a la que quiere añadir estaciones");
                     System.out.println("Lineas disponibles");
                     for (int i = 0; i < allLines.size(); i++) {
-                        System.out.println(i+".Linea " + allLines.get(i).getIdLine());
+                        System.out.println(i +".Linea " + allLines.get(i).getIdLine());
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
@@ -338,10 +338,10 @@ public class Menu_21317055_AriasHurtado {
 
 
                                     System.out.println("Ingrese el tipo de parada de la siguiente estacion");
-                                    System.out.println("1.Recorrido");
-                                    System.out.println("2.Combinacion");
-                                    System.out.println("3.Mantencion");
-                                    System.out.println("4.Terminal");
+                                    System.out.println("r.Recorrido");
+                                    System.out.println("c.Combinacion");
+                                    System.out.println("m.Mantencion");
+                                    System.out.println("t.Terminal");
                                     userStationType = scanner.nextLine().charAt(0);
 
                                     Station_213170554_AriasHurtado userStation = new Station_213170554_AriasHurtado(userIdStation, userNameStation, userStationType, userStopTime);
@@ -361,8 +361,6 @@ public class Menu_21317055_AriasHurtado {
                                 }
                                 break;
                             case 2:
-                                //test
-                                System.out.println("LLEGO AL CASE 2");
                                 break;
                             default:
                                 System.out.println("Ingrese una opcion valida");
@@ -385,16 +383,19 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 4:
-                    System.out.println("Lineas disponibles para añadir");
+                    System.out.println("Lineas disponibles para añadir/actualizar");
                     for (int i = 0; i < allLines.size(); i++) {
                         System.out.println(i+".Linea " + allLines.get(i).getIdLine());
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
                     if(allLines.get(select).isLine()){
-                        subway.addLine(allLines);
+                        ArrayList<Line_21317055_AriasHurtado> auxAllLine = new ArrayList<>();
+                        auxAllLine.add(allLines.get(select));
+                        subway.addLine(auxAllLine);
+                        System.out.println("La linea se añadio");
                     }else{
-                        System.out.println("La linea no se añadio");
+                        System.out.println("La linea no se pudo añadir");
                     }
                     break;
                 case 5:
