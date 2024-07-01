@@ -9,7 +9,9 @@ public class Line_21317055_AriasHurtado {
     private String nameLine;
     private String railType;
     private ArrayList<Section_21317055_AriasHurtado> sections;
+
     private ArrayList<Integer> assignedTrains;
+
 
     public Line_21317055_AriasHurtado(int idLine, String nameLine, String railType, ArrayList<Section_21317055_AriasHurtado> sections) {
         this.idLine = idLine;
@@ -83,6 +85,8 @@ public class Line_21317055_AriasHurtado {
         }
         return null;
     }
+
+
 
 
 

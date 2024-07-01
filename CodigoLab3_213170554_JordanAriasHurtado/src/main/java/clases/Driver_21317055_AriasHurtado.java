@@ -4,6 +4,7 @@ public class Driver_21317055_AriasHurtado {
     private int idDriver;
     private String nameDriver;
     private String trainMaker;
+
     private int assignedTrain;
 
     public Driver_21317055_AriasHurtado(int idDriver, String nameDriver, String trainMaker){

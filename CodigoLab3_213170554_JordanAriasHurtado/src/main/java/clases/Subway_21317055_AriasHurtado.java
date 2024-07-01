@@ -2,6 +2,8 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 public class Subway_21317055_AriasHurtado {
@@ -11,14 +13,16 @@ public class Subway_21317055_AriasHurtado {
     private ArrayList<Train_21317055_AriasHurtado> trains;
     private ArrayList<Driver_21317055_AriasHurtado> drivers;
 
+
+
     public Subway_21317055_AriasHurtado(int idSubway, String nameSubway){
         this.idSubway = idSubway;
         this.nameSubway = nameSubway;
 
         this.lines = new ArrayList<>();
-
         this.trains = new ArrayList<>();
         this.drivers = new ArrayList<>();
+
     }
 
 
@@ -79,6 +83,21 @@ public class Subway_21317055_AriasHurtado {
             }
         }
         return null;
+    }
+
+    public boolean areInTheSameLine(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
+        //en cada linea
+        for(int i = 0; i < lines.size(); i++){
+            for (int j = 0; j < lines.get(i).getSections().size(); j++){
+                //si esta la primera estacion en la linea
+                if (lines.get(i).getSections().get(j).getStation1().sameStation(station1) || lines.get(i).getSections().get(j).getStation2().sameStation(station1)) {
+                    if (lines.get(i).getSections().get(j).getStation1().sameStation(station2) || lines.get(i).getSections().get(j).getStation2().sameStation(station2)) {
+                        return true;
+                }
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -164,9 +183,26 @@ public class Subway_21317055_AriasHurtado {
         System.out.println("*********************************************");
     }
 
-    public void assignTrainToLine(Train_21317055_AriasHurtado train, Line_21317055_AriasHurtado line) {}
+    public void assignTrainToLine(Train_21317055_AriasHurtado train, Line_21317055_AriasHurtado line) {
+        line.getAssignedTrains().add(train.getIdTrain());
+        train.setAssignedLine(line.getIdLine());
+    }
 
-    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){}
+    public void assignDriverToTrain(Train_21317055_AriasHurtado train, Driver_21317055_AriasHurtado driver, Date departureTime,Station_213170554_AriasHurtado departureStation, Station_213170554_AriasHurtado arriveStation){
+        train.setAssignedDriver(driver.getIdDriver());
+        driver.setAssignedTrain(train.getIdTrain());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String formattedDate = sdf.format(departureTime);
+
+        if (areInTheSameLine(departureStation, arriveStation)){
+            train.setDepartureStation(departureStation);
+            train.setArriveStation(arriveStation);
+        }else{
+            throw new IllegalArgumentException("las estaciones deben pertenecer a la misma linea");
+        }
+
+    }
 
     public static void main(String[] args){
         Station_213170554_AriasHurtado station1 = new Station_213170554_AriasHurtado(1, "Usach", 't', 5);
@@ -189,6 +225,30 @@ public class Subway_21317055_AriasHurtado {
         line1.addSection(section3);
         line1.addSection(section4);
         line1.addSection(section5);
+
+        Station_213170554_AriasHurtado station7 = new Station_213170554_AriasHurtado(7, "a", 't', 5);
+        Station_213170554_AriasHurtado station8 = new Station_213170554_AriasHurtado(8, "b", 'r', 10);
+        Station_213170554_AriasHurtado station9 = new Station_213170554_AriasHurtado(9, "c", 'r', 15);
+        Station_213170554_AriasHurtado station10 = new Station_213170554_AriasHurtado(10, "d", 'c', 5);
+        Station_213170554_AriasHurtado station11 = new Station_213170554_AriasHurtado(11, "e", 'r', 10);
+        Station_213170554_AriasHurtado station12 = new Station_213170554_AriasHurtado(12, "f", 't', 15);
+
+        Section_21317055_AriasHurtado section6 = new Section_21317055_AriasHurtado(station7, station8, 3, 8);
+        Section_21317055_AriasHurtado section7 = new Section_21317055_AriasHurtado(station8, station9, 4, 9);
+        Section_21317055_AriasHurtado section8 = new Section_21317055_AriasHurtado(station9, station10, 5, 10);
+        Section_21317055_AriasHurtado section9 = new Section_21317055_AriasHurtado(station10, station11, 6, 11);
+        Section_21317055_AriasHurtado section10 = new Section_21317055_AriasHurtado(station11, station12, 7, 12);
+
+        ArrayList<Section_21317055_AriasHurtado> secciones2 = new ArrayList<>();
+        Line_21317055_AriasHurtado line2 = new Line_21317055_AriasHurtado(2, "L2", "UIC-60", secciones2);
+        line2.addSection(section6);
+        line2.addSection(section7);
+        line2.addSection(section8);
+        line2.addSection(section9);
+        line2.addSection(section10);
+
+
+
 
         PassangerCar_21317055_AriasHurtado pcar1 = new PassangerCar_21317055_AriasHurtado(1, 6, "atom", "creator", 't');
         PassangerCar_21317055_AriasHurtado pcar2 = new PassangerCar_21317055_AriasHurtado(2, 7, "atom", "creator", 'c');
@@ -217,6 +277,7 @@ public class Subway_21317055_AriasHurtado {
 
         Subway_21317055_AriasHurtado subway1= new Subway_21317055_AriasHurtado(1, "metro");
         lines.add(line1);
+        lines.add(line2);
         trains.add(train1);
         drivers.add(driver1);
         drivers.add(driver2);
@@ -224,9 +285,9 @@ public class Subway_21317055_AriasHurtado {
         subway1.addLine(lines);
         subway1.addTrain(trains);
         subway1.addDriver(drivers);
-        subway1.assignTrainToLine(train1, line1);
-        Date departureTime = new Date();
-        subway1.assignDriverToTrain(train1, driver1, departureTime, station1 ,station6);
-        subway1.myToString();
+        System.out.println(subway1.areInTheSameLine(station1,station7));
+        //subway1.assignTrainToLine(train1, line1);
+        //subway1.assignDriverToTrain(train1, driver1, departureTime, station1 ,station6);
+        //subway1.myToString();
     }
 }

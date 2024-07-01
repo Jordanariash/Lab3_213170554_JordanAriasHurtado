@@ -206,13 +206,18 @@ public class Menu_21317055_AriasHurtado {
             //funciona
             System.out.println("1. Crear linea nueva");
 
+            //funciona
             System.out.println("2. Añadir estacion a una linea");
 
             //funciona
             System.out.println("3. Consultar si una linea es valida para ingresar a la red de metro");
 
+            //funciona
             System.out.println("4. Añadir lineas a la red de metro");
+
+            //listo no probado
             System.out.println("5. Crear tren nuevo");
+
             System.out.println("6. Añadir vagones a un tren");
             System.out.println("7. Quitar vagones a un tren");
             System.out.println("8. Consultar si un tren es valido para ingresar a la red de metro");
@@ -399,10 +404,47 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 5:
+                    int userIdTrain;
+                    System.out.println("Ingrese el id del nuevo tren");
+                    userIdTrain = scanner.nextInt();
+                    scanner.nextLine();
+
+                    String userTrainMaker;
+                    System.out.println("Ingrese la manufacturadora del nuevo tren");
+                    userTrainMaker = scanner.nextLine();
+
+                    int userSpeed;
+                    System.out.println("Ingrese la velocidad del nuevo tren");
+                    userSpeed = scanner.nextInt();
+
+                    int userStationStayTime;
+                    System.out.println("Ingrese el tiempo de parada por estacion del nuevo tren");
+                    userStationStayTime = scanner.nextInt();
+
+                    ArrayList<PassangerCar_21317055_AriasHurtado> userPcars = new ArrayList<>();
+
+                    Train_21317055_AriasHurtado userTrain = new Train_21317055_AriasHurtado(userIdTrain, userTrainMaker, userSpeed, userStationStayTime, userPcars);
+                    System.out.println("Se ha creado el tren con exito");
+                    allTrains.add(userTrain);
                     break;
                 case 6:
+                    System.out.println("Indique el tren del que quiere linea que quiere añadir un carro");
+                    System.out.println("Trenes disponibles");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Indique la posicion en la que quiere agregar el vagon");
                     break;
                 case 7:
+                    System.out.println("Indique el tren del que quiere linea que quiere eliminar un carro");
+                    System.out.println("Trenes disponibles");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
                     break;
                 case 8:
                     break;

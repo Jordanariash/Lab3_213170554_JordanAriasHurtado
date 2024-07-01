@@ -8,7 +8,11 @@ public class Train_21317055_AriasHurtado {
     private int speed;
     private int stationStaytime;
     private ArrayList<PassangerCar_21317055_AriasHurtado> carList;
+
+    private int assignedLine;
     private int assignedDriver;
+    private Station_213170554_AriasHurtado departureStation;
+    private Station_213170554_AriasHurtado arriveStation;
 
     public Train_21317055_AriasHurtado(int idTrain, String trainMaker, int speed, int stationStaytime, ArrayList<PassangerCar_21317055_AriasHurtado> carList) {
         this.idTrain = idTrain;
@@ -75,6 +79,32 @@ public class Train_21317055_AriasHurtado {
         this.assignedDriver = assignedDriver;
     }
 
+    public int getAssignedLine() {
+        return assignedLine;
+    }
+
+    public void setAssignedLine(int assignedLine) {
+        this.assignedLine = assignedLine;
+    }
+
+    public Station_213170554_AriasHurtado getDepartureStation() {
+        return departureStation;
+    }
+
+    public void setDepartureStation(Station_213170554_AriasHurtado departureStation) {
+        this.departureStation = departureStation;
+    }
+
+    public Station_213170554_AriasHurtado getArriveStation() {
+        return arriveStation;
+    }
+
+    public void setArriveStation(Station_213170554_AriasHurtado arriveStation) {
+        this.arriveStation = arriveStation;
+    }
+
+
+
 
 
 
@@ -84,6 +114,9 @@ public class Train_21317055_AriasHurtado {
     }
 
     public void removeCar(int position){
+        if (carList.isEmpty()){
+            throw new IllegalArgumentException("El tren no tiene vagones");
+        }
         this.carList.remove(position);
     }
 
