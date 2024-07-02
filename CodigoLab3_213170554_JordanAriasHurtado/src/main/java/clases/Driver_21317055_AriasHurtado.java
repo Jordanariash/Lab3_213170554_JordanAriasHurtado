@@ -1,17 +1,21 @@
 package clases;
 
+import java.util.Date;
+
 public class Driver_21317055_AriasHurtado {
     private int idDriver;
     private String nameDriver;
     private String trainMaker;
 
     private int assignedTrain;
+    private Date departureTime;
 
     public Driver_21317055_AriasHurtado(int idDriver, String nameDriver, String trainMaker){
         this.idDriver = idDriver;
         this.nameDriver = nameDriver;
         this.trainMaker = trainMaker;
         this.assignedTrain = assignedTrain;
+        this.departureTime = departureTime;
     }
 
     public int getIdDriver() {
@@ -46,8 +50,13 @@ public class Driver_21317055_AriasHurtado {
         this.assignedTrain = assignedTrain;
     }
 
+    public Date getDepartureTime() {
+        return departureTime;
+    }
 
-
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
+    }
 
     public void showInfoDriver(){
         System.out.println("ID driver: " + idDriver + " , Nombre conductor: " + nameDriver + " ,Manufacturador: " + trainMaker);

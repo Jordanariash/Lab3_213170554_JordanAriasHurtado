@@ -1,6 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Train_21317055_AriasHurtado {
     private int idTrain;
@@ -13,6 +14,7 @@ public class Train_21317055_AriasHurtado {
     private int assignedDriver;
     private Station_213170554_AriasHurtado departureStation;
     private Station_213170554_AriasHurtado arriveStation;
+    private Date departureTime;
 
     public Train_21317055_AriasHurtado(int idTrain, String trainMaker, int speed, int stationStaytime, ArrayList<PassangerCar_21317055_AriasHurtado> carList) {
         this.idTrain = idTrain;
@@ -28,7 +30,13 @@ public class Train_21317055_AriasHurtado {
         }else{
             this.carList = carList;
         }
+
+
         this.assignedDriver =  assignedDriver;
+        this.departureStation = departureStation;
+        this.arriveStation = arriveStation;
+        this.departureTime = departureTime;
+        this.assignedLine = assignedLine;
     }
 
     public int getIdTrain() {
@@ -103,7 +111,13 @@ public class Train_21317055_AriasHurtado {
         this.arriveStation = arriveStation;
     }
 
+    public Date getDepartureTime() {
+        return departureTime;
+    }
 
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
+    }
 
 
 

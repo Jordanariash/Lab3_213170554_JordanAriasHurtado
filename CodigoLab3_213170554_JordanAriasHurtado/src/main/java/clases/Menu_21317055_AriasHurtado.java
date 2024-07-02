@@ -218,11 +218,21 @@ public class Menu_21317055_AriasHurtado {
             //listo no probado
             System.out.println("5. Crear tren nuevo");
 
+            //listo no probado
             System.out.println("6. Añadir vagones a un tren");
+
+            //listo no probado
             System.out.println("7. Quitar vagones a un tren");
+
+            //listo no probado
             System.out.println("8. Consultar si un tren es valido para ingresar a la red de metro");
+
+            //listo no probado
             System.out.println("9. Añadir trenes a la red de metro");
+
+            //listo no probado
             System.out.println("10. Ingresar nuevo conductor");
+            
             System.out.println("11. Asignar tren a linea");
             System.out.println("12. Asignar conductor a tren");
             System.out.println("13. Volver");
@@ -435,7 +445,43 @@ public class Menu_21317055_AriasHurtado {
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Indique la posicion en la que quiere agregar el vagon");
+
+                    System.out.println("Indique el id del nuevo vagon:");
+                    int userId;
+                    userId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.println("Indique capacidad del nuevo vagon:");
+                    int userCapacity;
+                    userCapacity = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.println("Indique el modelo del nuevo vagon:");
+                    String userModel;
+                    userModel = scanner.nextLine();
+
+                    System.out.println("Indique si el nuevo vagon es de tipo central (c), o terminal (t):");
+                    char userCarType;
+                    userCarType = scanner.nextLine().charAt(0);
+
+                    PassangerCar_21317055_AriasHurtado userPcar = new PassangerCar_21317055_AriasHurtado(userId, userCapacity, userModel, allTrains.get(select).getTrainMaker(),userCarType);
+
+                    if(allTrains.get(select).getCarList().isEmpty()){
+                        allTrains.get(select).addCar(0, userPcar);
+                        System.out.println("Se ha añadido el vagon al tren");
+                    }else{
+                        System.out.println("Indique la posicion en la que quiere agregar el vagon:");
+                        for (int i = 0; i < allTrains.get(select).getCarList().size(); i++) {
+                            System.out.println(i+"."+ allTrains.get(select).getCarList().get(i).getIdPassangerCar());
+                        }
+                        suboption = scanner.nextInt();
+                        scanner.nextLine();
+                        allTrains.get(select).addCar(suboption, userPcar);
+                        System.out.println("Se ha añadido el vagon al tren");
+                    }
+
+
+
                     break;
                 case 7:
                     System.out.println("Indique el tren del que quiere linea que quiere eliminar un carro");
@@ -445,12 +491,72 @@ public class Menu_21317055_AriasHurtado {
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
+                    if(allTrains.get(select).getCarList().isEmpty()){
+                        System.out.println("No hay vagones disponibles");
+                    }else{
+                        System.out.println("Indique la posicion en la que quiere remover el vagon:");
+                        for (int i = 0; i < allTrains.get(select).getCarList().size(); i++) {
+                            System.out.println(i+"."+ allTrains.get(select).getCarList().get(i).getIdPassangerCar());
+                        }
+                        suboption = scanner.nextInt();
+                        scanner.nextLine();
+                        allTrains.get(select).removeCar(suboption);
+                        System.out.println("Se ha removido el vagon con exito");
+                    }
                     break;
                 case 8:
+                    System.out.println("Indique el id del tren que quiere validar");
+                    System.out.println("Trenes disponibles");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if(allTrains.get(select).isTrain(allTrains.get(select))){
+                        System.out.println("El tren se puede añadir");
+                    }else{
+                        System.out.println("El tren no se puede añadir");
+                    }
                     break;
                 case 9:
+                    System.out.println("Trenes disponibles para añadir/actualizar");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    if(allTrains.get(select).isTrain(allTrains.get(select))){
+                        ArrayList<Train_21317055_AriasHurtado> auxAllTrain = new ArrayList<>();
+                        auxAllTrain.add(allTrains.get(select));
+                        subway.addTrain(auxAllTrain);
+                        System.out.println("El tren se añadio");
+                    }else{
+                        System.out.println("El tren no se pudo añadir");
+                    }
                     break;
                 case 10:
+                    int userIdDriver;
+                    System.out.println("Ingrese el id del nuevo conductor");
+                    userIdDriver = scanner.nextInt();
+                    scanner.nextLine();
+
+                    String userNameDriver;
+                    System.out.println("Ingrese el nombre del nuevo conductor");
+                    userNameDriver = scanner.nextLine();
+
+                    String userTrainMakerDriver;
+                    System.out.println("Ingrese que tipo de tren puede manejar el conductor (Manufacturadora de tren)");
+                    userTrainMakerDriver = scanner.nextLine();
+
+                    Driver_21317055_AriasHurtado userDriver = new Driver_21317055_AriasHurtado(userIdDriver, userNameDriver, userTrainMakerDriver);
+                    allDrivers.add(userDriver);
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                case 13:
                     break;
                 default:
                     System.out.println("Opcion no valida");

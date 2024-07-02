@@ -2,7 +2,6 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 
@@ -100,6 +99,16 @@ public class Subway_21317055_AriasHurtado {
         return false;
     }
 
+    public Line_21317055_AriasHurtado getLineByStation(int idStation){
+        for (int i = 0; i < lines.size(); i++){
+            for (int j = 0; j < lines.get(i).getSections().size(); j++){
+                if (idStation == lines.get(i).getSections().get(j).getStation1().getIdStation() || idStation == lines.get(i).getSections().get(j).getStation2().getIdStation()){
+                    return lines.get(i);
+                }
+            }
+        }
+        return null;
+    }
 
 
     //añadir la verificacion de elementos unicos
@@ -149,12 +158,16 @@ public class Subway_21317055_AriasHurtado {
         if (lines != null && !lines.isEmpty()) {
             for (int i = 0; i < lines.size(); i++) {
                 lines.get(i).showInfoLine();
-                System.out.println("la linea tiene asignado el/los trenes: ");
-                //falta añadir esto
+                if(lines.get(i).getAssignedTrains().isEmpty()){
+                    System.out.println("la linea no tiene asignado ningun tren");
+                }else {
+                    System.out.println("la linea tiene asignado el/los trenes: ");
+                    System.out.println(getLines().get(i).getAssignedTrains());
+                }
                 System.out.println("---------------------------------------------");
             }
         } else {
-            System.out.println("no hay lineas");
+            System.out.println("No hay lineas");
             System.out.println("---------------------------------------------");
         }
         System.out.println("-----------------trenes----------------------");
@@ -162,8 +175,16 @@ public class Subway_21317055_AriasHurtado {
             for (int i = 0; i < trains.size(); i++) {
                 trains.get(i).showInfoTrain();
                 System.out.println("---------------------------------------------");
+                if(trains.get(i).getArriveStation() == null) {
+                    System.out.println("El tren no esta asignado a ninguna linea");
+                }else{
+                    System.out.println("El tren esta asignado a la linea: "+ getLineByStation(trains.get(i).getArriveStation().getIdStation()).getNameLine());
+                    System.out.println("Parte su recorrido en la estacion " +trains.get(i).getDepartureStation()+" y termina en "+ trains.get(i).getArriveStation());
+                    System.out.println("Y comienza el recorrido");
+                }
+                System.out.println("---------------------------------------------");
+                System.out.println("---------------------------------------------");
                 System.out.println("el tren tiene asignados a los conductores: ");
-                //falta añadir esto
                 System.out.println("---------------------------------------------");
             }
         } else {
@@ -192,8 +213,10 @@ public class Subway_21317055_AriasHurtado {
         train.setAssignedDriver(driver.getIdDriver());
         driver.setAssignedTrain(train.getIdTrain());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = sdf.format(departureTime);
+
+        train.setDepartureTime(departureTime);
+        driver.setDepartureTime(departureTime);
+
 
         if (areInTheSameLine(departureStation, arriveStation)){
             train.setDepartureStation(departureStation);
@@ -285,9 +308,16 @@ public class Subway_21317055_AriasHurtado {
         subway1.addLine(lines);
         subway1.addTrain(trains);
         subway1.addDriver(drivers);
-        System.out.println(subway1.areInTheSameLine(station1,station7));
-        //subway1.assignTrainToLine(train1, line1);
-        //subway1.assignDriverToTrain(train1, driver1, departureTime, station1 ,station6);
-        //subway1.myToString();
+        subway1.assignTrainToLine(train1, line1);
+
+        Date departureTime = new Date(124, 6, 1, 8, 0, 0); // Año 2024 (124 + 1900), julio (6), día 1, 08:00:00
+        subway1.assignDriverToTrain(train1, driver1, departureTime, station1, station2);
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        //String formattedTime = sdf.format(departureTime);
+        //System.out.println("Hora de salida: " + formattedTime);
+
+
+        subway1.myToString();
     }
 }

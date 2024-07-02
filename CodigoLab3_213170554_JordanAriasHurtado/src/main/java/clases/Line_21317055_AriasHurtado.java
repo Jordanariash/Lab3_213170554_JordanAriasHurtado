@@ -257,7 +257,6 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
-
     public boolean sameLine(Line_21317055_AriasHurtado line){
         if(getIdLine() == line.getIdLine() && getNameLine().equals(line.getNameLine())){
             return true;
