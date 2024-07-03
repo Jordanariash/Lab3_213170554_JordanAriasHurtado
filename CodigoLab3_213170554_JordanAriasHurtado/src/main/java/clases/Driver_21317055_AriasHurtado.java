@@ -14,7 +14,7 @@ public class Driver_21317055_AriasHurtado {
         this.idDriver = idDriver;
         this.nameDriver = nameDriver;
         this.trainMaker = trainMaker;
-        this.assignedTrain = assignedTrain;
+        this.assignedTrain = 0;
         this.departureTime = departureTime;
     }
 

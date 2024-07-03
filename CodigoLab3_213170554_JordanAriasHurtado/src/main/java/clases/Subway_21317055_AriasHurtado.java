@@ -84,15 +84,34 @@ public class Subway_21317055_AriasHurtado {
         return null;
     }
 
+    public Driver_21317055_AriasHurtado getDriverById(int idDriver){
+        for(Driver_21317055_AriasHurtado driver : drivers){
+            if (driver.getIdDriver() == idDriver) {
+                return driver;
+            }
+        }
+        return null;
+    }
+
     public boolean areInTheSameLine(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
         //en cada linea
         for(int i = 0; i < lines.size(); i++){
             for (int j = 0; j < lines.get(i).getSections().size(); j++){
-                //si esta la primera estacion en la linea
                 if (lines.get(i).getSections().get(j).getStation1().sameStation(station1) || lines.get(i).getSections().get(j).getStation2().sameStation(station1)) {
-                    if (lines.get(i).getSections().get(j).getStation1().sameStation(station2) || lines.get(i).getSections().get(j).getStation2().sameStation(station2)) {
-                        return true;
+                    for (int k = j; k < lines.get(i).getSections().size(); k++){
+                        if (lines.get(i).getSections().get(k).getStation1().sameStation(station2) || lines.get(i).getSections().get(k).getStation2().sameStation(station2)) {
+                            return true;
+                        }
+                    }
                 }
+            }
+            for (int j = 0; j < lines.get(i).getSections().size(); j++){
+                if (lines.get(i).getSections().get(j).getStation1().sameStation(station2) || lines.get(i).getSections().get(j).getStation2().sameStation(station2)) {
+                    for (int k = j; k < lines.get(i).getSections().size(); k++){
+                        if (lines.get(i).getSections().get(k).getStation1().sameStation(station1) || lines.get(i).getSections().get(k).getStation2().sameStation(station1)) {
+                            return true;
+                        }
+                    }
                 }
             }
         }
@@ -109,6 +128,9 @@ public class Subway_21317055_AriasHurtado {
         }
         return null;
     }
+
+
+
 
 
     //añadir la verificacion de elementos unicos
@@ -129,9 +151,8 @@ public class Subway_21317055_AriasHurtado {
     public void addTrain(ArrayList<Train_21317055_AriasHurtado> trains){
         ArrayList<Train_21317055_AriasHurtado> trainsUnrepeated= new ArrayList<Train_21317055_AriasHurtado>();
         for(int i = 0; i < trains.size(); i++){
-            if(!trains.get(i).sameModel() || !trains.get(i).validBody()){
+            if(!trains.get(i).isTrain(trains.get(i))){
                 System.out.println("El tren N° "+ trains.get(i).getIdTrain() + " es invalido");
-                break;
             }
             if(!trainsUnrepeated.contains(trains.get(i))){
                 trainsUnrepeated.add(trains.get(i));
@@ -168,7 +189,6 @@ public class Subway_21317055_AriasHurtado {
             }
         } else {
             System.out.println("No hay lineas");
-            System.out.println("---------------------------------------------");
         }
         System.out.println("-----------------trenes----------------------");
         if (trains != null && !trains.isEmpty()) {
@@ -179,13 +199,18 @@ public class Subway_21317055_AriasHurtado {
                     System.out.println("El tren no esta asignado a ninguna linea");
                 }else{
                     System.out.println("El tren esta asignado a la linea: "+ getLineByStation(trains.get(i).getArriveStation().getIdStation()).getNameLine());
-                    System.out.println("Parte su recorrido en la estacion " +trains.get(i).getDepartureStation()+" y termina en "+ trains.get(i).getArriveStation());
-                    System.out.println("Y comienza el recorrido");
+                    System.out.println("Parte su recorrido en la estacion " +trains.get(i).getDepartureStation().getNameStation()+" y termina en "+ trains.get(i).getArriveStation().getNameStation());
+                    System.out.println("Y comienza el recorrido a las: "+ trains.get(i).getDepartureTime());
                 }
                 System.out.println("---------------------------------------------");
-                System.out.println("---------------------------------------------");
-                System.out.println("el tren tiene asignados a los conductores: ");
-                System.out.println("---------------------------------------------");
+                if(trains.get(i).getAssignedDriver() == 0){
+                    System.out.println("El tren no tiene asignado a ningun conductor");
+                }else {
+                    System.out.println("el tren tiene asignado al conductor: "+ trains.get(i).getAssignedDriver());
+
+
+                    System.out.println("---------------------------------------------");
+                }
             }
         } else {
             System.out.println("no hay trenes");
@@ -195,6 +220,11 @@ public class Subway_21317055_AriasHurtado {
         if(drivers != null && !drivers.isEmpty()) {
             for (int i = 0; i < drivers.size(); i++) {
                drivers.get(i).showInfoDriver();
+                if(drivers.get(i).getAssignedTrain()==0){
+                    System.out.println("El conductor no esta asignado a ningun tren");
+                }else{
+                    System.out.println("El conductor esta asignado al tren: "+drivers.get(i).getAssignedTrain());
+                }
             }
             System.out.println("---------------------------------------------");
         } else {
@@ -213,10 +243,8 @@ public class Subway_21317055_AriasHurtado {
         train.setAssignedDriver(driver.getIdDriver());
         driver.setAssignedTrain(train.getIdTrain());
 
-
         train.setDepartureTime(departureTime);
         driver.setDepartureTime(departureTime);
-
 
         if (areInTheSameLine(departureStation, arriveStation)){
             train.setDepartureStation(departureStation);
@@ -273,20 +301,39 @@ public class Subway_21317055_AriasHurtado {
 
 
 
-        PassangerCar_21317055_AriasHurtado pcar1 = new PassangerCar_21317055_AriasHurtado(1, 6, "atom", "creator", 't');
-        PassangerCar_21317055_AriasHurtado pcar2 = new PassangerCar_21317055_AriasHurtado(2, 7, "atom", "creator", 'c');
-        PassangerCar_21317055_AriasHurtado pcar3 = new PassangerCar_21317055_AriasHurtado(3, 8, "atom", "creator", 'c');
-        PassangerCar_21317055_AriasHurtado pcar4 = new PassangerCar_21317055_AriasHurtado(4, 9, "atom", "creator", 'c');
-        PassangerCar_21317055_AriasHurtado pcar5 = new PassangerCar_21317055_AriasHurtado(5, 10, "atom", "creator", 't');
+        PassangerCar_21317055_AriasHurtado pcar1 = new PassangerCar_21317055_AriasHurtado(1, 6,  "creator","atom", 't');
+        PassangerCar_21317055_AriasHurtado pcar2 = new PassangerCar_21317055_AriasHurtado(2, 7,  "creator","atom", 'c');
+        PassangerCar_21317055_AriasHurtado pcar3 = new PassangerCar_21317055_AriasHurtado(3, 8,  "creator","atom", 'c');
+        PassangerCar_21317055_AriasHurtado pcar4 = new PassangerCar_21317055_AriasHurtado(4, 9,  "creator", "atom",'c');
+        PassangerCar_21317055_AriasHurtado pcar5 = new PassangerCar_21317055_AriasHurtado(5, 10, "creator", "atom", 't');
 
         ArrayList<PassangerCar_21317055_AriasHurtado> carList = new ArrayList<>();
         Train_21317055_AriasHurtado train1 = new Train_21317055_AriasHurtado(1, "atom",  10, 5, carList);
 
         train1.addCar(0,pcar1);
-        train1.addCar(1,pcar2);
-        train1.addCar(2,pcar3);
-        train1.addCar(3,pcar4);
-        train1.addCar(4,pcar5);
+        train1.addCar(0,pcar2);
+        train1.addCar(0,pcar3);
+        train1.addCar(0,pcar4);
+        train1.addCar(0,pcar5);
+
+        PassangerCar_21317055_AriasHurtado pcar6 = new PassangerCar_21317055_AriasHurtado(6, 6,  "creator2","atom2", 't');
+        PassangerCar_21317055_AriasHurtado pcar7 = new PassangerCar_21317055_AriasHurtado(7, 7,  "creator2","atom2", 'c');
+        PassangerCar_21317055_AriasHurtado pcar8 = new PassangerCar_21317055_AriasHurtado(8, 8,  "creator2","atom2", 'c');
+        PassangerCar_21317055_AriasHurtado pcar9 = new PassangerCar_21317055_AriasHurtado(9, 9,  "creator2", "atom2",'c');
+        PassangerCar_21317055_AriasHurtado pcar10 = new PassangerCar_21317055_AriasHurtado(10, 10, "creator2", "atom2", 't');
+
+        ArrayList<PassangerCar_21317055_AriasHurtado> carList2 = new ArrayList<>();
+        Train_21317055_AriasHurtado train2 = new Train_21317055_AriasHurtado(2, "atom2",  10, 5, carList2);
+
+        train2.addCar(0,pcar6);
+        train2.addCar(0,pcar7);
+        train2.addCar(0,pcar8);
+        train2.addCar(0,pcar9);
+        train2.addCar(0,pcar10);
+
+
+
+
 
         Driver_21317055_AriasHurtado driver1 = new Driver_21317055_AriasHurtado(1, "charmander", "atom");
         Driver_21317055_AriasHurtado driver2= new Driver_21317055_AriasHurtado(2, "squirtle", "atom");
@@ -302,6 +349,7 @@ public class Subway_21317055_AriasHurtado {
         lines.add(line1);
         lines.add(line2);
         trains.add(train1);
+        trains.add(train2);
         drivers.add(driver1);
         drivers.add(driver2);
         drivers.add(driver3);
@@ -309,15 +357,17 @@ public class Subway_21317055_AriasHurtado {
         subway1.addTrain(trains);
         subway1.addDriver(drivers);
         subway1.assignTrainToLine(train1, line1);
+        subway1.assignTrainToLine(train2, line1);
 
-        Date departureTime = new Date(124, 6, 1, 8, 0, 0); // Año 2024 (124 + 1900), julio (6), día 1, 08:00:00
-        subway1.assignDriverToTrain(train1, driver1, departureTime, station1, station2);
-
-        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        //String formattedTime = sdf.format(departureTime);
-        //System.out.println("Hora de salida: " + formattedTime);
-
+        //usando unix
+        //13 de junio 2024, 8:00:00
+        Date departureTime1 = new Date(1719993600);
+        subway1.assignDriverToTrain(train1, driver1, departureTime1, station1, station6);
+        Date departureTime2 = new Date(1719993600);
+        subway1.assignDriverToTrain(train2, driver2, departureTime2, station7, station12);
 
         subway1.myToString();
     }
+
+
 }

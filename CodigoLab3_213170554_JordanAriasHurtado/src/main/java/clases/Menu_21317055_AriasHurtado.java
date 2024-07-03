@@ -12,11 +12,12 @@ public class Menu_21317055_AriasHurtado {
     private ArrayList<Driver_21317055_AriasHurtado> allDrivers = new ArrayList<Driver_21317055_AriasHurtado>();
 
     public Menu_21317055_AriasHurtado() {
-        scanner = new Scanner(System.in);
+
     }
 
     //listo
     public void menuLoad() {
+        scanner = new Scanner(System.in);
         subway = new Subway_21317055_AriasHurtado(1, "Metro de santiago");
         int option;
         do{
@@ -26,7 +27,7 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("2. Definicion de trenes con distintos numero de carros (cargar archivo trenes.txt)");
             System.out.println("3. Conductores asignados a una Linea (cargar archivo conductores.txt)");
             System.out.println("4. Acceder al Subway");
-            System.out.println("5. Retorno al menú de Inicio");
+            System.out.println("5. Retorno al menu de Inicio");
             option = scanner.nextInt();
             scanner.nextLine();
             switch(option){
@@ -232,7 +233,7 @@ public class Menu_21317055_AriasHurtado {
 
             //listo no probado
             System.out.println("10. Ingresar nuevo conductor");
-            
+
             System.out.println("11. Asignar tren a linea");
             System.out.println("12. Asignar conductor a tren");
             System.out.println("13. Volver");
@@ -262,7 +263,7 @@ public class Menu_21317055_AriasHurtado {
                     System.out.println("Indique la linea a la que quiere añadir estaciones");
                     System.out.println("Lineas disponibles");
                     for (int i = 0; i < allLines.size(); i++) {
-                        System.out.println(i +".Linea " + allLines.get(i).getIdLine());
+                        System.out.println(i+1 +".Linea " + allLines.get(i).getIdLine());
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
@@ -283,7 +284,6 @@ public class Menu_21317055_AriasHurtado {
                         switch (suboption) {
                             case 1:
                                 //test
-                                System.out.println("LLEGO AL IF");
                                 if(allLines.get(select).getSections().isEmpty()){
                                     System.out.println("Ingrese el id");
                                     userIdStation = scanner.nextInt();
@@ -338,8 +338,6 @@ public class Menu_21317055_AriasHurtado {
                                     allLines.get(select).getSections().add(userSection);
 
                                 }else{
-                                    //test
-                                    System.out.println("LLEGO AL ELSE");
                                     System.out.println("Ingrese el id de la siguiente estacion");
                                     userIdStation = scanner.nextInt();
                                     scanner.nextLine();
@@ -371,7 +369,6 @@ public class Menu_21317055_AriasHurtado {
 
                                     Section_21317055_AriasHurtado userSection = new Section_21317055_AriasHurtado(allLines.get(select).getSections().get(allLines.get(select).getSections().size()-1).getStation2(),userStation,userDistance,userCost);
                                     //test
-                                    System.out.println("CREO LA SECCION");
                                     allLines.get(select).getSections().add(userSection);
                                 }
                                 break;
@@ -472,11 +469,12 @@ public class Menu_21317055_AriasHurtado {
                     }else{
                         System.out.println("Indique la posicion en la que quiere agregar el vagon:");
                         for (int i = 0; i < allTrains.get(select).getCarList().size(); i++) {
-                            System.out.println(i+"."+ allTrains.get(select).getCarList().get(i).getIdPassangerCar());
+                            System.out.println(i+".Vagon "+ allTrains.get(select).getCarList().get(i).getIdPassangerCar()+ " modelo " +allTrains.get(select).getCarList().get(i).getModel());
                         }
                         suboption = scanner.nextInt();
                         scanner.nextLine();
                         allTrains.get(select).addCar(suboption, userPcar);
+                        allTrains.get(select).showInfoTrain();
                         System.out.println("Se ha añadido el vagon al tren");
                     }
 
@@ -562,13 +560,6 @@ public class Menu_21317055_AriasHurtado {
                     System.out.println("Opcion no valida");
             }
         }while(option != 13);
-    }
-
-
-
-    public static void main(String[] args) {
-        Menu_21317055_AriasHurtado menu = new Menu_21317055_AriasHurtado();
-        menu.menuLoad();
     }
 
 }
