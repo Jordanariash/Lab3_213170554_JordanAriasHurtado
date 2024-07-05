@@ -241,25 +241,30 @@ public class Subway_21317055_AriasHurtado {
         train.setDepartureTime(departureTime);
         driver.setDepartureTime(departureTime);
 
-        if (areInTheSameLine(departureStation, arriveStation)) {
+        if (areInTheSameLine(departureStation, arriveStation) && !departureStation.sameStation(arriveStation)) {
             train.setDepartureStation(departureStation);
             train.setArriveStation(arriveStation);
         } else {
-            throw new IllegalArgumentException("las estaciones deben pertenecer a la misma linea");
+            throw new IllegalArgumentException("las estaciones deben pertenecer a la misma linea, y ser distintas entre si");
         }
 
     }
-
-    public int compareTime(Date date1, Date date2) {
-        // es a-b=c
-        return date1.compareTo(date2);
-    }
-
 
     public long calcTime(Section_21317055_AriasHurtado section,Train_21317055_AriasHurtado train){
         return (section.getDistance()/train.getSpeed()) + section.getStation1().getStopTime()+ train.getStationStaytime() + section.getStation2().getStopTime() + train.getStationStaytime();
     }
 
+    public boolean areInOrder(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2, Line_21317055_AriasHurtado line){
+        for(int i = 0; i < line.getSections().size(); i++){
+            if(line.getSections().get(i).getStation1().sameStation(station1)){
+                return true;
+            }
+            if(line.getSections().get(i).getStation1().sameStation(station2)){
+                return false;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -269,20 +274,79 @@ public class Subway_21317055_AriasHurtado {
         } else {
             //dada una estacion, empezar a calcular desde el inicio:
             //si es estacion 1, empezar a contar desde esa estacion
+
+            //hora de partida del tren
             long departure = train.getDepartureTime().getTime();
+
+            //hora ingresada por el usuario
             long auxTime = time.getTime();
-            for (int i = 0; i < getLineById(train.getAssignedLine()).getSections().size();i++){
-                if(getLineById(train.getAssignedLine()).getSections().get(i).getStation1().sameStation(train.getArriveStation())||getLineById(train.getAssignedLine()).getSections().get(i).getStation2().sameStation(train.getArriveStation()) ){
-                    if (departure >= auxTime){
-                        return getLineById(train.getAssignedLine()).getSections().get(i).getStation2();
-                    }else{
-                        departure = departure + calcTime(getLineById(train.getAssignedLine()).getSections().get(i), train);
+            //Departure y arrive estan en orden A-b-C
+
+
+            if(areInOrder(train.getDepartureStation(),train.getArriveStation(),getLineById(train.getAssignedLine()))){
+                //Recorra la linea
+                for(int i = 0; i < getLineById(train.getAssignedLine()).getSections().size() ; i++){
+                    //y si encuentra la estacion
+                    if(getLineById(train.getAssignedLine()).getSections().get(i).getStation1().sameStation(train.getDepartureStation())){
+                        //empieza a acumular
+                        for(int j = i; j < getLineById(train.getAssignedLine()).getSections().size() ; j++) {
+                            long departureAux = departure;
+                            departure = departure + calcTime(getLineById(train.getAssignedLine()).getSections().get(j), train);
+                            if(time.getTime() < departure){
+                                if(Math.abs(time.getTime()-departure)< Math.abs(time.getTime()-departureAux)){
+                                    return getLineById(train.getAssignedLine()).getSections().get(j).getStation2();
+                                }else{
+                                    return getLineById(train.getAssignedLine()).getSections().get(j).getStation1();
+                                }
+                            }
+
+                            //pero si sigue y llega hasta el final, y se pasa la hora, retorna la ultima estacion
+                            if(getLineById(train.getAssignedLine()).getSections().get(j).getStation2().sameStation(train.getArriveStation())){
+                                System.out.println("La hora ingresada, supera al recorrido del tren, y su ultima estacion es: ");
+                                return train.getArriveStation();
+                            }
+                        }
+                    }
+                }
+            }else{
+
+                for(int i = getLineById(train.getAssignedLine()).getSections().size()-1; i > 0  ; i--){
+                    //y si encuentra la estacion
+
+                    if(getLineById(train.getAssignedLine()).getSections().get(i).getStation2().sameStation(train.getDepartureStation())){
+                        //empieza a acumular
+                        for(int j = i; j >= 0 ; j--) {
+                            long departureAux = departure;
+                            departure = departure + calcTime(getLineById(train.getAssignedLine()).getSections().get(j), train);
+                            if(time.getTime() < departure){
+                                if(Math.abs(time.getTime()-departure)< Math.abs(time.getTime()-departureAux)){
+                                    return getLineById(train.getAssignedLine()).getSections().get(j).getStation1();
+                                }else{
+                                    return getLineById(train.getAssignedLine()).getSections().get(j).getStation2();
+                                }
+                            }
+
+                            //pero si sigue y llega hasta el final, y se pasa la hora, retorna la ultima estacion
+                            if(getLineById(train.getAssignedLine()).getSections().get(j).getStation1().sameStation(train.getArriveStation())){
+                                System.out.println("La hora ingresada, supera al recorrido del tren, y su ultima estacion es: ");
+                                return train.getArriveStation();
+                            }
+                        }
                     }
                 }
             }
+
+            //Departure y arriver estan invertidas C-b-A
+
         }
         return null;
     }
+
+
+
+
+
+
 
 
     public static void main(String[] args){
@@ -372,8 +436,6 @@ public class Subway_21317055_AriasHurtado {
         ArrayList<Line_21317055_AriasHurtado> lines = new ArrayList<>();
         ArrayList<Train_21317055_AriasHurtado> trains = new ArrayList<>();
         ArrayList<Driver_21317055_AriasHurtado> drivers = new ArrayList<>();
-        ArrayList<pairTrainLine<Train_21317055_AriasHurtado, Line_21317055_AriasHurtado>> assignedTrains = new ArrayList<>();
-        ArrayList<pairTrainDriver> assignedDrivers = new ArrayList<>();
 
         Subway_21317055_AriasHurtado subway1= new Subway_21317055_AriasHurtado(1, "metro");
         lines.add(line1);
@@ -392,15 +454,57 @@ public class Subway_21317055_AriasHurtado {
         //usando unix
         //13 de junio 2024, 8:00:00
         Date departureTime1 = new Date(1718280000);
-        subway1.assignDriverToTrain(train1, driver1, departureTime1, station1, station6);
+        //subway1.assignDriverToTrain(train1, driver1, departureTime1, station1, station6); //funciona
+
+        subway1.assignDriverToTrain(train1, driver1, departureTime1, station6, station1);
 
         Date departureTime2 = new Date(1718280000);
         subway1.assignDriverToTrain(train2, driver2, departureTime2, station7, station12);
 
-        Date departureTime3 = new Date(1718287200);
-        System.out.println(subway1.whereIsTrain(train1, departureTime3));
 
-        System.out.println(subway1.calcTime(section1,train1));
+
+        Date departureTime3 = new Date(1718280150);
+        System.out.println(subway1.whereIsTrain(train1, departureTime3).getNameStation());
+
+        /*
+
+Usach
+1718280000      1718280001, deberia retornar usach
+1718280025      1718280024, deberia retornar estacion central
+Estacion Central
+1718280025      1718280026, deberia retornar estacion central
+1718280060      1718280059, deberia retornar ula
+ULA
+1718280060
+1718280090
+republica
+1718280090
+1718280115
+los heroes
+1718280115
+1718280150
+la moneda
+
+
+
+la moneda
+1718280000
+1718280035
+los heroes
+1718280035
+1718280060
+republica
+1718280060
+1718280090
+ULA
+1718280090
+1718280125
+Estacion Central
+1718280125
+1718280150
+
+        * */
+
         //subway1.myToString();
     }
 
