@@ -3,6 +3,7 @@ package clases;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Menu_21317055_AriasHurtado {
     private Subway_21317055_AriasHurtado subway;
@@ -12,7 +13,7 @@ public class Menu_21317055_AriasHurtado {
     private ArrayList<Driver_21317055_AriasHurtado> allDrivers = new ArrayList<Driver_21317055_AriasHurtado>();
 
     public Menu_21317055_AriasHurtado() {
-
+        menuLoad();
     }
 
     //listo
@@ -203,6 +204,7 @@ public class Menu_21317055_AriasHurtado {
         int option;
         int select;
         int suboption;
+        long time;
         do{
             //funciona
             System.out.println("1. Crear linea nueva");
@@ -235,7 +237,9 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("10. Ingresar nuevo conductor");
 
             System.out.println("11. Asignar tren a linea");
+
             System.out.println("12. Asignar conductor a tren");
+
             System.out.println("13. Volver");
             option = scanner.nextInt();
             scanner.nextLine();
@@ -551,8 +555,33 @@ public class Menu_21317055_AriasHurtado {
                     allDrivers.add(userDriver);
                     break;
                 case 11:
+                    System.out.println("Trenes disponibles");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Ingrese la hora en formato UNIX para consultar donde esta el tren");
+                    time = scanner.nextLong();
+                    scanner.nextLine();
+                    Date date = new Date(time);
+                    System.out.println("El tren a las "+" esta en " + subway.whereIsTrain(subway.getTrainById(select), date).getNameStation());
                     break;
                 case 12:
+                    System.out.println("Trenes disponibles");
+                    for (int i = 0; i < allTrains.size(); i++) {
+                        System.out.println(i+".Tren " + allTrains.get(i).getIdTrain());
+                    }
+                    select = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Ingrese la hora en formato UNIX para consultar las estaciones restantes por recorrer del tren");
+                    time = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("Las estaciones que le quedan por recorrer al tren");
+                    Date date2 = new Date(time);
+                    for(int i =0; i<subway.trainPath(subway.getTrainById(select), date2).size(); i++){
+                        System.out.println(subway.trainPath(subway.getTrainById(select), date2).get(i).getNameStation());
+                    }
                     break;
                 case 13:
                     break;
