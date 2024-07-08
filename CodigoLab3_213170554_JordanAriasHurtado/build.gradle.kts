@@ -10,6 +10,7 @@ repositories {
     mavenCentral()
 }
 
+
 application {
     mainClass.set("clases.Main_21317055_AriasHurtado")
 }
@@ -19,6 +20,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+
 tasks.test {
     useJUnitPlatform()
+}
+
+//añadi esto
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }

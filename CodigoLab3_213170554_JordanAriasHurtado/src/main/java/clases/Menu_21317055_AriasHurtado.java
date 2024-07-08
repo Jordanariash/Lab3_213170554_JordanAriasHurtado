@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.InputMismatchException; //para que al ingresar algo que no es, reintentar
+
 public class Menu_21317055_AriasHurtado {
     private Subway_21317055_AriasHurtado subway;
     private Scanner scanner;
@@ -15,7 +17,6 @@ public class Menu_21317055_AriasHurtado {
     public Menu_21317055_AriasHurtado() {
         menuLoad();
     }
-
     //listo
     public void menuLoad() {
         scanner = new Scanner(System.in);
@@ -29,9 +30,9 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("3. Conductores asignados a una Linea (cargar archivo conductores.txt)");
             System.out.println("4. Acceder al Subway");
             System.out.println("5. Retorno al menu de Inicio");
+            System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
             option = scanner.nextInt();
-            scanner.nextLine();
-            switch(option){
+            switch (option) {
                 case 1:
                     try {
                         ArrayList<Line_21317055_AriasHurtado> lines = LineReader.readLines("ExampleLines.txt");
@@ -79,8 +80,9 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("1. Consultar el estado actual de la red de metro.");
             System.out.println("2. Modificar la red de metro.");
             System.out.println("3. Retorno al menú de Inicio");
+            System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+
             option = scanner.nextInt();
-            scanner.nextLine();
             switch (option) {
                 case 1:
                     menuConsult();
@@ -94,12 +96,12 @@ public class Menu_21317055_AriasHurtado {
         }while (option != 3) ;
     }
 
-    //listo (pendientes ultimas funciones subway)
     public void menuConsult() {
         int option;
         int select;
         int subselect1;
         int subselect2;
+        long time;
         do {
             System.out.println("------------------- Sistema Metro - Interactuar con el sistema de metros -------------------");
             System.out.println("1. lineLength: obtener el largo total de una línea.");
@@ -111,84 +113,316 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("7. Subway - trainPath: armar el recorrido del tren a partir de una hora especificada y que retorna la lista de estaciones futuras por recorrer.");
             System.out.println("8. Visualizar metro");
             System.out.println("9. Volver");
+            System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
             option = scanner.nextInt();
             scanner.nextLine();
             switch (option) {
+                //listo
                 case 1:
-                    System.out.println("Indique el id de la linea que quiere obtener el largo");
-                    System.out.println("Lineas disponibles");
-                    for (int i = 0; i < subway.getLines().size(); i++) {
-                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    if(!subway.getLines().isEmpty()) {
+                        System.out.println("Seleccione la linea que quiere obtener el largo");
+                        System.out.println("Lineas disponibles");
+                        for (int i = 0; i < subway.getLines().size(); i++) {
+                            System.out.println(i + 1 + ".Linea " + subway.getLines().get(i).getNameLine());
+                        }
+                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < subway.getLines().size()) {
+                                    System.out.println("La línea " + select + " tiene un largo de: " + subway.getLines().get(aux).lineLenght());
+                                    break;
+                                } else {
+                                    System.out.println("Línea no disponible. Intente nuevamente: ");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay lineas disponibles en el metro");
                     }
-                    select = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("La linea " + select + " tiene un largo de: " + subway.getLineById(select).lineLenght());
                     break;
                 case 2:
-                    System.out.println("Indique el id de la linea de la que quiere obtener el largo entre 2 estaciones");
-                    System.out.println("Lineas disponibles");
-                    for (int i = 0; i < subway.getLines().size(); i++) {
-                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    //listo
+                    if(!subway.getLines().isEmpty()) {
+                        System.out.println("Seleccione la linea que quiere obtener el largo entre 2 estaciones");
+                        System.out.println("Lineas disponibles");
+                        for (int i = 0; i < subway.getLines().size(); i++) {
+                            System.out.println(i + 1 + ".Linea " + subway.getLines().get(i).getNameLine());
+                        }
+                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < subway.getLines().size()) {
+                                    while (true) {
+                                        System.out.println("Indique la primera estacion");
+                                        System.out.println("Estaciones disponibles:");
+                                        subway.getLines().get(aux).showStations();
+                                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                                        try {
+                                            subselect1 = scanner.nextInt();
+                                            int aux2 = subselect1 - 1;
+                                            if (aux2 >= 0 && aux2 <= subway.getLines().get(aux).getSections().size()) {
+                                                while (true) {
+                                                    System.out.println("Indique la segunda estacion");
+                                                    System.out.println("Estaciones disponibles:");
+                                                    subway.getLines().get(aux).showStations();
+                                                    System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                                                    try {
+                                                        subselect2 = scanner.nextInt();
+                                                        int aux3 = subselect2 - 1;
+                                                        if (aux3 >= 0 && aux3 <= subway.getLines().get(aux).getSections().size()) {
+                                                            System.out.println("El largo entre " + subway.getLines().get(aux).getStationByPosition(aux2).getNameStation() + " y " + subway.getLines().get(aux).getStationByPosition(aux3).getNameStation() + " es de: " + subway.getLines().get(aux).lineSectionLenght(subway.getLines().get(aux).getStationByPosition(aux2), subway.getLines().get(aux).getStationByPosition(aux3)));
+                                                            break;
+                                                        } else {
+                                                            System.out.println("Estacion no disponible. Intente nuevamente: ");
+                                                            scanner.nextLine();
+                                                        }
+                                                    } catch (InputMismatchException e) {
+                                                        System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                                        scanner.nextLine();
+                                                    }
+
+                                                }
+                                                break;
+                                            } else {
+                                                System.out.println("Estacion no disponible. Intente nuevamente: ");
+                                                scanner.nextLine();
+                                            }
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                            scanner.nextLine();
+                                        }
+                                    }
+                                    break;
+                                } else {
+                                    System.out.println("Línea no disponible");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay lineas disponibles en el metro");
                     }
-                    select = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Indique el id de la primera estacion");
-                    System.out.println("Estaciones disponibles:");
-                    subway.getLineById(select).showStations();
-                    subselect1 = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Indique el id de la segunda estacion");
-                    System.out.println("Estaciones disponibles:");
-                    subway.getLineById(select).showStations();
-                    subselect2 = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("El largo entre " + subway.getLineById(select).getStationById(subselect1).getNameStation() + " y " + subway.getLineById(select).getStationById(subselect2).getNameStation() + " es de: " + subway.getLineById(select).lineSectionLenght(subway.getLineById(select).getStationById(subselect1), subway.getLineById(select).getStationById(subselect2)));
                     break;
                 case 3:
-                    System.out.println("Indique el id de la linea que quiere obtener el costo");
-                    System.out.println("Lineas disponibles");
-                    for (int i = 0; i < subway.getLines().size(); i++) {
-                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
-                    }
-                    select = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("La linea " + select + " tiene un largo de: " + subway.getLineById(select).lineCost());
+                    //listo
+                    if(!subway.getLines().isEmpty()) {
+                        System.out.println("Seleccione la linea que quiere obtener el costo");
+                        System.out.println("Lineas disponibles");
+                        for (int i = 0; i < subway.getLines().size(); i++) {
+                            System.out.println(i + 1 + ".Linea " + subway.getLines().get(i).getNameLine());
+                        }
+                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < subway.getLines().size()) {
+                                    System.out.println("La línea " + select + " tiene un largo de: " + subway.getLines().get(aux).lineCost());
+                                    break;
+                                } else {
+                                    System.out.println("Línea no disponible. Intente nuevamente:");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                            System.out.println("No hay lineas disponibles en el metro");
+                        }
                     break;
                 case 4:
-                    System.out.println("Indique el id de la linea de la que quiere obtener el costo entre 2 estaciones");
-                    System.out.println("Lineas disponibles");
-                    for (int i = 0; i < subway.getLines().size(); i++) {
-                        System.out.println("Linea " + subway.getLines().get(i).getIdLine());
+                    //listo
+                    if(!subway.getLines().isEmpty()) {
+                        System.out.println("Seleccione la linea que quiere obtener el costo entre 2 estaciones");
+                        System.out.println("Lineas disponibles");
+                        for (int i = 0; i < subway.getLines().size(); i++) {
+                            System.out.println(i+1 +".Linea " + subway.getLines().get(i).getNameLine());
+                        }
+                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < subway.getLines().size()) {
+                                    while (true) {
+                                        System.out.println("Indique la primera estacion");
+                                        System.out.println("Estaciones disponibles:");
+                                        subway.getLines().get(aux).showStations();
+                                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                                        try {
+                                            subselect1 = scanner.nextInt();
+                                            int aux2 = subselect1 - 1;
+                                            if (aux2 >= 0 && aux2 <= subway.getLines().get(aux).getSections().size()) {
+                                                while (true){
+                                                    System.out.println("Indique la segunda estacion");
+                                                    System.out.println("Estaciones disponibles:");
+                                                    subway.getLines().get(aux).showStations();
+                                                    System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                                                    try {
+                                                        subselect2 = scanner.nextInt();
+                                                        int aux3 = subselect2 - 1;
+                                                        if (aux3 >= 0 && aux3 <= subway.getLines().get(aux).getSections().size()) {
+                                                            System.out.println("El largo entre " + subway.getLines().get(aux).getStationByPosition(aux2).getNameStation() + " y " +subway.getLines().get(aux).getStationByPosition(aux3).getNameStation() + " es de: " + subway.getLines().get(aux).lineSectionCost(subway.getLines().get(aux).getStationByPosition(aux2), subway.getLines().get(aux).getStationByPosition(aux3)));
+                                                            break;
+                                                        }else{
+                                                            System.out.println("Estacion no disponible. Intente nuevamente: ");
+                                                            scanner.nextLine();
+                                                        }
+                                                    }catch (InputMismatchException e){
+                                                        System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                                        scanner.nextLine();
+                                                    }
+
+                                                }
+                                                break;
+                                            }else{
+                                                System.out.println("Estacion no disponible. Intente nuevamente: ");
+                                                scanner.nextLine();
+                                            }
+                                        }catch (InputMismatchException e) {
+                                            System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                            scanner.nextLine();
+                                        }
+                                    }
+                                    break;
+                                } else {
+                                    System.out.println("Línea no disponible");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay lineas disponibles en el metro");
                     }
-                    select = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Indique el id de la primera estacion");
-                    System.out.println("Estaciones disponibles:");
-                    subway.getLineById(select).showStations();
-                    subselect1 = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Indique el id de la segunda estacion");
-                    System.out.println("Estaciones disponibles:");
-                    subway.getLineById(select).showStations();
-                    subselect2 = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("El costo entre " + subway.getLineById(select).getStationById(subselect1).getNameStation() + " y " + subway.getLineById(select).getStationById(subselect2).getNameStation() + " es de: " + subway.getLineById(select).lineSectionCost(subway.getLineById(select).getStationById(subselect1), subway.getLineById(select).getStationById(subselect2)));
                     break;
                 case 5:
-                    System.out.println("Indique el id del tren que quiere obtener la capacidad maxima de pasajeros");
-                    System.out.println("Trenes disponibles");
-                    for (int i = 0; i < subway.getTrains().size(); i++) {
-                        System.out.println(subway.getTrains().get(i).getIdTrain() + ".Tren con vagones modelo " + subway.getTrains().get(i).getCarList().get(0).getModel());
+                    if(!subway.getTrains().isEmpty()) {
+                        System.out.println("Indique el id del tren que quiere obtener la capacidad maxima de pasajeros");
+                        System.out.println("Trenes disponibles");
+                        for (int i = 0; i < subway.getTrains().size(); i++) {
+                            System.out.println(i + 1 + ".Tren marca " + subway.getTrains().get(i).getTrainMaker());
+                        }
+                        System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < subway.getTrains().size()) {
+                                    System.out.println("El tren tiene una capacidad maxima de " + subway.getTrains().get(aux).fetchCapacity() + " pasajeros");
+                                    break;
+                                } else {
+                                    System.out.println("Tren no disponible. Intente nuevamente:");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay trenes disponibles en el metro");
                     }
-                    select = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("El tren " + select + " tiene una capacidad maxima de " + subway.getTrainById(select).fetchCapacity() + " pasajeros");
                     break;
                 case 6:
-                    System.out.println("where is train pendiente");
+                    if(!subway.getTrains().isEmpty()) {
+                        System.out.println("Seleccione el tren del que quiere saber su ubicacion");
+                        System.out.println("Trenes disponibles");
+                        for (int i = 0; i < subway.getTrains().size(); i++) {
+                            System.out.println(i + 1 + ".Tren marca " + subway.getTrains().get(i).getTrainMaker());
+                        }
+
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if(subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
+                                    if (aux >= 0 && aux < subway.getTrains().size()) {
+                                        System.out.println("Ingrese una hora en formato UNIX y presione ENTER para continuar: ");
+                                        while (true) {
+                                            try {
+                                                time = scanner.nextLong();
+                                                Date date = new Date(time);
+                                                System.out.println("El tren " + subway.getTrainById(select).getTrainMaker() + " esta en la estacion: " + subway.whereIsTrain(subway.getTrainById(aux), date).getNameStation());
+                                                break;
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("El valor ingresado no es una fecha en formato UNIX. Intente nuevamente: ");
+                                                scanner.nextLine();
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("Tren no disponible. Intente nuevamente:");
+                                    }
+                                    break;
+                                }else {
+                                    System.out.println("El Tren no tiene las condiciones necesarias, elija otro :");
+
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay trenes disponibles en el metro");
+                    }
                     break;
                 case 7:
-                    System.out.println("train path pendiente");
+                    if(!subway.getTrains().isEmpty()) {
+                        System.out.println("Seleccione el tren del que quiere saber su recorrido");
+                        System.out.println("Trenes disponibles");
+                        for (int i = 0; i < subway.getTrains().size(); i++) {
+                            System.out.println(i + 1 + ".Tren marca " + subway.getTrains().get(i).getTrainMaker());
+                        }
+
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if(subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
+                                    if (aux >= 0 && aux < subway.getTrains().size()) {
+                                        System.out.println("Ingrese una hora en formato UNIX y presione ENTER para continuar: ");
+                                        while (true) {
+                                            try {
+                                                time = scanner.nextLong();
+                                                Date date = new Date(time);
+                                                for(int i =0; i<subway.trainPath(subway.getTrainById(aux), date).size(); i++){
+                                                    System.out.println(subway.trainPath(subway.getTrainById(aux), date).get(i).getNameStation());
+                                                }
+                                                break;
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("El valor ingresado no es una fecha en formato UNIX. Intente nuevamente: ");
+                                                scanner.nextLine();
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("Tren no disponible. Intente nuevamente:");
+                                    }
+                                    break;
+                                }else {
+                                    System.out.println("El Tren no tiene las condiciones necesarias, elija otro porfavor:");
+
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay trenes disponibles en el metro");
+                    }
                     break;
                 case 8:
                     subway.myToString();
@@ -204,42 +438,19 @@ public class Menu_21317055_AriasHurtado {
         int option;
         int select;
         int suboption;
-        long time;
         do{
-            //funciona
             System.out.println("1. Crear linea nueva");
-
-            //funciona
             System.out.println("2. Añadir estacion a una linea");
-
-            //funciona
             System.out.println("3. Consultar si una linea es valida para ingresar a la red de metro");
-
-            //funciona
             System.out.println("4. Añadir lineas a la red de metro");
-
-            //listo no probado
             System.out.println("5. Crear tren nuevo");
-
-            //listo no probado
             System.out.println("6. Añadir vagones a un tren");
-
-            //listo no probado
             System.out.println("7. Quitar vagones a un tren");
-
-            //listo no probado
             System.out.println("8. Consultar si un tren es valido para ingresar a la red de metro");
-
-            //listo no probado
             System.out.println("9. Añadir trenes a la red de metro");
-
-            //listo no probado
             System.out.println("10. Ingresar nuevo conductor");
-
             System.out.println("11. Asignar tren a linea");
-
             System.out.println("12. Asignar conductor a tren");
-
             System.out.println("13. Volver");
             option = scanner.nextInt();
             scanner.nextLine();
@@ -561,11 +772,14 @@ public class Menu_21317055_AriasHurtado {
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Ingrese la hora en formato UNIX para consultar donde esta el tren");
-                    time = scanner.nextLong();
+                    System.out.println("Lineas disponibles");
+                    for (int i = 0; i < allLines.size(); i++) {
+                        System.out.println(i+".Linea " + allLines.get(i).getIdLine());
+                    }
+                    suboption = scanner.nextInt();
                     scanner.nextLine();
-                    Date date = new Date(time);
-                    System.out.println("El tren a las "+" esta en " + subway.whereIsTrain(subway.getTrainById(select), date).getNameStation());
+                    allTrains.get(select).setAssignedLine(allLines.get(suboption).getIdLine());
+                    allLines.get(suboption).getAssignedTrains().add(allTrains.get(select).getIdTrain());
                     break;
                 case 12:
                     System.out.println("Trenes disponibles");
@@ -574,14 +788,12 @@ public class Menu_21317055_AriasHurtado {
                     }
                     select = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Ingrese la hora en formato UNIX para consultar las estaciones restantes por recorrer del tren");
-                    time = scanner.nextLong();
-                    scanner.nextLine();
-                    System.out.println("Las estaciones que le quedan por recorrer al tren");
-                    Date date2 = new Date(time);
-                    for(int i =0; i<subway.trainPath(subway.getTrainById(select), date2).size(); i++){
-                        System.out.println(subway.trainPath(subway.getTrainById(select), date2).get(i).getNameStation());
+                    System.out.println("Conductores disponibles");
+                    for (int i = 0; i < allDrivers.size(); i++) {
+                        System.out.println(i+"." + allDrivers.get(i).getNameDriver());
                     }
+                    suboption = scanner.nextInt();
+
                     break;
                 case 13:
                     break;
@@ -590,6 +802,9 @@ public class Menu_21317055_AriasHurtado {
             }
         }while(option != 13);
     }
+
+
+
 
 }
 

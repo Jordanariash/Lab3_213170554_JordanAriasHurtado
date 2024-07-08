@@ -86,6 +86,16 @@ public class Line_21317055_AriasHurtado {
         return null;
     }
 
+    public Station_213170554_AriasHurtado getStationByPosition(int position) {
+        if (position <= getSections().size() && position >= 0){
+            if(position == getSections().size()){
+                return getSections().get(getSections().size()-1).getStation2();
+            }else{
+                return getSections().get(position).getStation1();
+            }
+        }
+        return null;
+    }
 
 
 
@@ -267,8 +277,8 @@ public class Line_21317055_AriasHurtado {
 
     public void showStations(){
        for (int i = 0; i < sections.size(); i++) {
-           System.out.println(sections.get(i).getStation1().getIdStation() + ". "+ sections.get(i).getStation1().getNameStation());
+           System.out.println(i+1 + ". "+ sections.get(i).getStation1().getNameStation());
             }
-       System.out.println(sections.get(sections.size()-1).getStation2().getIdStation() + ". "+ sections.get(sections.size()-1).getStation2().getNameStation());
+       System.out.println(sections.size()+1 + ". "+ sections.get(sections.size()-1).getStation2().getNameStation());
     }
 }

@@ -128,6 +128,7 @@ public class Subway_21317055_AriasHurtado {
     }
 
 
+
     //añadir la verificacion de elementos unicos
     public void addLine(ArrayList<Line_21317055_AriasHurtado> lines) {
         ArrayList<Line_21317055_AriasHurtado> linesUnrepeated = new ArrayList<Line_21317055_AriasHurtado>();
@@ -265,8 +266,6 @@ public class Subway_21317055_AriasHurtado {
         }
         return false;
     }
-
-
 
     public Station_213170554_AriasHurtado whereIsTrain(Train_21317055_AriasHurtado train, Date time) {
         if (train.getDepartureTime() == null) {
@@ -534,13 +533,11 @@ public class Subway_21317055_AriasHurtado {
 
 
         Date departureTime3 = new Date(1718280059);
-        System.out.println(subway1.whereIsTrain(train1, departureTime3).getNameStation());
-        for(int i =0; i<subway1.trainPath(train1, departureTime3).size(); i++){
-            System.out.println(subway1.trainPath(train1, departureTime3).get(i).getNameStation());
-        }
+
+        System.out.println(subway1.getLines().get(0).getStationByPosition(5).getNameStation());
 
 
-        /*
+/*
 
 Usach
 1718280000      1718280001, deberia retornar usach
@@ -578,9 +575,7 @@ Estacion Central
 1718280150
 USACH
 
-        * */
-
-        //subway1.myToString();
+ */
     }
 
 
