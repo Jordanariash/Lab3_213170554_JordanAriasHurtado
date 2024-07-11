@@ -30,9 +30,8 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("1. Creacion de una linea de metro basica (cargar archivo lineas.txt)");
             System.out.println("2. Definicion de trenes con distintos numero de carros (cargar archivo trenes.txt)");
             System.out.println("3. Conductores asignados a una Linea (cargar archivo conductores.txt)");
-            System.out.println("4. Asignaciones y horarios (cargar archivo asignaciones.txt)");
-            System.out.println("5. Acceder al Subway");
-            System.out.println("6. Salir");
+            System.out.println("4. Acceder al Subway");
+            System.out.println("5. Salir");
             System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
 
             try {
@@ -74,20 +73,13 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 4:
-                    try {
-                        DriverReader.readDrivers("ExampleAssignments.txt");
-                        System.out.println("Asignaciones cargadas correctamente.");
-                    } catch (IOException e) {
-                        System.out.println("Error al leer el archivo: " + e.getMessage());
-                    }
+                    menuView();
                     break;
                 case 5:
-                    menuView();
                     break;
                 default:
                     System.out.println("Opcion no valida");
-
-
+                    break;
             }
         }while(option != 5);
     }
@@ -117,8 +109,10 @@ public class Menu_21317055_AriasHurtado {
                 case 2:
                     menuModify();
                     break;
-                default:
+                case 3:
+                    //menuLoad();
                     break;
+                default:
             }
         }while (option != 3) ;
     }
@@ -460,6 +454,9 @@ public class Menu_21317055_AriasHurtado {
                     break;
                 case 8:
                     subway.myToString();
+                    break;
+                case 9:
+                    System.out.println("Ha salido");
                     break;
                 default:
                     break;
@@ -1241,6 +1238,7 @@ public class Menu_21317055_AriasHurtado {
                     }System.out.println("No hay trenes o conductores disponibles");
                     break;
                 case 15:
+                    menuView();
                     break;
                 default:
                     System.out.println("Opcion no valida");

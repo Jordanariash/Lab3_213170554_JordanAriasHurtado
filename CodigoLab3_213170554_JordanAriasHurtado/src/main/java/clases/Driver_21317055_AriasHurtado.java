@@ -8,14 +8,12 @@ public class Driver_21317055_AriasHurtado {
     private String trainMaker;
 
     private int assignedTrain;
-    private Date departureTime;
 
     public Driver_21317055_AriasHurtado(int idDriver, String nameDriver, String trainMaker){
         this.idDriver = idDriver;
         this.nameDriver = nameDriver;
         this.trainMaker = trainMaker;
         this.assignedTrain = 0;
-        this.departureTime = departureTime;
     }
 
     public int getIdDriver() {
@@ -48,14 +46,6 @@ public class Driver_21317055_AriasHurtado {
 
     public void setAssignedTrain(int assignedTrain) {
         this.assignedTrain = assignedTrain;
-    }
-
-    public Date getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(Date departureTime) {
-        this.departureTime = departureTime;
     }
 
     public void showInfoDriver(){

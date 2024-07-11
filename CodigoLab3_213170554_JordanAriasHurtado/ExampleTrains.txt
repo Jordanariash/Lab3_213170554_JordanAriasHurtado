@@ -1,2 +1,2 @@
-Train,1,Alstom,100,100,    1,50,NS-74,Alstom,t,    2,50,NS-74,Alstom,c,    3,50,NS-74,Alstom,c,      4,50,NS-74,Alstom,c,          5,50,NS-74,Alstom,t
-Train,2,CAF,200,200,       6,60,AS-2002,CAF,t,    7,60,AS-2002,CAF,c,    8,60,AS-2002,CAF,c,      9,60,AS-2002,CAF,c,          10,60,AS-2002,CAF,t
+Train,1,Alstom,100,100,    1,50,NS-74,Alstom,t,    2,50,NS-74,Alstom,c,    3,50,NS-74,Alstom,c,      4,50,NS-74,Alstom,c,          5,50,NS-74,Alstom,t,   1,1,  1,4,1704106800
+Train,2,CAF,200,200,       6,60,AS-2014,CAF,t,    7,60,AS-2014,CAF,c,    8,60,AS-2014,CAF,c,      9,60,AS-2014,CAF,c,          10,60,AS-2014,CAF,t,       2,2,  5,8,1704106800

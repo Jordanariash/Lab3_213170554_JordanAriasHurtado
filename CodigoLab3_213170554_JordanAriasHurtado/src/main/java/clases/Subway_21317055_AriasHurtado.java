@@ -91,6 +91,7 @@ public class Subway_21317055_AriasHurtado {
         return null;
     }
 
+
     public boolean areInTheSameLine(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
         //en cada linea
         for (int i = 0; i < lines.size(); i++) {
@@ -116,16 +117,6 @@ public class Subway_21317055_AriasHurtado {
         return false;
     }
 
-    public Line_21317055_AriasHurtado getLineByStation(int idStation) {
-        for (int i = 0; i < lines.size(); i++) {
-            for (int j = 0; j < lines.get(i).getSections().size(); j++) {
-                if (idStation == lines.get(i).getSections().get(j).getStation1().getIdStation() || idStation == lines.get(i).getSections().get(j).getStation2().getIdStation()) {
-                    return lines.get(i);
-                }
-            }
-        }
-        return null;
-    }
 
 
 
@@ -190,21 +181,39 @@ public class Subway_21317055_AriasHurtado {
         if (trains != null && !trains.isEmpty()) {
             for (int i = 0; i < trains.size(); i++) {
                 trains.get(i).showInfoTrain();
-                if (trains.get(i).getArriveStation() == null) {
+                if (trains.get(i).getAssignedLine() == 0) {
                     System.out.println("El tren no esta asignado a ninguna linea");
                 } else {
-                    System.out.println("El tren esta asignado a la linea: " + getLineById(trains.get(i).getAssignedLine()).getNameLine());
-                    System.out.println("Parte su recorrido en la estacion " + trains.get(i).getDepartureStation().getNameStation() + " y termina en " + trains.get(i).getArriveStation().getNameStation());
-                    System.out.println("Y comienza el recorrido a las: " + trains.get(i).getDepartureTime());
+                    if (!lines.isEmpty()){
+                        for (int j = 0; i < lines.size(); j++) {
+                            if (trains.get(i).getAssignedLine() == lines.get(j).getIdLine()) {
+                                System.out.println("El tren esta asignado a la linea: " + getLineById(trains.get(i).getAssignedLine()).getNameLine());
+                                System.out.println("Parte su recorrido " + trains.get(i).getDepartureStation().getNameStation() + " y termina en " + trains.get(i).getArriveStation().getNameStation());
+                                System.out.println("Y comienza el recorrido a las: " + trains.get(i).getDepartureTime());
+                                break;
+                            }
+                        }
+                    }else{
+                        System.out.println("La linea a la que se le asigno el tren no se encuentra disponible");
+                    }
                 }
                 if (trains.get(i).getAssignedDriver() == 0) {
                     System.out.println("El tren no tiene asignado a ningun conductor");
                 } else {
-                    System.out.println("el tren tiene asignado al conductor: " + getDriverById(trains.get(i).getAssignedDriver()).getNameDriver());
-
-
-                    System.out.println("---------------------------------------------");
+                    if (!drivers.isEmpty()){
+                        for (int j = 0; i < drivers.size(); j++) {
+                            if (trains.get(i).getAssignedDriver() == drivers.get(j).getIdDriver()) {
+                                System.out.println("el tren tiene asignado al conductor: " + getDriverById(trains.get(i).getAssignedDriver()).getNameDriver());
+                                break;
+                            } else {
+                                System.out.println("El conductor que se le asigno al tren no se encuentra disponible");
+                            }
+                        }
+                    }else{
+                        System.out.println("El conductor que se le asigno al tren no se encuentra disponible");
+                    }
                 }
+                System.out.println("---------------------------------------------");
             }
         } else {
             System.out.println("no hay trenes");
@@ -214,11 +223,21 @@ public class Subway_21317055_AriasHurtado {
         if (drivers != null && !drivers.isEmpty()) {
             for (int i = 0; i < drivers.size(); i++) {
                 drivers.get(i).showInfoDriver();
-                if (drivers.get(i).getAssignedTrain() == 0) {
-                    System.out.println("El conductor no esta asignado a ningun tren");
-                } else {
-                    System.out.println("El conductor esta asignado al tren: " + drivers.get(i).getAssignedTrain());
+                if(drivers.get(i).getAssignedTrain() == 0){
+                    System.out.println("El conductor no tiene asignado ningun tren");
+                }else{
+                    if (!trains.isEmpty()) {
+                        for (int j = 0; j < trains.size(); j++) {
+                            if(drivers.get(i).getAssignedTrain() == trains.get(j).getIdTrain()){
+                                System.out.println("El conductor tiene asignado el tren modelo: " + trains.get(j).getTrainMaker() + "; ID:" + trains.get(j).getIdTrain());
+                                break;
+                            }
+                        }
+                    }else{
+                        System.out.println("El tren que se le asigno al conductor no se encuentra disponible");
+                    }
                 }
+                System.out.println("---------------------------------------------");
             }
             System.out.println("---------------------------------------------");
         } else {
@@ -238,7 +257,6 @@ public class Subway_21317055_AriasHurtado {
         driver.setAssignedTrain(train.getIdTrain());
 
         train.setDepartureTime(departureTime);
-        driver.setDepartureTime(departureTime);
 
         if (areInTheSameLine(departureStation, arriveStation) && !departureStation.sameStation(arriveStation)) {
             train.setDepartureStation(departureStation);

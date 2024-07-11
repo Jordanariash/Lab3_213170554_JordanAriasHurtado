@@ -17,7 +17,11 @@ public class DriverReader {
                 int driverId = Integer.parseInt(parts[1]);
                 String driverName = parts[2];
                 String trainMaker = parts[3];
-                drivers.add(new Driver_21317055_AriasHurtado(driverId, driverName, trainMaker));
+                int assignedTrain = Integer.parseInt(parts[4]);
+                Driver_21317055_AriasHurtado newDriver = new Driver_21317055_AriasHurtado(driverId, driverName, trainMaker);
+                newDriver.setAssignedTrain(assignedTrain);
+                drivers.add(newDriver);
+
             }
         }
         reader.close();

@@ -46,8 +46,18 @@ public class LineReader {
                     sections.add(section);
 
                     }
-                Line_21317055_AriasHurtado line1 = new Line_21317055_AriasHurtado(idLine, nameLine, railType, sections);
-                lines.add(line1);
+
+                ArrayList<Integer> assignedTrains = new ArrayList<>();
+                if (parts.length > 5) {
+                    String[] trainDetails = parts[5].trim().split(";");
+                    for (String trainDetail : trainDetails) {
+                        assignedTrains.add(Integer.parseInt(trainDetail.trim()));
+                    }
+                }
+
+                Line_21317055_AriasHurtado newLine = new Line_21317055_AriasHurtado(idLine, nameLine, railType, sections);
+                newLine.setAssignedTrains(assignedTrains);
+                lines.add(newLine);
                 }
             }
             reader.close();

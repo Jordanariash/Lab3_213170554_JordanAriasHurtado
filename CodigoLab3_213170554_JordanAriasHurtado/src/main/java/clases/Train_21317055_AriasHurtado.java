@@ -11,7 +11,6 @@ public class Train_21317055_AriasHurtado {
     private ArrayList<PassangerCar_21317055_AriasHurtado> carList;
 
     private int assignedLine;
-
     private int assignedDriver;
     private Station_213170554_AriasHurtado departureStation;
     private Station_213170554_AriasHurtado arriveStation;
