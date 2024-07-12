@@ -169,7 +169,11 @@ public class Line_21317055_AriasHurtado {
     // pero añadir al inicio o final?
     // o que se añada automaticamente a cualquier lado en que sea posible?
     public void addSection(Section_21317055_AriasHurtado section){
-        sections.add(section);
+        if(getSections().get(getSections().size()-1).getStation2() == section.getStation1() || getSections().isEmpty()){
+            sections.add(section);
+        }else{
+            System.out.println("No concuerda la ultima estacion de la linea con la primera de la seccion");
+        }
     }
 
     public boolean isConnected(){

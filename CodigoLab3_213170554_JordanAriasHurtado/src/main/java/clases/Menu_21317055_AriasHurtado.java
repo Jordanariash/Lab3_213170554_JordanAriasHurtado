@@ -7,6 +7,8 @@ import java.util.Date;
 
 import java.util.InputMismatchException; //para que al ingresar algo que no es, reintentar
 
+
+//cambiar estructura de allLines, y separarlo de subway
 public class Menu_21317055_AriasHurtado {
     private Subway_21317055_AriasHurtado subway;
     private Scanner scanner;
@@ -110,7 +112,6 @@ public class Menu_21317055_AriasHurtado {
                     menuModify();
                     break;
                 case 3:
-                    //menuLoad();
                     break;
                 default:
             }
@@ -473,7 +474,7 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("1. Crear una linea nueva");
             System.out.println("2. Crear una estacion nueva");
 
-            //problemas linea vacia 2 estaciones
+            //problemas, cuando se cambia de allLines, se cambia de subway
             System.out.println("3. Añadir estacion a una linea");
             System.out.println("4. Consultar si una linea es valida para ingresar a la red de metro");
             System.out.println("5. Añadir lineas a la red de metro");
@@ -630,7 +631,7 @@ public class Menu_21317055_AriasHurtado {
                                                                 if (aux3 >= 0 && aux2 < allStations.size()) {
                                                                     Station_213170554_AriasHurtado station2 = allStations.get(aux3);
                                                                     allStations.remove(aux3);
-                                                                    System.out.println("Ingrese la distancia entre estacions y presione ENTER para continuar: ");
+                                                                    System.out.println("Ingrese la distancia entre estaciones y presione ENTER para continuar: ");
                                                                     int distance;
                                                                     while (true) {
                                                                         try {
@@ -655,8 +656,8 @@ public class Menu_21317055_AriasHurtado {
                                                                         }
                                                                     }
                                                                     try {
-                                                                        Section_21317055_AriasHurtado section = new Section_21317055_AriasHurtado(station1, station2, distance, cost);
-                                                                        allLines.get(aux).getSections().add(section);
+                                                                        Section_21317055_AriasHurtado newSection = new Section_21317055_AriasHurtado(station1, station2, distance, cost);
+                                                                        subway.getLines().get(aux).showInfoLine();
                                                                         System.out.println("Se añadio la estacion con exito");
                                                                         break;
                                                                     } catch (IllegalArgumentException e) {
@@ -723,8 +724,8 @@ public class Menu_21317055_AriasHurtado {
                                                         }
                                                     }
                                                     try {
-                                                        Section_21317055_AriasHurtado section = new Section_21317055_AriasHurtado(allLines.get(aux).getSections().get(allLines.get(aux).getSections().size() - 1).getStation2(), station1, distance, cost);
-                                                        allLines.get(aux).getSections().add(section);
+                                                        Section_21317055_AriasHurtado newSection = new Section_21317055_AriasHurtado(allLines.get(aux).getSections().get(allLines.get(aux).getSections().size() - 1).getStation2(), station1, distance, cost);
+                                                        allLines.get(aux).addSection(newSection);
                                                         System.out.println("Se añadio la estacion con exito");
                                                         break;
                                                     } catch (IllegalArgumentException e) {
@@ -760,15 +761,27 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Indique el id de la linea que quiere validar");
                         System.out.println("Lineas disponibles");
                         for (int i = 0; i < allLines.size(); i++) {
-                            System.out.println(i + ".Linea " + allLines.get(i).getIdLine());
+                            System.out.println(i + 1 + ".Linea " + allLines.get(i).getIdLine());
                         }
-                        select = scanner.nextInt();
-                        scanner.nextLine();
-
-                        if (allLines.get(select).isLine()) {
-                            System.out.println("La linea se puede añadir");
-                        } else {
-                            System.out.println("La linea no se puede añadir");
+                        while (true) {
+                            try {
+                                select = scanner.nextInt();
+                                int aux = select - 1;
+                                if (aux >= 0 && aux < allLines.size()) {
+                                    if (allLines.get(aux).isLine()) {
+                                        System.out.println("La linea se puede añadir");
+                                        break;
+                                    } else {
+                                        System.out.println("La linea no se puede añadir");
+                                        break;
+                                    }
+                                }else{
+                                    System.out.println("Opcion no disponible");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
                         }
                     } else {
                         System.out.println("No hay lineas disponibles");
