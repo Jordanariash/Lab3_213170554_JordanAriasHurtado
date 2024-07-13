@@ -253,6 +253,7 @@ public class Line_21317055_AriasHurtado {
     }
 
 
+
     //esta es "line?" pero no se puede ocupar "?" por error de tipeo
     public boolean isLine(){
         return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal();

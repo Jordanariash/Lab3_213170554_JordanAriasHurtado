@@ -170,7 +170,19 @@ public class Subway_21317055_AriasHurtado {
                     System.out.println("la linea no tiene asignado ningun tren");
                 } else {
                     System.out.println("la linea tiene asignado el/los trenes: ");
-                    System.out.println(getLines().get(i).getAssignedTrains());
+                    for(int j = 0 ; j < lines.get(i).getAssignedTrains().size() ; j++){
+                        int aux = 0;
+                        for(int k = 0; k < trains.size(); k++) {
+                            if(getLines().get(i).getAssignedTrains().get(j) == trains.get(k).getIdTrain()){
+                                System.out.println("Tren modelo "+getTrainById(getLines().get(i).getAssignedTrains().get(j)).getTrainMaker() +";ID: "+ getLines().get(i).getAssignedTrains().get(j));
+                                aux++;
+                                break;
+                            }
+                        }
+                        if(aux == 0){
+                            System.out.println("El tren con ID: "+ getLines().get(i).getAssignedTrains().get(j) +" ,no se encuentra disponible ");
+                        }
+                    }
                 }
                 System.out.println("---------------------------------------------");
             }
