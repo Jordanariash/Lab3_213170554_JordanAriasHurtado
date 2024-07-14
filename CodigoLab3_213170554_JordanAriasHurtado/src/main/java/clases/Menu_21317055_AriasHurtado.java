@@ -5,12 +5,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
 
-import java.util.InputMismatchException; //para que al ingresar algo que no es, reintentar
+import java.util.InputMismatchException;
 
 
-//fixear estaciones tren test (where y path)
-
-//cambiar estructura de allLines, y separarlo de subway
 public class Menu_21317055_AriasHurtado {
     private Subway_21317055_AriasHurtado subway;
     private Scanner scanner;
@@ -471,14 +468,33 @@ public class Menu_21317055_AriasHurtado {
         int select;
         int suboption;
         do{
+            //funciona 100%
             System.out.println("1. Crear una linea nueva");
+
+            //funciona 100%
             System.out.println("2. Crear una estacion nueva");
+
+            //funciona en
+            //linea creada desde 0
+            //linea con estaciones precargada
+
+            //se cae en añadir estacion a linea creada y añadidas 2 estaciones
             System.out.println("3. Añadir estacion a una linea");
+
+            //funciona 100%
             System.out.println("4. Consultar si una linea es valida para ingresar a la red de metro");
+
+            //funciona 100%
             System.out.println("5. Añadir lineas a la red de metro");
+
+            //funciona 100%
             System.out.println("6. Quitar lineas de la red de metro");
+
+            //funciona 100%
             System.out.println("7. Crear tren nuevo");
+            //funciona 100%
             System.out.println("8. Crear vagon nuevo");
+
             System.out.println("9. Añadir vagones a un tren");
             System.out.println("10. Quitar vagones a un tren");
             System.out.println("11. Consultar si un tren es valido para ingresar a la red de metro");
@@ -842,6 +858,7 @@ public class Menu_21317055_AriasHurtado {
                                 if(aux >= 0 && aux < subway.getLines().size()){
                                     reserveLines.add(subway.getLines().get(aux));
                                     subway.getLines().remove(aux);
+                                    System.out.println("Se ha retirado la linea con exito");
                                     break;
                                 }else{
                                     System.out.println("Opcion no disponible");
@@ -1182,28 +1199,32 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 //Quitar trenes de la red de metro
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 case 13:
+                    if(!subway.getTrains().isEmpty()){
+                        System.out.println("Indique el tren a retirar");
+                        for(int i = 0; i< subway.getTrains().size(); i++){
+                            System.out.println(i+1 +".Tren modelo: " + subway.getTrains().get(i).getTrainMaker() + ", ID: " + subway.getTrains().get(i).getIdTrain());
+                        }
+                        while(true){
+                            try{
+                                select = scanner.nextInt();
+                                int aux = select -1;
+                                if (aux >= 0 && aux < subway.getTrains().size()) {
+                                    reserveTrains.add(subway.getTrains().get(aux));
+                                    subway.getTrains().remove(aux);
+                                    System.out.println("Se ha removido el tren con exito");
+                                    break;
+                                }else{
+                                    System.out.println("Tren no disponible");
+                                }
+                            }catch (InputMismatchException e) {
+                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                scanner.nextLine();
+                            }
+                        }
+                    }else{
+                        System.out.println("No hay trenes disponibles");
+                    }
                     break;
                 //Ingresar nuevo conductor
                 case 14:
@@ -1239,22 +1260,31 @@ public class Menu_21317055_AriasHurtado {
                     Driver_21317055_AriasHurtado userDriver = new Driver_21317055_AriasHurtado(userIdDriver, userNameDriver, userTrainMakerDriver);
                     subway.getDrivers().add(userDriver);
                     break;
+
                 //Quitar conductor del metro
                 case 15:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                if(!subway.getDrivers().isEmpty()){
+                    System.out.println("Conductores disponibles: ");
+                    for(int i = 0; i < subway.getDrivers().size(); i++){
+                        System.out.println(i + 1 + ". " + subway.getDrivers().get(i).getNameDriver() + ", ID: " + subway.getDrivers().get(i).getIdDriver());
+                    }
+                    while(true){
+                        try{
+                            select = scanner.nextInt();
+                            int aux = select - 1;
+                            if (aux >= 0 && aux < subway.getDrivers().size()) {
+                                subway.getDrivers().remove(subway.getDrivers().get(aux));
+                                System.out.println("Se ha retirado el conductor");
+                                break;
+                            }else{
+                                System.out.println("Conductor no disponible");
+                            }
+                        }catch (InputMismatchException e) {
+                            System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                            scanner.nextLine();
+                        }
+                    }
+                }
                     break;
                 //Asignar tren a linea
                 case 16:
