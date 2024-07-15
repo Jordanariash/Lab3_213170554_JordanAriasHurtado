@@ -57,6 +57,23 @@ public class Menu_21317055_AriasHurtado {
                     try {
                         ArrayList<Train_21317055_AriasHurtado> trains = TrainReader.readTrains("ExampleTrains.txt");
                         subway.addTrain(trains);
+                        if(!subway.getLines().isEmpty()){
+                            for(int i = 0; i<subway.getTrains().size(); i++){
+                                for(int j = 0; j < subway.getLines().size(); j++){
+                                    for (int k = 0; k < subway.getLines().get(j).getSections().size(); k++){
+                                        if(subway.getLines().get(j).getSections().get(k).getStation1().getIdStation() == subway.getTrains().get(i).getDepartureStation().getIdStation()){
+                                            subway.getTrains().get(i).setDepartureStation(subway.getLines().get(j).getSections().get(k).getStation1());
+                                        } else if ((subway.getLines().get(j).getSections().get(k).getStation2().getIdStation() == subway.getTrains().get(i).getDepartureStation().getIdStation())) {
+                                            subway.getTrains().get(i).setDepartureStation(subway.getLines().get(j).getSections().get(k).getStation2());
+                                        } else if(subway.getLines().get(j).getSections().get(k).getStation1().getIdStation() == subway.getTrains().get(i).getArriveStation().getIdStation()){
+                                            subway.getTrains().get(i).setArriveStation(subway.getLines().get(j).getSections().get(k).getStation1());
+                                        } else if((subway.getLines().get(j).getSections().get(k).getStation2().getIdStation() == subway.getTrains().get(i).getArriveStation().getIdStation())){
+                                            subway.getTrains().get(i).setArriveStation(subway.getLines().get(j).getSections().get(k).getStation2());
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         System.out.println("Trenes cargados correctamente.");
                     } catch (IOException e) {
                         System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -381,7 +398,12 @@ public class Menu_21317055_AriasHurtado {
                                             try {
                                                 time = scanner.nextLong();
                                                 Date date = new Date(time);
-                                                System.out.println("El tren " + subway.getTrainById(select).getTrainMaker() + " esta en la estacion: " + subway.whereIsTrain(subway.getTrainById(aux), date).getNameStation());
+                                                try{
+                                                    System.out.println("El tren " + subway.getTrains().get(aux).getTrainMaker() + " esta en la estacion: " + subway.whereIsTrain(subway.getTrains().get(aux), date).getNameStation());
+                                                    break;
+                                                }catch (NullPointerException e) {
+                                                    System.out.println("Ha ocurrido un error con el tren");
+                                                }
                                                 break;
                                             } catch (InputMismatchException e) {
                                                 System.out.println("El valor ingresado no es una fecha en formato UNIX. Intente nuevamente: ");
@@ -424,9 +446,22 @@ public class Menu_21317055_AriasHurtado {
                                             try {
                                                 time = scanner.nextLong();
                                                 Date date = new Date(time);
-                                                for(int i =0; i<subway.trainPath(subway.getTrainById(aux), date).size(); i++){
-                                                    System.out.println(subway.trainPath(subway.getTrainById(aux), date).get(i).getNameStation());
+
+                                                ArrayList<Station_213170554_AriasHurtado> auxPath = subway.trainPath(subway.getTrains().get(aux), date);
+
+                                                if(!auxPath.isEmpty()){
+                                                    try {
+                                                        System.out.println("Estaciones pendientes:");
+                                                        for (int i = 0; i < subway.trainPath(subway.getTrains().get(aux), date).size(); i++) {
+                                                            System.out.println(i+1 + ". "subway.trainPath(subway.getTrains().get(aux), date).get(i).getNameStation());
+                                                        }
+                                                    }catch (NullPointerException e) {
+                                                        System.out.println("Ha ocurrido un error con el tren");
+                                                    }
+                                                }else{
+                                                    System.out.println("El tren no tiene mas estaciones que recorrer");
                                                 }
+
                                                 break;
                                             } catch (InputMismatchException e) {
                                                 System.out.println("El valor ingresado no es una fecha en formato UNIX. Intente nuevamente: ");

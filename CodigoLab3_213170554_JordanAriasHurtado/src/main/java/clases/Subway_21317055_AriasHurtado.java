@@ -117,21 +117,6 @@ public class Subway_21317055_AriasHurtado {
         return false;
     }
 
-    public Station_213170554_AriasHurtado cloneStation1FromTrain(Station_213170554_AriasHurtado station, Line_21317055_AriasHurtado line){
-        for(int i = 0; i < getLines().size(); i++){
-            for(int j = 0; i < getLines().get(i).getSections().size(); j++){
-                if(getLines().get(i).getSections().get(j).getStation1().getIdStation() == station.getIdStation()){
-                    station = getLines().get(i).getSections().get(j).getStation1();
-                    return station;
-                } else if (getLines().get(i).getSections().get(j).getStation2().getIdStation() == station.getIdStation()) {
-                    station = getLines().get(i).getSections().get(j).getStation2();
-                    return station;
-                }
-            }
-        }
-        return null;
-    }
-
 
 
 
@@ -310,9 +295,12 @@ public class Subway_21317055_AriasHurtado {
         return false;
     }
 
+
+
+
     public Station_213170554_AriasHurtado whereIsTrain(Train_21317055_AriasHurtado train, Date time) {
         if (train.getDepartureTime() == null) {
-            System.out.println("El tren no esta asignado a ninguna linea");
+            System.out.println("El tren no tiene una hora de salida");
         } else {
             //dada una estacion, empezar a calcular desde el inicio:
             //si es estacion 1, empezar a contar desde esa estacion
@@ -377,9 +365,7 @@ public class Subway_21317055_AriasHurtado {
                     }
                 }
             }
-
             //Departure y arriver estan invertidas C-b-A
-
         }
         return null;
     }
