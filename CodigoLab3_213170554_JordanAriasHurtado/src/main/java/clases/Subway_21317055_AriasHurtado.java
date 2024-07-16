@@ -217,8 +217,6 @@ public class Subway_21317055_AriasHurtado {
                             if (trains.get(i).getAssignedDriver() == drivers.get(j).getIdDriver()) {
                                 System.out.println("el tren tiene asignado al conductor: " + getDriverById(trains.get(i).getAssignedDriver()).getNameDriver());
                                 break;
-                            } else {
-                                System.out.println("El conductor que se le asigno al tren no se encuentra disponible");
                             }
                         }
                     }else{

@@ -132,7 +132,7 @@ public class Menu_21317055_AriasHurtado {
         }while (option != 3) ;
     }
 
-    //listo no probado
+    //listo
     public void menuConsult() {
         int option = 0;
         int select;
@@ -391,8 +391,8 @@ public class Menu_21317055_AriasHurtado {
                             try {
                                 select = scanner.nextInt();
                                 int aux = select - 1;
-                                if(subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
-                                    if (aux >= 0 && aux < subway.getTrains().size()) {
+                                if(aux >= 0 && aux < subway.getTrains().size()) {
+                                    if (subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
                                         System.out.println("Ingrese una hora en formato UNIX y presione ENTER para continuar: ");
                                         while (true) {
                                             try {
@@ -411,11 +411,11 @@ public class Menu_21317055_AriasHurtado {
                                             }
                                         }
                                     } else {
-                                        System.out.println("Tren no disponible. Intente nuevamente:");
+                                        System.out.println("El Tren no tiene las condiciones necesarias, elija otro:");
                                     }
                                     break;
                                 }else {
-                                    System.out.println("El Tren no tiene las condiciones necesarias, elija otro :");
+                                    System.out.println("Tren no disponible. Intente nuevamente :");
 
                                 }
                             } catch (InputMismatchException e) {
@@ -428,7 +428,7 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 7:
-                    if(!subway.getTrains().isEmpty()) {
+                    if(!subway.getTrains().isEmpty() || !subway.getLines().isEmpty()) {
                         System.out.println("Seleccione el tren del que quiere saber su recorrido");
                         System.out.println("Trenes disponibles");
                         for (int i = 0; i < subway.getTrains().size(); i++) {
@@ -439,21 +439,19 @@ public class Menu_21317055_AriasHurtado {
                             try {
                                 select = scanner.nextInt();
                                 int aux = select - 1;
-                                if(subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
-                                    if (aux >= 0 && aux < subway.getTrains().size()) {
+                                if(aux >= 0 && aux < subway.getTrains().size()) {
+                                    if (subway.getTrains().get(aux).getArriveStation() != null && subway.getTrains().get(aux).getDepartureStation() != null && subway.getTrains().get(aux).getDepartureTime() != null) {
                                         System.out.println("Ingrese una hora en formato UNIX y presione ENTER para continuar: ");
                                         while (true) {
                                             try {
                                                 time = scanner.nextLong();
                                                 Date date = new Date(time);
 
-                                                ArrayList<Station_213170554_AriasHurtado> auxPath = subway.trainPath(subway.getTrains().get(aux), date);
-
-                                                if(!auxPath.isEmpty()){
+                                                if(!subway.trainPath(subway.getTrains().get(aux), date).isEmpty()){
                                                     try {
                                                         System.out.println("Estaciones pendientes:");
                                                         for (int i = 0; i < subway.trainPath(subway.getTrains().get(aux), date).size(); i++) {
-                                                            System.out.println(i+1 + ". "subway.trainPath(subway.getTrains().get(aux), date).get(i).getNameStation());
+                                                            System.out.println(i+1 + ". " + subway.trainPath(subway.getTrains().get(aux), date).get(i).getNameStation());
                                                         }
                                                     }catch (NullPointerException e) {
                                                         System.out.println("Ha ocurrido un error con el tren");
@@ -712,11 +710,11 @@ public class Menu_21317055_AriasHurtado {
                                                                     }
                                                                     try {
                                                                         Section_21317055_AriasHurtado newSection = new Section_21317055_AriasHurtado(station1, station2, distance, cost);
-                                                                        reserveLines.get(aux).addSection(newSection);
+                                                                        reserveLines.get(aux).getSections().add(newSection);
                                                                         System.out.println("Se añadio la estacion con exito");
                                                                         break;
-                                                                    } catch (IllegalArgumentException e) {
-                                                                        System.out.println("Las estaciones no pueden tener mismo id o nombre");
+                                                                    } catch (IndexOutOfBoundsException e) {
+                                                                        System.out.println("Ocurrio un error");
                                                                         reserveStations.add(station1);
                                                                         reserveStations.add(station2);
                                                                         break;
@@ -1407,6 +1405,7 @@ public class Menu_21317055_AriasHurtado {
                                                     try{
                                                         select = scanner.nextInt();
                                                         int aux3 = select - 1;
+                                                        //si elige cualquier estacion menos la ultima
                                                         if(aux3 >= 0 && aux3 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
                                                             System.out.println("Ingrese la estacion final del recorrido");
                                                             subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).showStations();
@@ -1414,15 +1413,18 @@ public class Menu_21317055_AriasHurtado {
                                                                 try{
                                                                     select = scanner.nextInt();
                                                                     int aux4 = select - 1;
+                                                                    //si elige la 2da estacion y tampoco es la ultima
                                                                     if(aux4 >= 0 && aux4 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
+                                                                        //si es la misma estacion, error
                                                                         if(aux3 == aux4){
                                                                             System.out.println("Las estaciones no pueden ser las mismas");
+                                                                            //sino, prosigue
                                                                         }else{
                                                                             subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation1() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation1());
                                                                             System.out.println("Se asigno el tren con exito");
                                                                             break;
                                                                         }
-                                                                    } else if(aux3 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()){
+                                                                    } else if(aux4 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
                                                                         subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation1() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation2());
                                                                         System.out.println("Se asigno el tren con exito");
                                                                         break;
@@ -1434,18 +1436,19 @@ public class Menu_21317055_AriasHurtado {
                                                                     scanner.nextLine();
                                                                 }
                                                             }
-                                                        } else if (aux3 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()) {
+                                                            //si elige la ultima estacion
+                                                        } else if (aux3 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1) {
                                                             System.out.println("Ingrese la estacion final del recorrido");
                                                             subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).showStations();
                                                             while(true){
                                                                 try{
                                                                     select = scanner.nextInt();
                                                                     int aux4 = select - 1;
-                                                                    if(aux4 >= 0 && aux4 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()){
+                                                                    if(aux4 >= 0 && aux4 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
                                                                         subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation2() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation1());
                                                                         System.out.println("Se asigno el tren con exito");
                                                                         break;
-                                                                    } else if (aux4 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()) {
+                                                                    } else if (aux4 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1) {
                                                                         System.out.println("Las estaciones no pueden ser las mismas");
                                                                         break;
                                                                     }

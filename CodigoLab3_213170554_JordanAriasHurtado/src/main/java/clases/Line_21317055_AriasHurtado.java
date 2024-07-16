@@ -114,22 +114,26 @@ public class Line_21317055_AriasHurtado {
 
 
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
-        int sectionLenght = 0;
-        int i = 0;
-        while(i < sections.size()) {
-            if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
-                i++;
-            }
-        while(i < sections.size()){
-            sectionLenght = sections.get(i).getDistance() + sectionLenght;
-            if(station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())){
-                return sectionLenght;
+        if(station1.sameStation(station2)){
+            return 0;
+        }else {
+            int sectionLenght = 0;
+            int i = 0;
+            while (i < sections.size()) {
+                if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
+                    i++;
                 }
-            i++;
-            }
+                while (i < sections.size()) {
+                    sectionLenght = sections.get(i).getDistance() + sectionLenght;
+                    if (station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())) {
+                        return sectionLenght;
+                    }
+                    i++;
+                }
 
+            }
+            return sectionLenght;
         }
-        return sectionLenght;
     }
 
 
@@ -147,29 +151,31 @@ public class Line_21317055_AriasHurtado {
 
 
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
-        int sectionCost = 0;
-        int i = 0;
-        while(i < sections.size()) {
-            if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
-                i++;
-            }
-            while(i < sections.size()){
-                sectionCost = sections.get(i).getCost() + sectionCost;
-                if(station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())){
-                    return sectionCost;
+        if(station1.sameStation(station2)){
+            return 0;
+        }else {
+            int sectionCost = 0;
+            int i = 0;
+            while (i < sections.size()) {
+                if (!station1.sameStation(sections.get(i).getStation1()) && !station2.sameStation(sections.get(i).getStation1())) {
+                    i++;
                 }
-                i++;
-            }
+                while (i < sections.size()) {
+                    sectionCost = sections.get(i).getCost() + sectionCost;
+                    if (station1.sameStation(sections.get(i).getStation2()) || station2.sameStation(sections.get(i).getStation2())) {
+                        return sectionCost;
+                    }
+                    i++;
+                }
 
+            }
+            return sectionCost;
         }
-        return sectionCost;
     }
 
 
-    // pero añadir al inicio o final?
-    // o que se añada automaticamente a cualquier lado en que sea posible?
     public void addSection(Section_21317055_AriasHurtado section){
-        if(getSections().get(getSections().size()-1).getStation2() == section.getStation1() || getSections().isEmpty()){
+        if(getSections().get(getSections().size()-1).getStation2().sameStation(section.getStation1()) || getSections().isEmpty()){
             sections.add(section);
         }else{
             System.out.println("No concuerda la ultima estacion de la linea con la primera de la seccion");
