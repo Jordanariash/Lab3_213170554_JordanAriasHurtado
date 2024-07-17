@@ -1045,6 +1045,7 @@ public class Menu_21317055_AriasHurtado {
                                                 if (aux2 >= 0 && aux2 < reserveTrains.size()) {
                                                     reserveTrains.get(aux).addCar(0, reservePcars.get(aux2));
                                                     System.out.println("Se ha añadido el vagon con exito");
+                                                    reservePcars.remove(aux2);
                                                     break;
                                                 } else {
                                                     System.out.println("Vagon no dispponible");

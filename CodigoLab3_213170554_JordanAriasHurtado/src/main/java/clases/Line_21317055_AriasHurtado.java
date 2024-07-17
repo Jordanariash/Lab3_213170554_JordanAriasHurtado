@@ -1,18 +1,27 @@
 package clases;
-
-
 import java.util.ArrayList;
 
-
+/**
+ * Clase Line que representa una linea dentro de una red de metro
+ * Cada linea tiene un id unico a nivel de metro, un nombre unico a nivel de metro, un tipo de riel, una lista de secciones, las cuales deben estar conectadas entre si
+ * y una lista de id's de trenes asignados a la linea
+ */
 public class Line_21317055_AriasHurtado {
     private int idLine;
     private String nameLine;
     private String railType;
     private ArrayList<Section_21317055_AriasHurtado> sections;
-
     private ArrayList<Integer> assignedTrains;
 
-
+    /**
+     * Constructor de Line
+     * Crea una linea con un id, nombre, tipo de riel, y secciones, y sin ningun tren asociado
+     *
+     * @param idLine identificador unico de la linea
+     * @param nameLine nombre propio de la linea
+     * @param railType tipo de riel
+     * @param sections lista de secciones que conforma la linea
+     */
     public Line_21317055_AriasHurtado(int idLine, String nameLine, String railType, ArrayList<Section_21317055_AriasHurtado> sections) {
         this.idLine = idLine;
         if (nameLine == null || nameLine.trim().isEmpty()) {
@@ -34,46 +43,51 @@ public class Line_21317055_AriasHurtado {
         this.assignedTrains = new ArrayList<>();
     }
 
+    /**
+     * Consigue el id de una linea
+     * @return id de una linea
+     */
     public int getIdLine() {
         return idLine;
     }
 
-    public void setIdLine(int idLine) {
-        this.idLine = idLine;
-    }
-
+    /**
+     * Consigue el nombre de una linea
+     * @return el nombre de una linea
+     */
     public String getNameLine() {
         return nameLine;
     }
 
-    public void setNameLine(String nameLine) {
-        this.nameLine = nameLine;
-    }
-
+    /**
+     * Consigue el tipo de riel de la linea
+     * @return tipo de riel de la linea
+     */
     public String getRailType() {
         return railType;
     }
 
-    public void setRailType(String railType) {
-        this.railType = railType;
-    }
-
+    /**
+     * Consigue la lista de secciones que compone la linea
+     * @return lista de secciones
+     */
     public ArrayList<Section_21317055_AriasHurtado> getSections() {
         return sections;
     }
 
-    public void setSections(ArrayList<Section_21317055_AriasHurtado> sections) {
-        this.sections = sections;
-    }
-
+    /**
+     * Consigue la lista de id's de trenes asignados
+     * @return lista de id's de trenes asignados
+     */
     public ArrayList<Integer> getAssignedTrains() {
         return assignedTrains;
     }
 
-    public void setAssignedTrains(ArrayList<Integer> assignedTrains) {
-        this.assignedTrains = assignedTrains;
-    }
-
+    /**
+     * Consigue una estacion por el id
+     * @param idStation id de la estacion
+     * @return la estacion con el id
+     */
     public Station_213170554_AriasHurtado getStationById(int idStation){
         for (int i = 0; i<sections.size(); i++) {
             if(sections.get(i).getStation1().getIdStation() == idStation){
@@ -86,6 +100,11 @@ public class Line_21317055_AriasHurtado {
         return null;
     }
 
+    /**
+     * Consiguue una estacion por su posicion dentro del arreglo en la lista de secciones
+     * @param position posicion de la estacion
+     * @return estacion
+     */
     public Station_213170554_AriasHurtado getStationByPosition(int position) {
         if (position <= getSections().size() && position >= 0){
             if(position == getSections().size()){
@@ -97,22 +116,69 @@ public class Line_21317055_AriasHurtado {
         return null;
     }
 
+    /**
+     * Establece el id de una linea
+     * @param idLine id
+     */
+    public void setIdLine(int idLine) {
+        this.idLine = idLine;
+    }
+
+    /**
+     * Establece el nombre de una linea
+     * @param nameLine nombre
+     */
+    public void setNameLine(String nameLine) {
+        this.nameLine = nameLine;
+    }
+
+    /**
+     * Establece el tipo de riel de una linea
+     * @param railType riel
+     */
+    public void setRailType(String railType) {
+        this.railType = railType;
+    }
+
+    /**
+     * Establece las secciones de una linea
+     * @param sections lista de secciones
+     */
+    public void setSections(ArrayList<Section_21317055_AriasHurtado> sections) {
+        this.sections = sections;
+    }
+
+    /**
+     * Establece los trenes asignados a la linea
+     * @param assignedTrains lista de id's de trenes
+     */
+    public void setAssignedTrains(ArrayList<Integer> assignedTrains) {
+        this.assignedTrains = assignedTrains;
+    }
 
 
-
+    /**
+     * Calcula la distancia de la linea
+     * @return distancia total
+     */
     public int lineLenght(){
         int totalLenght = 0;
         if(sections == null){
             return 0;
         }else{
-            for(int i = 0; i < sections.size(); i++){
-                totalLenght  = sections.get(i).getDistance() + totalLenght;
+            for (Section_21317055_AriasHurtado section : sections) {
+                totalLenght = section.getDistance() + totalLenght;
             }
             return totalLenght;
         }
     }
 
-
+    /**
+     * Calcula la distancia entre 2 estaciones de una linea
+     * @param station1 estacion de origen
+     * @param station2 estacion de destino
+     * @return distancia
+     */
     public int lineSectionLenght(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2){
         if(station1.sameStation(station2)){
             return 0;
@@ -136,7 +202,10 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
-
+    /**
+     * Calcula el costo de una linea
+     * @return costo total
+     */
     public int lineCost(){
         int totalCost = 0;
         if(sections == null){
@@ -149,7 +218,12 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
-
+    /**
+     * Calcula el costo entre 2 estaciones de una linea
+     * @param station1 estacion de origen
+     * @param station2 estacion de destino
+     * @return distancia
+     */
     public int lineSectionCost(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2) {
         if(station1.sameStation(station2)){
             return 0;
@@ -173,7 +247,10 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
-
+    /**
+     * Añade una seccion al final de la linea
+     * @param section nueva seccion
+     */
     public void addSection(Section_21317055_AriasHurtado section){
         if(getSections().get(getSections().size()-1).getStation2().sameStation(section.getStation1()) || getSections().isEmpty()){
             sections.add(section);
@@ -182,6 +259,10 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    /**
+     * Verifica si las secciones de la linea estan conectadas entre si
+     * @return verdadero o falso
+     */
     public boolean isConnected(){
         if(sections.isEmpty()){
             return true;
@@ -197,6 +278,10 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    /**
+     * Verifica si la linea es circular, osea la primera estacion de la primera seccion, es la misma que la segunda estacion de la ultima seccion
+     * @return verdadero o falso
+     */
     public boolean circular(){
 
         if(sections.isEmpty()){
@@ -208,6 +293,10 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    /**
+     * Verifica si la linea es lineal, osea la estacion inicial y final de la linea son de tipo terminal
+     * @return verdadero o falso
+     */
     public boolean lineal(){
         if(sections.isEmpty()){
             return true;
@@ -219,6 +308,10 @@ public class Line_21317055_AriasHurtado {
 
     }
 
+    /**
+     * Verifica si la estacion no tiene secciones repetidas
+     * @return verdadero o falso
+     */
     public boolean unrepeteadSections(){
         ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<>();
         for (int i = 0; i < sections.size()-1; i++) {
@@ -241,43 +334,52 @@ public class Line_21317055_AriasHurtado {
 
     }
 
+    /**
+     * Verifica si la linea solo contiene 2 terminales
+     * @return verdadero o falso
+     */
     public boolean onlyTwoTerminal(){
         if(sections.isEmpty()) {
             return true;
         }
         int count = 0;
-        for (int i = 0; i < sections.size(); i++) {
-            if((sections.get(i).getStation1().getStationType() == 't')||(sections.get(i).getStation2().getStationType() == 't')){
+        for (Section_21317055_AriasHurtado section : sections) {
+            if ((section.getStation1().getStationType() == 't') || (section.getStation2().getStationType() == 't')) {
                 count++;
             }
         }
-        if(count == 2){
-            return true;
-        }else{
-            return false;
-        }
+        return count == 2;
     }
 
-
-
-    //esta es "line?" pero no se puede ocupar "?" por error de tipeo
+    /**
+     * Verifica si la linea tiene todas las caracteristicas necesarias para ser valida, y poder ingresar a la red de metro
+     * @return verdadero o falso
+     */
     public boolean isLine(){
         return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal();
     }
 
+    /**
+     * Muestra la informacion de una linea
+     */
     public void showInfoLine(){
         System.out.println("ID linea: "+ idLine + " , Nombre Linea: " + nameLine + " , tipo rieles: " + railType);
         if(sections.isEmpty()){
             System.out.println("No hay estaciones en la linea");
         }else {
-            for (int i = 0; i < sections.size(); i++) {
-                sections.get(i).getStation1().showInfoStation();
-                System.out.println("distancia: " + sections.get(i).getDistance() + " costo: " + sections.get(i).getCost());
+            for (Section_21317055_AriasHurtado section : sections) {
+                section.getStation1().showInfoStation();
+                System.out.println("distancia: " + section.getDistance() + " costo: " + section.getCost());
             }
             sections.get(sections.size()-1).getStation2().showInfoStation();
         }
     }
 
+    /**
+     * Compara 2 estaciones por nombre o id, para ver si son la misma
+     * @param line linea a comparar
+     * @return verdadero o falso
+     */
     public boolean sameLine(Line_21317055_AriasHurtado line){
         if(getIdLine() == line.getIdLine() && getNameLine().equals(line.getNameLine())){
             return true;
@@ -286,6 +388,9 @@ public class Line_21317055_AriasHurtado {
         }
     }
 
+    /**
+     * Muestra todas las estaciones de la linea en orden
+     */
     public void showStations(){
        for (int i = 0; i < sections.size(); i++) {
            System.out.println(i+1 + ". "+ sections.get(i).getStation1().getNameStation());

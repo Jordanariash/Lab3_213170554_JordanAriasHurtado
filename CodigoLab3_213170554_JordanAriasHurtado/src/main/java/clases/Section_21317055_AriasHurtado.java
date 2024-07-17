@@ -1,15 +1,26 @@
 package clases;
 
+/**
+ * Clase Section que representa una seccion de una linea
+ * Cada seccion tiene 2 estaciones distintas, una distancia y un costo
+ */
 public class Section_21317055_AriasHurtado{
 
-    //constructor
     Station_213170554_AriasHurtado station1;
     Station_213170554_AriasHurtado station2;
     private int distance;
     private int cost;
 
-    public Section_21317055_AriasHurtado(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2,
-                                         int distance, int cost){
+    /**
+     * Constructor de Section
+     * Crea una seccion, con 2 estaciones, una distancia, y un costo
+     *
+     * @param station1 primera estacion que compone la seccion
+     * @param station2 segunda estacion que compone la seccion
+     * @param distance distancia asociada entre las 2 estaciones
+     * @param cost costo asociado entre las 2 estaciones
+     */
+    public Section_21317055_AriasHurtado(Station_213170554_AriasHurtado station1, Station_213170554_AriasHurtado station2, int distance, int cost){
 
         this.station1 = station1;
 
@@ -33,43 +44,75 @@ public class Section_21317055_AriasHurtado{
 
 
     }
-    //getter y setters
 
+    /**
+     * Consigue la primera estacion de una seccion
+     * @return la primera estacion de una seccion
+     */
     public Station_213170554_AriasHurtado getStation1() {
         return station1;
     }
 
-    public void setStation1(Station_213170554_AriasHurtado station1) {
-        this.station1 = station1;
-    }
-
+    /**
+     * Consigue la segunda estacion de una seccion
+     * @return la segunda estacion de una seccion
+     */
     public Station_213170554_AriasHurtado getStation2() {
         return station2;
     }
 
-    public void setStation2(Station_213170554_AriasHurtado station2) {
-        this.station2 = station2;
-    }
-
+    /**
+     * Consigue la distancia de una seccion
+     * @return la distancia de una seccion
+     */
     public int getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
+    /**
+     * Consigue el costo de una seccion
+     * @return el costo de una seccion
+     */
     public int getCost() {
         return cost;
     }
 
+    /**
+     * Establece la primera estacion de una seccion
+     * @param station1 estacion
+     */
+    public void setStation1(Station_213170554_AriasHurtado station1) {
+        this.station1 = station1;
+    }
+
+    /**
+     * Establece la segunda estacion de una seccion
+     * @param station2 estacion
+     */
+    public void setStation2(Station_213170554_AriasHurtado station2) {
+        this.station2 = station2;
+    }
+
+    /**
+     * Establece la distancia de una seccion
+     * @param distance distancia
+     */
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    /**
+     * Establece el costo de una seccion
+     * @param cost costo
+     */
     public void setCost(int cost) {
         this.cost = cost;
     }
 
 
-
-
+    /**
+     * Muestra la informacion de una seccion
+     */
     public void showInfoSection() {
         station1.showInfoStation();
         System.out.println("distancia: " + distance + " ,costo: " + cost);
@@ -77,13 +120,14 @@ public class Section_21317055_AriasHurtado{
 
     }
 
-
-    //si 2 secciones tienen las mismas 2 estaciones
+    /**
+     * Verifica si una seccion, respecto a otra, no es la misma, o es la misma con las estaciones invertidas
+     * @param section seccion a comparar
+     * @return verdadero o falso
+     */
     public boolean sameSection(Section_21317055_AriasHurtado section){
         if(station1.sameStation(section.getStation1()) && station2.sameStation(section.getStation2())){
-            if(station1.sameStation(section.getStation2()) && station2.sameStation(section.getStation1())){
-                return true;
-            }
+            return station1.sameStation(section.getStation2()) && station2.sameStation(section.getStation1());
         }
         return false;
     }
