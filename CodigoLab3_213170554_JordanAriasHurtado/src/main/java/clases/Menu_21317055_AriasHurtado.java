@@ -507,11 +507,7 @@ public class Menu_21317055_AriasHurtado {
             //funciona 100%
             System.out.println("2. Crear una estacion nueva");
 
-            //funciona en
-            //linea creada desde 0
-            //linea con estaciones precargada
-
-            //se cae en añadir estacion a linea creada y añadidas 2 estaciones
+            //funciona 100%
             System.out.println("3. Añadir estacion a una linea");
 
             //funciona 100%
@@ -525,6 +521,7 @@ public class Menu_21317055_AriasHurtado {
 
             //funciona 100%
             System.out.println("7. Crear tren nuevo");
+
             //funciona 100%
             System.out.println("8. Crear vagon nuevo");
 
@@ -810,6 +807,17 @@ public class Menu_21317055_AriasHurtado {
 
                     break;
                 //Consultar si una linea es valida para ingresar a la red de metro
+
+
+
+
+
+
+                //nombre linea
+
+
+
+
                 case 4:
                     if (!reserveLines.isEmpty()) {
                         System.out.println("Indique el id de la linea que quiere validar");
@@ -857,8 +865,8 @@ public class Menu_21317055_AriasHurtado {
                                     if (reserveLines.get(aux).isLine()) {
                                         ArrayList<Line_21317055_AriasHurtado> auxAllLine = new ArrayList<>();
                                         auxAllLine.add(reserveLines.get(aux));
-                                        subway.addLine(auxAllLine);
                                         reserveLines.remove(aux);
+                                        subway.addLine(auxAllLine);
                                         System.out.println("La linea se añadio");
                                         break;
                                     } else {
@@ -1019,8 +1027,14 @@ public class Menu_21317055_AriasHurtado {
                     System.out.println("Se ha creado el vagon con exito");
                     break;
                 //Añadir vagones a un tren
+
+
+                //añade vagon que no debe(otro indice)
+
+
+
                 case 9:
-                    if (!reserveTrains.isEmpty() || !reservePcars.isEmpty()) {
+                    if (!reserveTrains.isEmpty() && !reservePcars.isEmpty()) {
                         System.out.println("Indique el tren del que quiere linea que quiere añadir un carro");
                         System.out.println("Trenes disponibles");
                         for (int i = 0; i < reserveTrains.size(); i++) {
@@ -1032,73 +1046,59 @@ public class Menu_21317055_AriasHurtado {
                                 select = scanner.nextInt();
                                 int aux = select - 1;
                                 if (aux >= 0 && aux < reserveTrains.size()) {
-                                    if (reserveTrains.get(aux).getCarList().isEmpty()) {
-                                        System.out.println("Indique el vagon que desea añadir");
-                                        System.out.println("Vagones disponibles");
-                                        for (int i = 0; i < reservePcars.size(); i++) {
-                                            System.out.println(i + 1 + ".vagon de " + reservePcars.get(i).getTrainMaker() + " modelo " + reservePcars.get(i).getModel() + " tipo " + reservePcars.get(i).getCarType());
-                                        }
-                                        while (true) {
-                                            try {
-                                                select = scanner.nextInt();
-                                                int aux2 = select - 1;
-                                                if (aux2 >= 0 && aux2 < reserveTrains.size()) {
+
+                                    System.out.println("Indique el vagon que desea añadir");
+                                    System.out.println("Vagones disponibles");
+                                    for (int i = 0; i < reservePcars.size(); i++) {
+                                        System.out.println(i + 1 + ".vagon " +reservePcars.get(i).getIdPassangerCar()+ " de " + reservePcars.get(i).getTrainMaker() + " modelo " + reservePcars.get(i).getModel() + " tipo " + reservePcars.get(i).getCarType());
+                                    }
+
+                                    while (true) {
+                                        try {
+                                            select = scanner.nextInt();
+                                            int aux2 = select - 1;
+                                            if (aux2 >= 0 && aux2 < reservePcars.size()) {
+
+                                                if (reserveTrains.get(aux).getCarList().isEmpty()) {
                                                     reserveTrains.get(aux).addCar(0, reservePcars.get(aux2));
                                                     System.out.println("Se ha añadido el vagon con exito");
                                                     reservePcars.remove(aux2);
                                                     break;
-                                                } else {
-                                                    System.out.println("Vagon no dispponible");
-                                                }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
-                                                scanner.nextLine();
-                                            }
-                                        }
-                                        break;
-                                    } else {
-                                        System.out.println("Indique el vagon que desea añadir");
-                                        System.out.println("Vagones disponibles");
-                                        for (int i = 0; i < reservePcars.size(); i++) {
-                                            System.out.println(i + 1 + ".vagon de " + reservePcars.get(i).getTrainMaker() + " modelo " + reservePcars.get(i).getModel() + " tipo " + reservePcars.get(i).getCarType());
-                                        }
-                                        while (true) {
-                                            try {
-                                                select = scanner.nextInt();
-                                                int aux2 = select - 1;
-                                                if (aux2 >= 0 && aux2 < reserveTrains.size()) {
-                                                    System.out.println("Indique la posicion para añadir el vagon");
-                                                    for (int i = 0; i < reserveTrains.get(aux).getCarList().size(); i++) {
-                                                        System.out.println(i + 1 + ".vagon de " + reserveTrains.get(aux).getCarList().get(i).getTrainMaker() + " modelo " + reserveTrains.get(aux).getCarList().get(i).getModel() + " tipo " + subway.getTrains().get(aux).getCarList().get(i).getCarType());
+                                                }else{
+                                                    System.out.println("Ingrese la posicion del vagon");
+                                                    System.out.println("Posiciones disponibles: ");
+                                                    for(int i = 0; i < reserveTrains.get(aux).getCarList().size(); i++){
+                                                        System.out.println(i + 1 + ".vagon modelo " + reserveTrains.get(aux).getCarList().get(i).getModel() + " tipo " + reserveTrains.get(aux).getCarList().get(i).getCarType());
                                                     }
-                                                    while (true) {
-                                                        try {
+                                                    while(true){
+                                                        try{
                                                             select = scanner.nextInt();
                                                             int aux3 = select - 1;
-                                                            if (aux3 >= 0 && aux3 < reserveTrains.get(aux).getCarList().size()) {
+                                                            if(aux3 >= 0 && aux3 < reserveTrains.get(aux).getCarList().size()){
                                                                 reserveTrains.get(aux).addCar(aux3, reservePcars.get(aux2));
                                                                 reservePcars.remove(aux2);
-                                                                System.out.println("Se ha añadido el vagon con exito");
                                                                 break;
-                                                            } else {
-                                                                System.out.println("La posicion ingresada no es valida");
+                                                            }else{
+                                                                System.out.println("Posicion no disponible");
                                                             }
-                                                        } catch (InputMismatchException e) {
+                                                        }catch (InputMismatchException e) {
                                                             System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
                                                             scanner.nextLine();
                                                         }
                                                     }
-                                                    break;
-                                                } else {
-                                                    System.out.println("Vagon no dispponible");
                                                 }
-                                            } catch (InputMismatchException e) {
-                                                System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
-                                                scanner.nextLine();
+                                                break;
+
+                                            } else {
+                                                System.out.println("Vagon no dispponible");
                                             }
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                                            scanner.nextLine();
                                         }
-                                        break;
                                     }
+                                    break;
+
                                 } else {
                                     System.out.println("Tren no disponible. Intente nuevamente: ");
                                 }
@@ -1132,7 +1132,7 @@ public class Menu_21317055_AriasHurtado {
                                         System.out.println("Indique la posicion del vagon que desea remover");
                                         System.out.println("Vagones disponibles");
                                         for (int i = 0; i < reserveTrains.get(aux).getCarList().size(); i++) {
-                                            System.out.println(i + 1 + ".vagon de " + reserveTrains.get(aux).getCarList().get(i).getTrainMaker() + " modelo " + reserveTrains.get(aux).getCarList().get(i).getModel() + " tipo " + subway.getTrains().get(aux).getCarList().get(i).getCarType());
+                                            System.out.println(i + 1 + ".vagon de " + reserveTrains.get(aux).getCarList().get(i).getTrainMaker() + " modelo " + reserveTrains.get(aux).getCarList().get(i).getModel() + " tipo " + reserveTrains.get(aux).getCarList().get(i).getCarType());
                                         }
                                         while (true) {
                                             try {
@@ -1144,7 +1144,7 @@ public class Menu_21317055_AriasHurtado {
                                                     System.out.println("El vagon se ha quitado del tren y guardado en reserva");
                                                     break;
                                                 } else {
-                                                    System.out.println("Vagon no dispponible");
+                                                    System.out.println("Vagon no disponible");
                                                 }
                                             } catch (InputMismatchException e) {
                                                 System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
@@ -1214,6 +1214,7 @@ public class Menu_21317055_AriasHurtado {
                                         ArrayList<Train_21317055_AriasHurtado> auxTrain = new ArrayList<>();
                                         auxTrain.add(reserveTrains.get(aux));
                                         subway.addTrain(auxTrain);
+                                        reserveTrains.remove(aux);
                                         System.out.println("El tren se añadio");
                                         break;
                                     } else {
@@ -1368,7 +1369,7 @@ public class Menu_21317055_AriasHurtado {
                     break;
                 //Asignar conductor a tren
                 case 17:
-                    if(!subway.getLines().isEmpty() || !subway.getDrivers().isEmpty()){
+                    if(!subway.getLines().isEmpty() && !subway.getDrivers().isEmpty()){
                         System.out.println("Trenes disponibles");
                         for (int i = 0; i < subway.getTrains().size(); i++) {
                             System.out.println(i + 1 + ".Tren " + subway.getTrains().get(i).getTrainMaker() + " " + subway.getTrains().get(i).getIdTrain());
@@ -1402,33 +1403,26 @@ public class Menu_21317055_AriasHurtado {
                                                 }
                                                 System.out.println("Ingrese la estacion inicial del recorrido");
                                                 subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).showStations();
+
                                                 while(true){
+
                                                     try{
                                                         select = scanner.nextInt();
                                                         int aux3 = select - 1;
-                                                        //si elige cualquier estacion menos la ultima
-                                                        if(aux3 >= 0 && aux3 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
-                                                            System.out.println("Ingrese la estacion final del recorrido");
+                                                        if(aux3 >= 0 && aux3 <= subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()) {
                                                             subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).showStations();
                                                             while(true){
+                                                                System.out.println("Ingrese la estacion final del recorrido");
                                                                 try{
                                                                     select = scanner.nextInt();
                                                                     int aux4 = select - 1;
-                                                                    //si elige la 2da estacion y tampoco es la ultima
-                                                                    if(aux4 >= 0 && aux4 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
-                                                                        //si es la misma estacion, error
+                                                                    if(aux4 >= 0 && aux4 <= subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()){
                                                                         if(aux3 == aux4){
-                                                                            System.out.println("Las estaciones no pueden ser las mismas");
-                                                                            //sino, prosigue
+                                                                            System.out.println("las estaciones no pueden ser la misma");
                                                                         }else{
-                                                                            subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation1() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation1());
-                                                                            System.out.println("Se asigno el tren con exito");
+                                                                            subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getStationByPosition(aux3) , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getStationByPosition(aux4));
                                                                             break;
                                                                         }
-                                                                    } else if(aux4 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
-                                                                        subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation1() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation2());
-                                                                        System.out.println("Se asigno el tren con exito");
-                                                                        break;
                                                                     }else{
                                                                         System.out.println("Estacion no disponible");
                                                                     }
@@ -1437,35 +1431,15 @@ public class Menu_21317055_AriasHurtado {
                                                                     scanner.nextLine();
                                                                 }
                                                             }
-                                                            //si elige la ultima estacion
-                                                        } else if (aux3 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1) {
-                                                            System.out.println("Ingrese la estacion final del recorrido");
-                                                            subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).showStations();
-                                                            while(true){
-                                                                try{
-                                                                    select = scanner.nextInt();
-                                                                    int aux4 = select - 1;
-                                                                    if(aux4 >= 0 && aux4 < subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1){
-                                                                        subway.assignDriverToTrain(subway.getTrains().get(aux), subway.getDrivers().get(aux2),newDate, subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux3).getStation2() , subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().get(aux4).getStation1());
-                                                                        System.out.println("Se asigno el tren con exito");
-                                                                        break;
-                                                                    } else if (aux4 == subway.getLineById(subway.getTrains().get(aux).getAssignedLine()).getSections().size()-1) {
-                                                                        System.out.println("Las estaciones no pueden ser las mismas");
-                                                                        break;
-                                                                    }
-                                                                }catch (InputMismatchException e) {
-                                                                    System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
-                                                                    scanner.nextLine();
-                                                                }
-                                                            }
-                                                        } else{
+                                                            break;
+                                                        }else{
                                                             System.out.println("Estacion no disponible");
                                                         }
-                                                        break;
                                                     }catch (InputMismatchException e) {
                                                         System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
                                                         scanner.nextLine();
                                                     }
+
                                                 }
                                                 break;
                                             }else{

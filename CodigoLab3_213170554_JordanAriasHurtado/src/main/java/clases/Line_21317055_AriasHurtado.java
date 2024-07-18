@@ -101,7 +101,7 @@ public class Line_21317055_AriasHurtado {
     }
 
     /**
-     * Consiguue una estacion por su posicion dentro del arreglo en la lista de secciones
+     * Consigue una estacion por su posicion dentro del arreglo en la lista de secciones
      * @param position posicion de la estacion
      * @return estacion
      */

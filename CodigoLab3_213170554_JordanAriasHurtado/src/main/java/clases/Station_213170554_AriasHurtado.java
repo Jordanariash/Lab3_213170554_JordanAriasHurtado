@@ -117,7 +117,7 @@ public class Station_213170554_AriasHurtado{
     }
 
     /**
-     *compara 2 estaciones, si tienen el nombre o id igual, es la misma estacion
+     * Compara 2 estaciones, si tienen el nombre o id igual, es la misma estacion
      * @param station estacion a comparar
      * @return verdadero o falso
      */
