@@ -335,6 +335,27 @@ public class Line_21317055_AriasHurtado {
     }
 
     /**
+     * Verifica que
+     * @return verdadero o falso
+     */
+    public boolean unrepeatedStations(){
+        if(sections.isEmpty()){
+            return true;
+        }
+        for (int i = 0; i < sections.size()-2; i++) {
+            for ( int j = i; j < sections.size()-1; j++) {
+                if(sections.get(i).getStation1().equals(sections.get(j).getStation1())){
+                    return false;
+                }
+                if(sections.get(i).getStation2().equals(sections.get(j).getStation2())){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Verifica si la linea solo contiene 2 terminales
      * @return verdadero o falso
      */
@@ -356,7 +377,7 @@ public class Line_21317055_AriasHurtado {
      * @return verdadero o falso
      */
     public boolean isLine(){
-        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal();
+        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal() && unrepeatedStations();
     }
 
     /**

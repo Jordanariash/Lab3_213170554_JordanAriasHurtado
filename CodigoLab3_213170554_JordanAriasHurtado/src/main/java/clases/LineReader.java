@@ -5,8 +5,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Clase para leer un archivo de ejemplo para construir Lineas
+ */
 public class LineReader {
+    /**
+     * Separa un archivo seleccionado por nombre
+     * @param fileName Nombre archivo
+     * @return Line list
+     * @throws IOException Error al leer el archivo
+     */
     public static ArrayList<Line_21317055_AriasHurtado> readLines(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;

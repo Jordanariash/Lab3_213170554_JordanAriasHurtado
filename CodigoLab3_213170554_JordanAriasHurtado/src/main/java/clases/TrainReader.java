@@ -6,7 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Clase para leer un archivo de ejemplo para construir Trenes
+ */
 public class TrainReader {
+    /**
+     * Separa un archivo seleccionado por nombre
+     * @param fileName Nombre archivo
+     * @return Train list
+     * @throws IOException Error al leer el archivo
+     */
     public static ArrayList<Train_21317055_AriasHurtado> readTrains(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;

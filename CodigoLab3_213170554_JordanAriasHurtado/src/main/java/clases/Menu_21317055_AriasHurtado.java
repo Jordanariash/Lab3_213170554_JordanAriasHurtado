@@ -20,7 +20,7 @@ public class Menu_21317055_AriasHurtado {
         menuLoad();
     }
 
-    //listo
+
     public void menuLoad() {
         scanner = new Scanner(System.in);
         subway = new Subway_21317055_AriasHurtado(1, "Metro de santiago");
@@ -823,7 +823,7 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Indique el id de la linea que quiere validar");
                         System.out.println("Lineas disponibles");
                         for (int i = 0; i < reserveLines.size(); i++) {
-                            System.out.println(i + 1 + ".Linea " + reserveLines.get(i).getIdLine());
+                            System.out.println(i + 1 + ".Linea " + reserveLines.get(i).getNameLine());
                         }
                         while (true) {
                             try {
@@ -854,7 +854,7 @@ public class Menu_21317055_AriasHurtado {
                     if (!reserveLines.isEmpty()) {
                         System.out.println("Lineas disponibles para añadir");
                         for (int i = 0; i < reserveLines.size(); i++) {
-                            System.out.println(i+1 + ".Linea " + reserveLines.get(i).getIdLine());
+                            System.out.println(i+1 + ".Linea " + reserveLines.get(i).getNameLine());
                         }
 
                         while(true){
@@ -1007,7 +1007,7 @@ public class Menu_21317055_AriasHurtado {
                     }
                     char userPcarType;
                     System.out.println("Ingrese el tipo de vagon");
-                    System.out.println("c.Combinacion");
+                    System.out.println("c.Central");
                     System.out.println("t.Terminal");
                     while (true) {
                         String input = scanner.nextLine();
@@ -1460,7 +1460,9 @@ public class Menu_21317055_AriasHurtado {
                             }
                         }
 
-                    }System.out.println("No hay trenes o conductores disponibles");
+                    }else {
+                        System.out.println("No hay trenes o conductores disponibles");
+                    }
                     break;
                 //volver
                 case 18:

@@ -277,7 +277,7 @@ public class Train_21317055_AriasHurtado {
      * @return verdadero o falso
      */
     public boolean isTrain(Train_21317055_AriasHurtado train){
-        return train.validBody() && train.sameModel();
+        return train.validBody() && train.sameModel() && train.unrepeatedPcars();
     }
 
     /**
@@ -313,5 +313,23 @@ public class Train_21317055_AriasHurtado {
         }else{
             return false;
         }
+    }
+
+    /**
+     * Verifica si un tren tiene todos sus vagones sin id's repetidos
+     * @return verdadero o falso
+     */
+    public boolean unrepeatedPcars(){
+        if(carList.isEmpty()){
+            return true;
+        }
+        for(int i = 0; i < carList.size()-2; i++){
+            for (int j = i; j < carList.size()-1; j++){
+                if(carList.get(i).samePcar(carList.get(j))){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -158,6 +158,11 @@ public class Subway_21317055_AriasHurtado {
         this.drivers.addAll(drivers);
     }
 
+
+
+    //cambiar funcionamiento metodo, hacer que retorne ALGO de tipo string,
+    //osea StringMenu = subway.toString
+    //@Override
     public void myToString() {
         System.out.println("*********************************************");
         System.out.println("id subway: " + getIdSubway());
@@ -440,4 +445,6 @@ public class Subway_21317055_AriasHurtado {
         }
         return null;
     }
+
+
 }
