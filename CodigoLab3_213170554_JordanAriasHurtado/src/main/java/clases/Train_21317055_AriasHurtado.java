@@ -303,6 +303,23 @@ public class Train_21317055_AriasHurtado {
     }
 
     /**
+     * Guarda la informacion de un tren en un String
+     * @return infoTrain
+     */
+    public String getInfoTrain(){
+        StringBuilder infoTrain;
+        infoTrain = new StringBuilder("Id tren: " + getIdTrain() + " ,Manufacturador: " + getTrainMaker() + " ,Velocidad: " + getSpeed() + " ,Tiempo de parada: " + getStationStaytime() + "\n");
+        if(carList.isEmpty()){
+            infoTrain.append("El tren no tiene vagones asignados\n");
+        }else{
+            for(int i = 0; i < carList.size(); i++){
+                infoTrain.append(getCarList().get(i).getInfoPcar());
+            }
+        }
+        return infoTrain.toString();
+    }
+
+    /**
      * Compara 2 trenes, a traves del id para verificar si son el mismo
      * @param train tren a comparar
      * @return verdadero o falso
@@ -323,8 +340,8 @@ public class Train_21317055_AriasHurtado {
         if(carList.isEmpty()){
             return true;
         }
-        for(int i = 0; i < carList.size()-2; i++){
-            for (int j = i; j < carList.size()-1; j++){
+        for(int i = 0; i < carList.size(); i++){
+            for (int j = i+1; j < carList.size(); j++){
                 if(carList.get(i).samePcar(carList.get(j))){
                     return false;
                 }

@@ -342,12 +342,12 @@ public class Line_21317055_AriasHurtado {
         if(sections.isEmpty()){
             return true;
         }
-        for (int i = 0; i < sections.size()-2; i++) {
-            for ( int j = i; j < sections.size()-1; j++) {
-                if(sections.get(i).getStation1().equals(sections.get(j).getStation1())){
+        for (int i = 0; i < sections.size(); i++) {
+            for ( int j = i+1; j < sections.size(); j++) {
+                if(sections.get(i).getStation1().sameStation(sections.get(j).getStation1())){
                     return false;
                 }
-                if(sections.get(i).getStation2().equals(sections.get(j).getStation2())){
+                if(sections.get(i).getStation2().sameStation(sections.get(j).getStation2())){
                     return false;
                 }
             }
@@ -394,6 +394,25 @@ public class Line_21317055_AriasHurtado {
             }
             sections.get(sections.size()-1).getStation2().showInfoStation();
         }
+    }
+
+    /**
+     * Guarda la informacion de una linea en un String
+     * @return infoLine
+     */
+    public String getInfoLine(){
+        StringBuilder infoLine;
+        infoLine = new StringBuilder("ID linea: " + getIdLine() + ", Nombre Linea: " + getNameLine() + " , Tipo rieles: " + getRailType() + "\n");
+        if(sections.isEmpty()){
+            infoLine.append("No hay estaciones en la linea\n");
+        }else{
+            for (Section_21317055_AriasHurtado section : sections){
+                infoLine.append(section.getStation1().getInfoStation());
+                infoLine.append("Distancia: ").append(section.getDistance()).append(", Costo: ").append(section.getCost()).append("\n");
+            }
+            infoLine.append(sections.get(sections.size()-1).getStation2().getInfoStation());
+        }
+        return infoLine.toString();
     }
 
     /**

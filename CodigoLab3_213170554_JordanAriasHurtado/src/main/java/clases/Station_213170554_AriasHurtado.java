@@ -131,4 +131,12 @@ public class Station_213170554_AriasHurtado{
     public void showInfoStation() {
         System.out.println("ID: " + idStation + ", Nombre: " + nameStation + ", Tipo: " + stationType + ", Tiempo parada: " + stopTime);
     }
+
+    /**
+     * Guarda la informacion de la estacion es un String
+     * @return Info
+     */
+    public String getInfoStation() {
+        return "ID estación: " + getIdStation() + " , Nombre: " + getNameStation() + ", Tipo: " + getStationType() + ", Tiempo parada: " + getStopTime() + "\n";
+    }
 }

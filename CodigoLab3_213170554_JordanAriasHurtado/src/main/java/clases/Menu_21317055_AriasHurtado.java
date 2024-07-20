@@ -484,7 +484,7 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 8:
-                    subway.myToString();
+                    System.out.println(subway.toString());
                     break;
                 case 9:
                     System.out.println("Ha salido");
@@ -501,30 +501,14 @@ public class Menu_21317055_AriasHurtado {
         int select;
         int suboption;
         do{
-            //funciona 100%
             System.out.println("1. Crear una linea nueva");
-
-            //funciona 100%
             System.out.println("2. Crear una estacion nueva");
-
-            //funciona 100%
             System.out.println("3. Añadir estacion a una linea");
-
-            //funciona 100%
             System.out.println("4. Consultar si una linea es valida para ingresar a la red de metro");
-
-            //funciona 100%
             System.out.println("5. Añadir lineas a la red de metro");
-
-            //funciona 100%
             System.out.println("6. Quitar lineas de la red de metro");
-
-            //funciona 100%
             System.out.println("7. Crear tren nuevo");
-
-            //funciona 100%
             System.out.println("8. Crear vagon nuevo");
-
             System.out.println("9. Añadir vagones a un tren");
             System.out.println("10. Quitar vagones a un tren");
             System.out.println("11. Consultar si un tren es valido para ingresar a la red de metro");
@@ -637,7 +621,6 @@ public class Menu_21317055_AriasHurtado {
                     reserveStations.add(userStation);
                     System.out.println("Se ha creado la estacion");
                     break;
-                //Añadir estacion a una linea
                 case 3:
                     if (!reserveLines.isEmpty() && !reserveStations.isEmpty()) {
                         System.out.println("Seleccione la linea a la que quiere añadir estaciones");
@@ -806,18 +789,6 @@ public class Menu_21317055_AriasHurtado {
                     }
 
                     break;
-                //Consultar si una linea es valida para ingresar a la red de metro
-
-
-
-
-
-
-                //nombre linea
-
-
-
-
                 case 4:
                     if (!reserveLines.isEmpty()) {
                         System.out.println("Indique el id de la linea que quiere validar");

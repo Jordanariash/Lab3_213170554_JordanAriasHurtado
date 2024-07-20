@@ -99,6 +99,16 @@ public class Driver_21317055_AriasHurtado {
     }
 
     /**
+     * Guarda la informacion del conductor en un String
+     * @return infoDriver
+     */
+    public String getInfoDriver(){
+        String infoDriver;
+        infoDriver = "ID driver: " + getIdDriver() + " , Nombre conductor: " + getNameDriver() + " ,Manufacturador: " + getTrainMaker()+ "\n";
+        return infoDriver;
+    }
+
+    /**
      * Compara 2 conductores a traves del id
      * @param driver conductor a comparar
      * @return verdadero o falso

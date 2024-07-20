@@ -109,6 +109,17 @@ public class Section_21317055_AriasHurtado{
         this.cost = cost;
     }
 
+    /**
+     * Verifica si una seccion, respecto a otra, no es la misma, o es la misma con las estaciones invertidas
+     * @param section seccion a comparar
+     * @return verdadero o falso
+     */
+    public boolean sameSection(Section_21317055_AriasHurtado section){
+        if(station1.sameStation(section.getStation1()) && station2.sameStation(section.getStation2())){
+            return station1.sameStation(section.getStation2()) && station2.sameStation(section.getStation1());
+        }
+        return false;
+    }
 
     /**
      * Muestra la informacion de una seccion
@@ -121,14 +132,15 @@ public class Section_21317055_AriasHurtado{
     }
 
     /**
-     * Verifica si una seccion, respecto a otra, no es la misma, o es la misma con las estaciones invertidas
-     * @param section seccion a comparar
-     * @return verdadero o falso
+     * Guarda la informacion de la seccion en String
+     * @return infoSection
      */
-    public boolean sameSection(Section_21317055_AriasHurtado section){
-        if(station1.sameStation(section.getStation1()) && station2.sameStation(section.getStation2())){
-            return station1.sameStation(section.getStation2()) && station2.sameStation(section.getStation1());
-        }
-        return false;
+    public String getInfoSection() {
+        String infoSection;
+        infoSection = station1.getInfoStation();
+        infoSection = infoSection + "Distancia: " + getDistance() + " , Costo: " + getCost() + "\n";
+        infoSection = infoSection + station2.getInfoStation();
+        return infoSection;
     }
+
 }

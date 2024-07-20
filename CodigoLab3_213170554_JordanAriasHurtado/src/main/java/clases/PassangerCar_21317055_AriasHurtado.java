@@ -136,6 +136,16 @@ public class PassangerCar_21317055_AriasHurtado {
     }
 
     /**
+     * Guarda la informacion de un vagon en un String
+     * @return infoPcar
+     */
+    public String getInfoPcar(){
+        String infoPcar;
+        infoPcar = "Id pcar: " + getIdPassangerCar() + " ,Capacidad: " + getPassangerCapacity() + " ,Modelo: "+ getModel() + " ,Manufacturadora: "+ getTrainMaker() + " ,Tipo del carro: "+ getCarType() + "\n";
+        return infoPcar;
+    }
+
+    /**
      * Compara 2 vagones, si tienen el mismo id, se refiere al mismo vagon
      * @param pcar vagon a comparar
      * @return verdadero o falso
