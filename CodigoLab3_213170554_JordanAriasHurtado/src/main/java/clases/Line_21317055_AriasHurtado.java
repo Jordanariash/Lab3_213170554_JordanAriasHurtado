@@ -338,7 +338,7 @@ public class Line_21317055_AriasHurtado {
      * Verifica que
      * @return verdadero o falso
      */
-    public boolean unrepeatedStations(){
+    public boolean unrepeatedStationsInLine(){
         if(sections.isEmpty()){
             return true;
         }
@@ -377,7 +377,7 @@ public class Line_21317055_AriasHurtado {
      * @return verdadero o falso
      */
     public boolean isLine(){
-        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal() && unrepeatedStations();
+        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal() && unrepeatedStationsInLine();
     }
 
     /**
@@ -421,7 +421,7 @@ public class Line_21317055_AriasHurtado {
      * @return verdadero o falso
      */
     public boolean sameLine(Line_21317055_AriasHurtado line){
-        if(getIdLine() == line.getIdLine() && getNameLine().equals(line.getNameLine())){
+        if(getIdLine() == line.getIdLine() || getNameLine().equals(line.getNameLine())){
             return true;
         }else{
             return false;

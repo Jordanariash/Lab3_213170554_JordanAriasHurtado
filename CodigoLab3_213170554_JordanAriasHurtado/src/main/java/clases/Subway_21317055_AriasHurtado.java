@@ -122,30 +122,51 @@ public class Subway_21317055_AriasHurtado {
 
     //añadir la verificacion de elementos unicos
     public void addLine(ArrayList<Line_21317055_AriasHurtado> lines) {
-        ArrayList<Line_21317055_AriasHurtado> linesUnrepeated = new ArrayList<Line_21317055_AriasHurtado>();
+        ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<Section_21317055_AriasHurtado>();
+        for (int i = 0; i < getLines().size(); i++) {
+            auxSections.addAll(getLines().get(i).getSections());
+        }
+        Line_21317055_AriasHurtado auxLine = new Line_21317055_AriasHurtado(0, "-", "-",auxSections);
         for (int i = 0; i < lines.size(); i++) {
-            if (!lines.get(i).isLine()) {
-                System.out.println("La linea " + lines.get(i).getNameLine() + " es invalida");
-                break;
-            }
-            if (!linesUnrepeated.contains(lines.get(i))) {
-                linesUnrepeated.add(lines.get(i));
+            for (int k = i +1; k < lines.size(); k++){
+                if(lines.get(i).getIdLine() == lines.get(k).getIdLine()){
+                    System.out.println("La linea ingresada tiene el mismo id y no se puede añadir");
+                }else{
+                    if (!lines.get(i).isLine()) {
+                        System.out.println("La linea " + lines.get(i).getNameLine() + " es invalida");
+                        break;
+                    }else{
+                        auxSections.addAll(lines.get(i).getSections());
+                        if(auxLine.unrepeatedStationsInLine()){
+                            this.lines.add(lines.get(i));
+                        }else{
+                            System.out.println("Una de las estaciones de la linea ingresada tiene una estacion repetida con las ya ingresadas en el sistema, no se pudo añadir al metro");
+                        }
+
+                    }
+                }
             }
         }
-        this.lines.addAll(linesUnrepeated);
     }
 
     public void addTrain(ArrayList<Train_21317055_AriasHurtado> trains) {
-        ArrayList<Train_21317055_AriasHurtado> trainsUnrepeated = new ArrayList<Train_21317055_AriasHurtado>();
+        ArrayList<PassangerCar_21317055_AriasHurtado> auxPcars = new ArrayList<PassangerCar_21317055_AriasHurtado>();
+        for(int i = 0; i < getTrains().size(); i++){
+            auxPcars.addAll(getTrains().get(i).getCarList());
+        }
+        Train_21317055_AriasHurtado auxTrain = new Train_21317055_AriasHurtado(0,"auxTrain",0,0,auxPcars);
         for (int i = 0; i < trains.size(); i++) {
-            if (!trains.get(i).isTrain(trains.get(i))) {
-                System.out.println("El tren N° " + trains.get(i).getIdTrain() + " es invalido");
-            }
-            if (!trainsUnrepeated.contains(trains.get(i))) {
-                trainsUnrepeated.add(trains.get(i));
+            if(!trains.get(i).isTrain(trains.get(i))){
+                System.out.println("El tren de " +trains.get(i).getTrainMaker()+", id: " +trains.get(i).getIdTrain() + " es invalido");
+            }else{
+                auxTrain.getCarList().addAll(trains.get(i).getCarList());
+                if(auxTrain.unrepeatedPcars()){
+                    this.trains.add(trains.get(i));
+                }else{
+                    System.out.println("Uno de los vagones del tren ingresado, tiene un vagon repetido ya ingresado al sistema");
+                }
             }
         }
-        this.trains.addAll(trainsUnrepeated);
     }
 
     public void addDriver(ArrayList<Driver_21317055_AriasHurtado> drivers) {
@@ -449,6 +470,4 @@ public class Subway_21317055_AriasHurtado {
         }
         return null;
     }
-
-
 }
