@@ -276,8 +276,8 @@ public class Train_21317055_AriasHurtado {
      * @param train tren
      * @return verdadero o falso
      */
-    public boolean isTrain(Train_21317055_AriasHurtado train){
-        return train.validBody() && train.sameModel() && train.unrepeatedPcars();
+    public boolean isTrain(){
+        return validBody() && sameModel() && unrepeatedPcars();
     }
 
     /**

@@ -309,32 +309,6 @@ public class Line_21317055_AriasHurtado {
     }
 
     /**
-     * Verifica si la estacion no tiene secciones repetidas
-     * @return verdadero o falso
-     */
-    public boolean unrepeteadSections(){
-        ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<>();
-        for (int i = 0; i < sections.size()-1; i++) {
-            //si hay una seccion que sea la misma, osea st1-st2 != st2-st1
-            if(sections.get(i).sameSection(sections.get(i+1))){
-                return false;
-            }
-        }
-        //verificar si alguna secccion esta repetida
-        for (int j = 0; j < sections.size(); j++) {
-            if(!auxSections.contains(sections.get(j))){
-                auxSections.add(sections.get(j));
-            }
-        }
-        if (auxSections.size() == sections.size()){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-    /**
      * Verifica que
      * @return verdadero o falso
      */
@@ -359,17 +333,31 @@ public class Line_21317055_AriasHurtado {
      * Verifica si la linea solo contiene 2 terminales
      * @return verdadero o falso
      */
-    public boolean onlyTwoTerminal(){
-        if(sections.isEmpty()) {
+    public boolean onlyTwoTerminal() {
+        if (sections.isEmpty()) {
             return true;
         }
-        int count = 0;
-        for (Section_21317055_AriasHurtado section : sections) {
-            if ((section.getStation1().getStationType() == 't') || (section.getStation2().getStationType() == 't')) {
-                count++;
+        if (sections.size() == 1) {
+            if(sections.get(0).getStation1().getStationType() == 't' && sections.get(0).getStation2().getStationType() == 't'){
+                return true;
+            }else{
+                return false;
             }
         }
-        return count == 2;
+        int count = 0;
+        for (int i = 0; i < sections.size(); i++) {
+            if (sections.get(i).getStation1().getStationType() == 't') {
+                count = count + 1;
+            }
+            if (sections.get(i).getStation2().getStationType() == 't') {
+                count = count + 1;
+            }
+        }
+        if (count == 2) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -377,7 +365,7 @@ public class Line_21317055_AriasHurtado {
      * @return verdadero o falso
      */
     public boolean isLine(){
-        return isConnected() && (circular() || lineal()) && unrepeteadSections() && onlyTwoTerminal() && unrepeatedStationsInLine();
+        return isConnected() && (circular() || lineal()) && onlyTwoTerminal() && unrepeatedStationsInLine();
     }
 
     /**
