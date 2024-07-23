@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
-
 import java.util.InputMismatchException;
 
 /**
@@ -167,7 +166,6 @@ public class Menu_21317055_AriasHurtado {
             }
 
             switch (option) {
-                //listo
                 case 1:
                     if(!subway.getLines().isEmpty()) {
                         System.out.println("Seleccione la linea que quiere obtener el largo");
@@ -197,7 +195,6 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 2:
-                    //listo
                     if(!subway.getLines().isEmpty()) {
                         System.out.println("Seleccione la linea que quiere obtener el largo entre 2 estaciones");
                         System.out.println("Lineas disponibles");
@@ -264,7 +261,6 @@ public class Menu_21317055_AriasHurtado {
                     }
                     break;
                 case 3:
-                    //listo
                     if(!subway.getLines().isEmpty()) {
                         System.out.println("Seleccione la linea que quiere obtener el costo");
                         System.out.println("Lineas disponibles");
@@ -293,7 +289,6 @@ public class Menu_21317055_AriasHurtado {
                         }
                     break;
                 case 4:
-                    //listo
                     if(!subway.getLines().isEmpty()) {
                         System.out.println("Seleccione la linea que quiere obtener el costo entre 2 estaciones");
                         System.out.println("Lineas disponibles");
@@ -543,27 +538,26 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Ingrese el id de la nueva linea");
                         try {
                             userIdLine = scanner.nextInt();
-                            break;
+                            if(userIdLine > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
-                            System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
+                            System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
                         }
                     }
-
                     String userNameLine = "";
+                    System.out.println("Ingrese el nombre de la nueva linea");
                     while (userNameLine.isEmpty()) {
                         userNameLine = scanner.nextLine();
-                        if (userNameLine.isEmpty()) {
-                            System.out.println("Ingrese el nombre de la nueva linea");
-                        }
                     }
-
                     String userRail = "";
+                    System.out.println("Ingrese el tipo de riel de la nueva linea");
                     while (userRail.isEmpty()) {
                         userRail = scanner.nextLine();
-                        if (userRail.isEmpty()) {
-                            System.out.println("Ingrese el tipo de riel de la nueva linea");
-                        }
                     }
 
                     ArrayList<Section_21317055_AriasHurtado> userSections = new ArrayList<>();
@@ -578,7 +572,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userIdStation = scanner.nextInt();
-                            break;
+                            if(userIdStation > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -586,11 +585,9 @@ public class Menu_21317055_AriasHurtado {
                     }
 
                     String userNameStation = "";
+                    System.out.println("Ingrese el nombre de la nueva estacion");
                     while (userNameStation.isEmpty()) {
                         userNameStation = scanner.nextLine();
-                        if (userNameStation.isEmpty()) {
-                            System.out.println("Ingrese el nombre de la nueva estacion");
-                        }
                     }
 
                     System.out.println("Indique el tiempo de parada de la nueva estacion");
@@ -598,7 +595,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userStationStopTime = scanner.nextInt();
-                            break;
+                            if(userStationStopTime >= 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un número entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -897,18 +899,21 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userIdTrain = scanner.nextInt();
-                            break;
+                            if(userIdTrain > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
                         }
                     }
                     String userTrainMaker = "";
+                    System.out.println("Ingrese la manufacturadora del nuevo tren");
                     while (userTrainMaker.isEmpty()) {
                         userTrainMaker = scanner.nextLine();
-                        if (userTrainMaker.isEmpty()) {
-                            System.out.println("Ingrese la manufacturadora del nuevo tren");
-                        }
                     }
 
                     System.out.println("Indique la velocidad del nuevo tren");
@@ -916,7 +921,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userSpeed = scanner.nextInt();
-                            break;
+                            if(userSpeed > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -928,7 +938,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userStationStayTime = scanner.nextInt();
-                            break;
+                            if(userStationStayTime > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -947,7 +962,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userIdPcar = scanner.nextInt();
-                            break;
+                            if(userIdPcar > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -958,7 +978,12 @@ public class Menu_21317055_AriasHurtado {
                     while (true) {
                         try {
                             userCapacity = scanner.nextInt();
-                            break;
+                            if(userCapacity > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -968,16 +993,11 @@ public class Menu_21317055_AriasHurtado {
                     System.out.println("Ingrese el modelo del nuevo vagon");
                     while (userModel.isEmpty()) {
                         userModel = scanner.nextLine();
-                        if (userModel.isEmpty()) {
-                            System.out.println("El modelo no puede estar vacio. Intentalo de nuevo.");
-                        }
                     }
                     String userTrainMakerPcar = "";
+                    System.out.println("Ingrese la manufacturadora del nuevo vagon");
                     while (userTrainMakerPcar.isEmpty()) {
                         userTrainMakerPcar = scanner.nextLine();
-                        if (userTrainMakerPcar.isEmpty()) {
-                            System.out.println("Ingrese la manufacturadora del nuevo vagon");
-                        }
                     }
                     char userPcarType;
                     System.out.println("Ingrese el tipo de vagon");
@@ -1236,7 +1256,12 @@ public class Menu_21317055_AriasHurtado {
                         System.out.println("Ingrese el id del nuevo conductor");
                         try {
                             userIdDriver = scanner.nextInt();
-                            break;
+                            if(userIdDriver > 0){
+                                break;
+                            }else{
+                                System.out.println("Ingrese un valor positivo");
+                                scanner.nextLine();
+                            }
                         } catch (InputMismatchException e) {
                             System.out.println("El valor ingresado no es un numero entero. Intente nuevamente: ");
                             scanner.nextLine();
@@ -1244,19 +1269,15 @@ public class Menu_21317055_AriasHurtado {
                     }
 
                     String userNameDriver = "";
+                    System.out.println("Ingrese el nombre del nuevo conductor");
                     while (userNameDriver.isEmpty()) {
                         userNameDriver = scanner.nextLine();
-                        if (userNameDriver.isEmpty()) {
-                            System.out.println("Ingrese el nombre del nuevo conductor");
-                        }
                     }
 
                     String userTrainMakerDriver = "";
+                    System.out.println("Ingrese que tipo de tren puede manejar el conductor (Manufacturadora de tren)");
                     while (userTrainMakerDriver.isEmpty()) {
                         userTrainMakerDriver = scanner.nextLine();
-                        if (userTrainMakerDriver.isEmpty()) {
-                            System.out.println("Ingrese que tipo de tren puede manejar el conductor (Manufacturadora de tren)");
-                        }
                     }
                     Driver_21317055_AriasHurtado userDriver = new Driver_21317055_AriasHurtado(userIdDriver, userNameDriver, userTrainMakerDriver);
                     subway.getDrivers().add(userDriver);
