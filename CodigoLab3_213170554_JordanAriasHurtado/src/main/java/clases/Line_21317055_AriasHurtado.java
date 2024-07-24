@@ -251,7 +251,7 @@ public class Line_21317055_AriasHurtado {
      * Añade una seccion al final de la linea
      * @param section nueva seccion
      */
-    public void addSection(Section_21317055_AriasHurtado section){
+    public void lineAddSection(Section_21317055_AriasHurtado section){
         if(getSections().get(getSections().size()-1).getStation2().sameStation(section.getStation1()) || getSections().isEmpty()){
             sections.add(section);
         }else{

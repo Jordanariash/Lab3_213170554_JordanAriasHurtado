@@ -766,7 +766,7 @@ public class Menu_21317055_AriasHurtado {
                                                     }
                                                     try {
                                                         Section_21317055_AriasHurtado newSection = new Section_21317055_AriasHurtado(reserveLines.get(aux).getSections().get(reserveLines.get(aux).getSections().size() - 1).getStation2(), station1, distance, cost);
-                                                        reserveLines.get(aux).addSection(newSection);
+                                                        reserveLines.get(aux).lineAddSection(newSection);
                                                         System.out.println("Se agrego la estacion con exito");
                                                         break;
                                                     } catch (IllegalArgumentException e) {

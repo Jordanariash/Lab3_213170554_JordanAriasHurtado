@@ -15,7 +15,6 @@ public class Train_21317055_AriasHurtado {
     private int speed;
     private int stationStaytime;
     private ArrayList<PassangerCar_21317055_AriasHurtado> carList;
-
     private int assignedLine;
     private int assignedDriver;
     private Station_213170554_AriasHurtado departureStation;
@@ -273,7 +272,6 @@ public class Train_21317055_AriasHurtado {
 
     /**
      * Verifica si el tren cumple las caracteristicas necesarias para poder ser ingresado al sistema de metro
-     * @param train tren
      * @return verdadero o falso
      */
     public boolean isTrain(){
