@@ -7,4 +7,4 @@ En powershell:
 
 En cmd:
 gradlew.bat build
-gradlew.bat run 
+gradlew.bat run
