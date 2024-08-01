@@ -117,45 +117,12 @@ public class Line_21317055_AriasHurtado {
     }
 
     /**
-     * Establece el id de una linea
-     * @param idLine id
-     */
-    public void setIdLine(int idLine) {
-        this.idLine = idLine;
-    }
-
-    /**
-     * Establece el nombre de una linea
-     * @param nameLine nombre
-     */
-    public void setNameLine(String nameLine) {
-        this.nameLine = nameLine;
-    }
-
-    /**
-     * Establece el tipo de riel de una linea
-     * @param railType riel
-     */
-    public void setRailType(String railType) {
-        this.railType = railType;
-    }
-
-    /**
-     * Establece las secciones de una linea
-     * @param sections lista de secciones
-     */
-    public void setSections(ArrayList<Section_21317055_AriasHurtado> sections) {
-        this.sections = sections;
-    }
-
-    /**
      * Establece los trenes asignados a la linea
      * @param assignedTrains lista de id's de trenes
      */
     public void setAssignedTrains(ArrayList<Integer> assignedTrains) {
         this.assignedTrains = assignedTrains;
     }
-
 
     /**
      * Calcula la distancia de la linea
@@ -366,22 +333,6 @@ public class Line_21317055_AriasHurtado {
      */
     public boolean isLine(){
         return isConnected() && (circular() || lineal()) && onlyTwoTerminal() && unrepeatedStationsInLine();
-    }
-
-    /**
-     * Muestra la informacion de una linea
-     */
-    public void showInfoLine(){
-        System.out.println("ID linea: "+ idLine + " , Nombre Linea: " + nameLine + " , tipo rieles: " + railType);
-        if(sections.isEmpty()){
-            System.out.println("No hay estaciones en la linea");
-        }else {
-            for (Section_21317055_AriasHurtado section : sections) {
-                section.getStation1().showInfoStation();
-                System.out.println("distancia: " + section.getDistance() + " costo: " + section.getCost());
-            }
-            sections.get(sections.size()-1).getStation2().showInfoStation();
-        }
     }
 
     /**

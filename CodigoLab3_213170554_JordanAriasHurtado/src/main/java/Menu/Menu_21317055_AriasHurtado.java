@@ -1,4 +1,9 @@
-package clases;
+package Menu;
+
+import Readers.DriverReader;
+import Readers.LineReader;
+import Readers.TrainReader;
+import clases.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -113,7 +118,7 @@ public class Menu_21317055_AriasHurtado {
             System.out.println("------------------- Sistema Metro - Visualizacion del estado actual del sistema de metros  -------------------");
             System.out.println("1. Consultar el estado actual de la red de metro.");
             System.out.println("2. Modificar la red de metro.");
-            System.out.println("3. Retorno al menú de Inicio");
+            System.out.println("3. Retorno al menu de Inicio");
             System.out.println("Ingrese una opcion y presione ENTER para continuar: ");
 
             try {

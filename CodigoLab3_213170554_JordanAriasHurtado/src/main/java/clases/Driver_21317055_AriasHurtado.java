@@ -60,42 +60,11 @@ public class Driver_21317055_AriasHurtado {
     }
 
     /**
-     * Establece el de un conductor
-     * @param idDriver id
-     */
-    public void setIdDriver(int idDriver) {
-        this.idDriver = idDriver;
-    }
-
-    /**
-     * Establece el nombre de un conductor
-     * @param nameDriver name
-     */
-    public void setNameDriver(String nameDriver) {
-        this.nameDriver = nameDriver;
-    }
-
-    /**
-     * Establece la licencia de manejo de un conductor
-     * @param trainMaker manufacturadora tren
-     */
-    public void setTrainMaker(String trainMaker) {
-        this.trainMaker = trainMaker;
-    }
-
-    /**
      * Establece el id del tren asignado de un conductor
      * @param assignedTrain id train
      */
     public void setAssignedTrain(int assignedTrain) {
         this.assignedTrain = assignedTrain;
-    }
-
-    /**
-     * Muestra la informacion del conductor
-     */
-    public void showInfoDriver(){
-        System.out.println("ID driver: " + idDriver + " , Nombre conductor: " + nameDriver + " ,Manufacturador: " + trainMaker);
     }
 
     /**

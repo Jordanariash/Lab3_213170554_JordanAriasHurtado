@@ -85,38 +85,6 @@ public class Station_213170554_AriasHurtado{
     }
 
     /**
-     * Establece el id de una estacion
-     * @param idStation id
-     */
-    public void setIdStation ( int idStation){
-        this.idStation = idStation;
-    }
-
-    /**
-     * Establece el nombre de una estacion
-     * @param nameStation nombre
-     */
-    public void setNameStation (String nameStation){
-        this.nameStation = nameStation;
-    }
-
-    /**
-     * Establece el tiempo de parada de una estacion
-     * @param stopTime timepo
-     */
-    public void setStopTime ( int stopTime){
-        this.stopTime = stopTime;
-    }
-
-    /**
-     * Establece el tipo de una estacion
-     * @param stationType r,m,c,t
-     */
-    public void setStationType(char stationType) {
-        this.stationType = stationType;
-    }
-
-    /**
      * Compara 2 estaciones, si tienen el nombre o id igual, es la misma estacion
      * @param station estacion a comparar
      * @return verdadero o falso

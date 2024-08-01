@@ -111,46 +111,6 @@ public class Subway_21317055_AriasHurtado {
     }
 
     /**
-     * Establece el id de un metro
-     * @param idSubway id
-     */
-    public void setIdSubway(int idSubway) {
-        this.idSubway = idSubway;
-    }
-
-    /**
-     * Establece el nombre de un metro
-     * @param nameSubway name
-     */
-    public void setNameSubway(String nameSubway) {
-        this.nameSubway = nameSubway;
-    }
-
-    /**
-     * Establece las lineas de de un metro
-     * @param lines Line list
-     */
-    public void setLines(ArrayList<Line_21317055_AriasHurtado> lines) {
-        this.lines = lines;
-    }
-
-    /**
-     * Establece los trenes de de un metro
-     * @param trains Train list
-     */
-    public void setTrains(ArrayList<Train_21317055_AriasHurtado> trains) {
-        this.trains = trains;
-    }
-
-    /**
-     * Establece los conductores de de un metro
-     * @param drivers Driver list
-     */
-    public void setDrivers(ArrayList<Driver_21317055_AriasHurtado> drivers) {
-        this.drivers = drivers;
-    }
-
-    /**
      * Verifica si 2 estaciones estan en la misma linea dentro del metro
      * @param station1 estacion
      * @param station2 estacion
@@ -219,7 +179,9 @@ public class Subway_21317055_AriasHurtado {
         // Crear una lista auxiliar para almacenar secciones
         ArrayList<Section_21317055_AriasHurtado> auxSections = new ArrayList<>();
 
-        // Recopilar todas las secciones de las líneas existentes
+        int preSize = getLines().size();
+
+        // Rellenar la linea auxiliar existentes
         for (int i = 0; i < getLines().size(); i++) {
             auxSections.addAll(getLines().get(i).getSections());
         }
@@ -227,7 +189,7 @@ public class Subway_21317055_AriasHurtado {
         // Crear una línea auxiliar para la verificación de secciones repetidas
         Line_21317055_AriasHurtado auxLine = new Line_21317055_AriasHurtado(-1, "-", "-", auxSections);
 
-        // Si la lista de líneas está vacía, añadir la primera línea válida
+        // Si la lista de líneas está vacia, añadir la primera línea válida
         if (getLines().isEmpty()) {
             for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).isLine()) {
@@ -244,12 +206,11 @@ public class Subway_21317055_AriasHurtado {
             // Verificar duplicados en las líneas existentes
             for (int j = 0; j < getLines().size(); j++) {
                 if (getLines().get(j).sameLine(lines.get(i))) {
-                    System.out.println("La línea ingresada tiene el mismo ID o nombre y no se puede añadir");
+                    //System.out.println("La línea ingresada tiene el mismo ID o nombre y no se puede añadir");
                     isDuplicate = true;
                     break;
                 }
             }
-
             // Solo proceder si no se encontró un duplicado
             if (!isDuplicate) {
                 if (!lines.get(i).isLine()) {
@@ -266,6 +227,12 @@ public class Subway_21317055_AriasHurtado {
                 }
             }
         }
+
+        if (preSize == getLines().size()){
+            System.out.println("La linea ingresada tiene el mismo ID o nombre y no se puede añadir");
+        }else{
+            System.out.println("Las lineas se añadieron con exito");
+        }
     }
 
     /**
@@ -277,7 +244,9 @@ public class Subway_21317055_AriasHurtado {
         // Crear una lista auxiliar para almacenar los vagones
         ArrayList<PassangerCar_21317055_AriasHurtado> auxPcars = new ArrayList<>();
 
-        // Recopilar todos los vagones de los trenes existentes
+        int preSize = getLines().size();
+
+        // Rellenar con los vagones de los trenes existentes
         for (int i = 0; i < getTrains().size(); i++) {
             auxPcars.addAll(getTrains().get(i).getCarList());
         }
@@ -302,7 +271,6 @@ public class Subway_21317055_AriasHurtado {
             // Verificar duplicados en los trenes existentes
             for (int j = 0; j < getTrains().size(); j++) {
                 if (getTrains().get(j).sameTrain(trains.get(i))) {
-                    System.out.println("El tren ingresado tiene el mismo id o nombre y no se puede añadir");
                     isDuplicate = true;
                     break;
                 }
@@ -324,6 +292,12 @@ public class Subway_21317055_AriasHurtado {
                 }
             }
         }
+
+        if (preSize == getTrains().size()){
+            System.out.println("El tren ingresado tiene el mismo ID y no se puede añadir");
+        }else{
+            System.out.println("Los trenes se añadieron con exito");
+        }
     }
 
     /**
@@ -332,6 +306,8 @@ public class Subway_21317055_AriasHurtado {
      * @param drivers driver list
      */
     public void addDriver(ArrayList<Driver_21317055_AriasHurtado> drivers) {
+        int preSize = getLines().size();
+
         if(getDrivers().isEmpty()){
             this.drivers.add(drivers.get(0));
         }
@@ -339,7 +315,6 @@ public class Subway_21317055_AriasHurtado {
             boolean isDuplicate = false;
             for (int j = 0; j < getDrivers().size(); j++) {
                 if (getDrivers().get(j).sameDriver(drivers.get(i))) {
-                    System.out.println("El conductor ingresado comparte el mismo id que otro ya en el sistema");
                     isDuplicate = true;
                     break;
                 }
@@ -347,6 +322,12 @@ public class Subway_21317055_AriasHurtado {
             if (!isDuplicate) {
                 this.drivers.add(drivers.get(i));
             }
+        }
+
+        if (preSize == getDrivers().size()){
+            System.out.println("El conductor ingresado tiene el mismo ID y no se puede añadir");
+        }else{
+            System.out.println("Los conductores se añadieron con exito");
         }
     }
 

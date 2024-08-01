@@ -1,4 +1,8 @@
-package clases;
+package Readers;
+
+import clases.PassangerCar_21317055_AriasHurtado;
+import clases.Station_213170554_AriasHurtado;
+import clases.Train_21317055_AriasHurtado;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

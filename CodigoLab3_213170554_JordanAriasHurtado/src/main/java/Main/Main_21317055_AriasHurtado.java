@@ -1,4 +1,6 @@
-package clases;
+package Main;
+
+import Menu.Menu_21317055_AriasHurtado;
 
 /**
  * Clase main para compilar el programa

@@ -12,7 +12,7 @@ repositories {
 
 
 application {
-    mainClass.set("clases.Main_21317055_AriasHurtado")
+    mainClass.set("Main.Main_21317055_AriasHurtado")
 }
 
 dependencies {
@@ -25,7 +25,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-//añadi esto
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }

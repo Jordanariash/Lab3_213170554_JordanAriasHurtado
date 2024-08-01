@@ -76,47 +76,6 @@ public class PassangerCar_21317055_AriasHurtado {
     }
 
     /**
-     * Establece el id de un vagon de pasajeros
-     * @param idPassangerCar id
-     */
-    public void setIdPassangerCar(int idPassangerCar) {
-        this.idPassangerCar = idPassangerCar;
-    }
-
-    /**
-     * Establece la capacidad de pasajeros del vagon
-     * @param passangerCapacity capacidad
-     */
-    public void setPassangerCapacity(int passangerCapacity) {
-        this.passangerCapacity = passangerCapacity;
-    }
-
-    /**
-     * Establece el modelo de un vagon de pasajeros
-     * @param model modelo
-     */
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    /**
-     * Establece la manufacturadora del vagon de pasajeros
-     * @param trainMaker manufacturadora
-     */
-    public void setTrainMaker(String trainMaker) {
-        this.trainMaker = trainMaker;
-    }
-
-    /**
-     * Establece el tipo del vagon de pasajeros
-     * @param carType central o terminal
-     */
-    public void setCarType(char carType) {
-        this.carType = carType;
-    }
-
-
-    /**
      * Verifica si el caracter ingresado  es un t o c. Para que el vagon se pueda construir correctamente
      * @param carType t,c
      */

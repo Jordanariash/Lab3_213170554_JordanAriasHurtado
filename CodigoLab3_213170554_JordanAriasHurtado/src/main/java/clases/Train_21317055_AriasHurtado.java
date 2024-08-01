@@ -133,46 +133,6 @@ public class Train_21317055_AriasHurtado {
     }
 
     /**
-     * Establece el id de un tren
-     * @param idTrain id
-     */
-    public void setIdTrain(int idTrain) {
-        this.idTrain = idTrain;
-    }
-
-    /**
-     * Establece la manufacturadora de un tren
-     * @param trainMaker manufacturadora
-     */
-    public void setTrainMaker(String trainMaker) {
-        this.trainMaker = trainMaker;
-    }
-
-    /**
-     * Establece la velocidad maxima de un tren
-     * @param speed velocidad
-     */
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    /**
-     * Establece el tiempo de estancia por estacion de un tren
-     * @param stationStaytime tiempo de parada
-     */
-    public void setStationStaytime(int stationStaytime) {
-        this.stationStaytime = stationStaytime;
-    }
-
-    /**
-     * Establece la lista de vagones completa de un tren
-     * @param carList lista de vagones
-     */
-    public void setCarList(ArrayList<PassangerCar_21317055_AriasHurtado> carList) {
-        this.carList = carList;
-    }
-
-    /**
      * Establece el id de un conductor asignado de un tren
      * @param assignedDriver id driver
      */
@@ -288,16 +248,6 @@ public class Train_21317055_AriasHurtado {
             trainCapacity = carList.get(i).getPassangerCapacity() + trainCapacity;
         }
         return trainCapacity;
-    }
-
-    /**
-     * Muestra la informacion del tren
-     */
-    public void showInfoTrain(){
-        System.out.println("Id tren: " + idTrain + " ,Manufacturador: " + trainMaker + " ,Velocidad: " + speed + " ,tiempo de parada: "  + stationStaytime);
-        for (int i = 0; i < carList.size(); i++) {
-            carList.get(i).showInfoPcar();
-        }
     }
 
     /**
